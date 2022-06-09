@@ -6,8 +6,8 @@ export const getFlex: FuncCss<Flex> = (params = FLEX) => {
   const style = css`
     display: flex;
     flex-direction: ${params.dir};
-    justify-content: ${params.js};
-    align-items: ${params.ai};
+    justify-content: ${params.js ? params.js : 'center'};
+    align-items: ${params.ai ? params.ai : 'center'};
   `
   return style
 }
