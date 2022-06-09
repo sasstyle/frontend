@@ -6,4 +6,14 @@ export interface Flex {
   ai?: 'center' | 'flex-start' | 'flex-end' | 'space-between'
 }
 
+export interface MediaScreen {
+  maxWidth: string
+  maxHeight?: string
+}
+
+export interface Typo {
+  fontSize: string
+  fontWeight?: number
+}
+
 export type FuncCss<T> = (x?: T) => FlattenSimpleInterpolation
