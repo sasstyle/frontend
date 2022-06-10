@@ -1,8 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { defaultBaseQuery } from '../../api/query'
 import { Req_Login, Req_Signup, Res_Login, Res_Signup } from './signup.interface'
 
+const BASE_URL = 'http://175.205.6.23:8000/user-service'
+
 export const signupApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://175.205.6.23:8000/user-service', credentials: 'include' }),
+  baseQuery: defaultBaseQuery(BASE_URL),
   endpoints: (build) => ({
     requestSignup: build.mutation<Res_Signup, Req_Signup>({
       query: (params) => ({

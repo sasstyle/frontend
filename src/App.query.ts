@@ -3,7 +3,7 @@ import { defaultBaseQuery } from './api/query'
 
 export const appQuery = createApi({
   reducerPath: 'appQuery',
-  baseQuery: defaultBaseQuery,
+  baseQuery: defaultBaseQuery(''),
   tagTypes: ['app'],
 
   endpoints: (builder) => ({}),
