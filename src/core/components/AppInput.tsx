@@ -1,14 +1,15 @@
 import styled from 'styled-components'
-import { useInput } from '../hooks/useInput'
 
 interface Props {
   placeHolder: string
+  onSetValue: (e: any) => void
+  value: string
 }
 
 export default function AppInput(props: Props) {
-  const { value, onSetValue } = useInput('')
+  // const { value, onSetValue } = useInput('')
 
-  return <Input value={value} onChange={onSetValue} placeholder={props.placeHolder}></Input>
+  return <Input value={props.value} onChange={props.onSetValue} placeholder={props.placeHolder}></Input>
 }
 
 const Input = styled.input`
