@@ -5,6 +5,7 @@ import { Req_Login, Req_Signup, Res_Login, Res_Signup } from './signup.interface
 const BASE_URL = 'http://203.252.240.42:8001/user-service'
 
 export const signupApi = createApi({
+  reducerPath: 'signupApi',
   baseQuery: defaultBaseQuery(BASE_URL),
   endpoints: (build) => ({
     requestSignup: build.mutation<Res_Signup, Req_Signup>({

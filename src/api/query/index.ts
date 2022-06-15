@@ -9,5 +9,5 @@ export const defaultBaseQuery = (baseUrl: string) =>
     prepareHeaders: (headers, { endpoint }) => {
       return headers
     },
-    credentials: 'include',
+    credentials: 'omit',
   })

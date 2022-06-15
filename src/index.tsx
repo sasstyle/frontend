@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from './App'
-import { store } from './core/store'
 import './designs/reset.css'
+import { setupStore } from './App.store'
 
+const store = setupStore()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>

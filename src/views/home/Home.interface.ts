@@ -1,1 +1,10 @@
-export interface a {}
+export interface Product {
+  imgUrl: string
+  price: string
+  name: string
+  likeCnt: number
+  rating: number
+  kind: 'top' | 'bottom'
+}
+
+export type Res_Product_List = Array<Product>

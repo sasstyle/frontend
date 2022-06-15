@@ -9,4 +9,5 @@ export const AppInner = styled.main`
   margin: 0 auto;
   ${getMediaScreen()}
   overflow: hidden;
+  box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12), 0px 12px 42px -4px rgba(24, 39, 75, 0.12);
 `
