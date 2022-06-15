@@ -16,7 +16,7 @@ export default function AppButton(props: Props) {
 const Button = styled.button<Props>`
   width: ${({ width }) => (width ? width : '100%')};
   height: auto;
-  padding: 0.7rem 0;
+  padding: 0.8rem 0;
   ${({ radius }) => radius && `border-radius : ${radius};`}
   color: ${({ color }) => (color ? color : '#ffffff')};
   background-color: ${({ background }) => (background ? background : '#010101')};

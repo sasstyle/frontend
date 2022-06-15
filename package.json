@@ -16,6 +16,7 @@
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@lottiefiles/react-lottie-player": "^3.4.7",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/styled-components": "^5.1.25",

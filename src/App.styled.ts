@@ -8,4 +8,5 @@ export const AppInner = styled.main`
   padding: 0 3rem;
   margin: 0 auto;
   ${getMediaScreen()}
+  overflow: hidden;
 `
