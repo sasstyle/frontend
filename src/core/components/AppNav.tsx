@@ -1,30 +1,30 @@
 import styled from 'styled-components'
 import { FiHome, FiSearch, FiTag, FiUser, FiHeart } from 'react-icons/fi'
-
 import { getFlex, getMediaScreen } from '../../designs/util/display'
+import { Link } from 'react-router-dom'
 
 export default function AppNav() {
   return (
     <NavWrap>
       <IconWrap>
         <FiHome />
-        <span>홈</span>
+        <Link to="/">홈</Link>
       </IconWrap>
       <IconWrap>
         <FiSearch />
-        <span>스토어</span>
+        <Link to="">스토어</Link>
       </IconWrap>
       <IconWrap>
         <FiTag />
-        <span>브랜드</span>
+        <Link to="">브랜드</Link>
       </IconWrap>
       <IconWrap>
         <FiHeart />
-        <span>찜</span>
+        <Link to="">찜</Link>
       </IconWrap>
       <IconWrap>
         <FiUser />
-        <span>마이페이지</span>
+        <Link to="/user">마이페이지</Link>
       </IconWrap>
       <Box />
     </NavWrap>
@@ -48,9 +48,11 @@ const NavWrap = styled.nav`
 
 const IconWrap = styled.div`
   ${getFlex({ dir: 'column' })}
-  span {
+  a {
     margin-top: 0.4rem;
     font-size: 0.6rem;
+    text-decoration: none;
+    color: black;
   }
   svg {
     width: 1.5rem;
