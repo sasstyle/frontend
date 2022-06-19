@@ -5,7 +5,7 @@ export const AppInner = styled.main`
   ${getFlex({ dir: 'column' })}
   width: 100vw;
   height: 100vh;
-  padding: 0 3rem;
+  padding: 0 1.8rem;
   margin: 0 auto;
   ${getMediaScreen()}
   overflow: hidden;

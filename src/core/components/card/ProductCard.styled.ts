@@ -1,22 +1,29 @@
 import styled from 'styled-components'
+import { getTypo } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
 
 export const VerticalWrap = styled.div`
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
-  padding: 1rem;
-  width: 12rem;
+  width: 9rem;
   height: 16rem;
   background: #ffffff;
-  box-shadow: 0px 6px 14px -6px rgba(24, 39, 75, 0.12), 0px 10px 32px -4px rgba(24, 39, 75, 0.1);
-  border-radius: 1rem;
+
   img {
-    width: 8rem;
-    height: 8rem;
+    width: inherit;
+    height: 10rem;
     margin-bottom: 0.7rem;
+    object-fit: cover;
   }
   strong {
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    ${getTypo({ fontSize: '0.75rem' })}
+    margin-bottom: 0.5rem;
+  }
+  span {
+    ${getTypo({ fontSize: '0.9rem', fontWeight: 700 })}
   }
 `
 

@@ -8,23 +8,23 @@ export default function AppNav() {
     <NavWrap>
       <IconWrap>
         <FiHome />
-        <span>Home</span>
+        <span>홈</span>
       </IconWrap>
       <IconWrap>
         <FiSearch />
-        <span>Search</span>
+        <span>스토어</span>
       </IconWrap>
       <IconWrap>
         <FiTag />
-        <span>Brand</span>
+        <span>브랜드</span>
       </IconWrap>
       <IconWrap>
         <FiHeart />
-        <span>Wishlist</span>
+        <span>찜</span>
       </IconWrap>
       <IconWrap>
         <FiUser />
-        <span>Me</span>
+        <span>마이페이지</span>
       </IconWrap>
       <Box />
     </NavWrap>
@@ -50,7 +50,7 @@ const IconWrap = styled.div`
   ${getFlex({ dir: 'column' })}
   span {
     margin-top: 0.4rem;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
   svg {
     width: 1.5rem;

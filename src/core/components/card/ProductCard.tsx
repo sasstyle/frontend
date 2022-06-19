@@ -6,11 +6,12 @@ export interface Props {
 }
 
 export function ProductCardVertical(props: Props) {
-  const { imgUrl, price, name, likeCnt, kind, rating } = props.product
+  const { imgUrl, price, name, brand, likeCnt, kind, rating } = props.product
   return (
     <UI.VerticalWrap>
       <img src={imgUrl} />
-      <strong>{name}</strong>
+      <strong>{brand}</strong>
+      <p>{name}</p>
       <span>{Number(price).toLocaleString()}원</span>
     </UI.VerticalWrap>
   )
