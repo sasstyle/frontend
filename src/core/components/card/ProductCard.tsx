@@ -3,12 +3,13 @@ import * as UI from './ProductCard.styled'
 
 export interface Props {
   product: Product
+  onClick: () => void
 }
 
 export function ProductCardVertical(props: Props) {
   const { imgUrl, price, name, brand, likeCnt, kind, rating } = props.product
   return (
-    <UI.VerticalWrap>
+    <UI.VerticalWrap onClick={props.onClick}>
       <img src={imgUrl} />
       <strong>{brand}</strong>
       <p>{name}</p>

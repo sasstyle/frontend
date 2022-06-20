@@ -1,30 +1,34 @@
 import styled from 'styled-components'
 import { FiHome, FiSearch, FiTag, FiUser, FiHeart } from 'react-icons/fi'
 import { getFlex, getMediaScreen } from '../../designs/util/display'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { startTransition } from 'react'
 
 export default function AppNav() {
+  const navigate = useNavigate()
+  const goTo = (location: string) => () => startTransition(() => navigate(location))
+
   return (
     <NavWrap>
-      <IconWrap>
+      <IconWrap onClick={goTo('/')}>
         <FiHome />
-        <Link to="/">홈</Link>
+        <span>홈</span>
       </IconWrap>
-      <IconWrap>
+      <IconWrap onClick={goTo('/')}>
         <FiSearch />
-        <Link to="">스토어</Link>
+        <span>스토어</span>
       </IconWrap>
-      <IconWrap>
+      <IconWrap onClick={goTo('/')}>
         <FiTag />
-        <Link to="">브랜드</Link>
+        <span>브랜드</span>
       </IconWrap>
-      <IconWrap>
+      <IconWrap onClick={goTo('/')}>
         <FiHeart />
-        <Link to="">찜</Link>
+        <span>찜</span>
       </IconWrap>
-      <IconWrap>
+      <IconWrap onClick={goTo('/user')}>
         <FiUser />
-        <Link to="/user">마이페이지</Link>
+        <span>마이페이지</span>
       </IconWrap>
       <Box />
     </NavWrap>
@@ -48,7 +52,7 @@ const NavWrap = styled.nav`
 
 const IconWrap = styled.div`
   ${getFlex({ dir: 'column' })}
-  a {
+  span {
     margin-top: 0.4rem;
     font-size: 0.6rem;
     text-decoration: none;

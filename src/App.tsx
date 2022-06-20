@@ -7,6 +7,7 @@ const Home = lazy(() => import('./views/home/Home'))
 const Login = lazy(() => import('./views/login/Login'))
 const SignUp = lazy(() => import('./views/signup/SignUp'))
 const User = lazy(() => import('./views/user/User'))
+const Product = lazy(() => import('./views/product/Product'))
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/user" element={<User />} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
       <AppNav />
     </AppInner>
