@@ -1,11 +1,11 @@
 import productList from '../mock/product.js'
 
-export const getProductList = () => {
+export const getProductDetail = (id) => {
   const config = {
     type: 'get',
-    path: '/',
+    path: '/product/:id',
     response: {
-      data: productList,
+      data: productList[id],
     },
   }
   return config
