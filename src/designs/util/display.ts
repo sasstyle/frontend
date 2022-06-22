@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { BREAK_POINT, FLEX, MEDIA_SCREEN } from './constant'
-import { Flex, FuncCss, MediaScreen } from './interface'
+import { Flex, FuncCss, Max_MediaScreen } from './interface'
 
 export const getFlex: FuncCss<Flex> = (params = FLEX) => {
   const style = css`
@@ -12,10 +12,11 @@ export const getFlex: FuncCss<Flex> = (params = FLEX) => {
   return style
 }
 
-export const getMediaScreen: FuncCss<MediaScreen> = (params = MEDIA_SCREEN) => {
+export const getMaxMediaScreen: FuncCss<Max_MediaScreen> = (params = MEDIA_SCREEN) => {
   const style = css`
     @media screen and (min-width: ${BREAK_POINT}) {
       max-width: ${params.maxWidth};
+      min-width: '375px';
       ${params.maxHeight !== '' && `max-height: ${params.maxHeight}`}
     }
   `

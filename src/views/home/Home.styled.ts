@@ -9,13 +9,14 @@ export const Wrap = styled.div`
   ${getInnerPadding()}
 `
 
-export const ProductWrap = styled.section`
-  ${getFlex({ js: 'space-between', ai: 'flex-start' })}
+export const ProductWrap = styled.div`
   ${hideScrollBar()}
+  ${getFlex({ js: 'flex-start', ai: 'flex-start' })}
   flex-wrap:wrap;
-  width: 100%;
+  width: auto;
   height: 70vh;
   overflow-y: scroll;
+  gap: 1rem;
 `
 
 export const SearchWrap = styled.div`

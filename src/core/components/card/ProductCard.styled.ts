@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 import { getTypo } from '../../../designs/util/atom'
-import { getFlex } from '../../../designs/util/display'
+import { getFlex, getMaxMediaScreen } from '../../../designs/util/display'
 
 export const VerticalWrap = styled.div`
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
   width: 9rem;
   height: 16rem;
   background: #ffffff;
+
+  @media screen and (max-width: 530px) {
+    width: 40vw;
+  }
 
   img {
     width: inherit;

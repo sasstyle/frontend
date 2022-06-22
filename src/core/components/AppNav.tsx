@@ -1,34 +1,42 @@
 import styled from 'styled-components'
 import { FiHome, FiSearch, FiTag, FiUser, FiHeart } from 'react-icons/fi'
-import { getFlex, getMediaScreen } from '../../designs/util/display'
+import { getFlex, getMaxMediaScreen } from '../../designs/util/display'
 import { useNavigate } from 'react-router-dom'
-import { startTransition } from 'react'
+import { startTransition, useState } from 'react'
 
 export default function AppNav() {
+  const [current, setCurrent] = useState('home')
+
+  const getColor = (name: string) => (current === name ? 'black' : 'lightgrey')
+
   const navigate = useNavigate()
-  const goTo = (location: string) => () => startTransition(() => navigate(location))
+  const goTo = (location: string, name: string) => () =>
+    startTransition(() => {
+      navigate(location)
+      setCurrent(name)
+    })
 
   return (
     <NavWrap>
-      <IconWrap onClick={goTo('/')}>
-        <FiHome />
-        <span>홈</span>
+      <IconWrap onClick={goTo('/', 'home')}>
+        <FiHome stroke={getColor('home')} />
+        <span style={{ color: getColor('home') }}>홈</span>
       </IconWrap>
-      <IconWrap onClick={goTo('/')}>
-        <FiSearch />
-        <span>스토어</span>
+      <IconWrap onClick={goTo('/', 'store')}>
+        <FiSearch color={getColor('store')} />
+        <span style={{ color: getColor('store') }}>스토어</span>
       </IconWrap>
-      <IconWrap onClick={goTo('/')}>
-        <FiTag />
-        <span>브랜드</span>
+      <IconWrap onClick={goTo('/', 'brand')}>
+        <FiTag color={getColor('brand')} />
+        <span style={{ color: getColor('brand') }}>브랜드</span>
       </IconWrap>
-      <IconWrap onClick={goTo('/')}>
-        <FiHeart />
-        <span>찜</span>
+      <IconWrap onClick={goTo('/', 'like')}>
+        <FiHeart color={getColor('like')} />
+        <span style={{ color: getColor('like') }}>찜</span>
       </IconWrap>
-      <IconWrap onClick={goTo('/user')}>
-        <FiUser />
-        <span>마이페이지</span>
+      <IconWrap onClick={goTo('/user', 'user')}>
+        <FiUser color={getColor('user')} />
+        <span style={{ color: getColor('user') }}>마이페이지</span>
       </IconWrap>
       <Box />
     </NavWrap>
@@ -47,7 +55,7 @@ const NavWrap = styled.nav`
   box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12), 0px 12px 42px -4px rgba(24, 39, 75, 0.12);
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
-  ${getMediaScreen()}
+  ${getMaxMediaScreen({ maxWidth: '528px' })}
 `
 
 const IconWrap = styled.div`
@@ -56,7 +64,6 @@ const IconWrap = styled.div`
     margin-top: 0.4rem;
     font-size: 0.6rem;
     text-decoration: none;
-    color: black;
   }
   svg {
     width: 1.5rem;

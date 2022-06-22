@@ -1,6 +1,6 @@
-import { Flex, MediaScreen, Typo } from './interface'
+import { Flex, Max_MediaScreen, Typo } from './interface'
 
-export const BREAK_POINT = '768px'
+export const BREAK_POINT = '528px'
 
 export const FLEX: Flex = {
   dir: 'row',
@@ -8,8 +8,8 @@ export const FLEX: Flex = {
   ai: 'center',
 }
 
-export const MEDIA_SCREEN: MediaScreen = {
-  maxWidth: '768px',
+export const MEDIA_SCREEN: Max_MediaScreen = {
+  maxWidth: '528px',
   maxHeight: '',
 }
 

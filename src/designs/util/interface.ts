@@ -6,7 +6,7 @@ export interface Flex {
   ai?: 'center' | 'flex-start' | 'flex-end' | 'space-between'
 }
 
-export interface MediaScreen {
+export interface Max_MediaScreen {
   maxWidth: string
   maxHeight?: string
 }
