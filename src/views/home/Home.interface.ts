@@ -7,6 +7,7 @@ export interface Product {
   likeCnt: number
   rating: number
   kind: 'top' | 'bottom'
+  isLike: boolean
 }
 
 export type Res_Product_List = Array<Product>

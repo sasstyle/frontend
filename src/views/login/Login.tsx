@@ -2,7 +2,7 @@ import { Player } from '@lottiefiles/react-lottie-player'
 import AppButton from '../../core/components/AppButton'
 import AppInput from '../../core/components/AppInput'
 import { useInput } from '../../core/hooks/useInput'
-import { useRequestLoginMutation } from '../signup/Signup.query'
+import { useRequestLoginMutation } from '../../api/auth/auth.query'
 import animationData from '../../designs/assets/lottieLogin.json'
 import * as UI from './Login.styled'
 
@@ -28,8 +28,8 @@ export default function Login() {
 
   return (
     <>
-      <Player autoplay loop src={animationData} style={{ height: '400px', width: '400px' }}></Player>
       <UI.LoginWrap>
+        <Player autoplay loop src={animationData} style={{ height: '300px', width: '300px' }}></Player>
         <AppInput placeHolder="Name" value={username} onSetValue={setUserName} />
         <AppInput placeHolder="Password" value={password} onSetValue={setPassword} />
         <AppButton content="Log in" radius="2rem" onClick={onLogin} />

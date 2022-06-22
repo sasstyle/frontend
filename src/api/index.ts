@@ -7,6 +7,10 @@ export const defaultBaseQuery = (baseUrl: string) =>
       'Content-Type': 'application/json',
     },
     prepareHeaders: (headers, { endpoint }) => {
+      // if (endpoint === '/users/me') {
+      //   headers.set('userId', `Bearer ${token}`)
+      // }
+
       return headers
     },
     credentials: 'omit',

@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 
 // api
-import { signupApi } from './views/signup/Signup.query'
+import { signupApi } from './api/auth/auth.query'
 import { homeApi } from './views/home/Home.query'
 import { productApi } from './views/product/Porudct.query'
 

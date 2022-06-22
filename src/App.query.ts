@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { defaultBaseQuery } from './api/query'
+import { defaultBaseQuery } from './api'
 
 export const appQuery = createApi({
   reducerPath: 'appQuery',

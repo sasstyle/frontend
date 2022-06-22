@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { defaultBaseQuery } from '../../api/query'
+import { defaultBaseQuery } from '../../api'
 import { Res_Product_List } from './Home.interface'
-import { TEST_BASE_URL } from '../../api/query/constant'
+import { TEST_BASE_URL } from '../../api/constant'
 
 export const homeApi = createApi({
   reducerPath: 'homeApi',

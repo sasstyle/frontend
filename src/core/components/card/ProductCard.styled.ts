@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { getTypo } from '../../../designs/util/atom'
-import { getFlex, getMaxMediaScreen } from '../../../designs/util/display'
+import { getFlex } from '../../../designs/util/display'
 
 export const VerticalWrap = styled.div`
+  position: relative;
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
   width: 9rem;
   height: 16rem;
@@ -29,6 +30,18 @@ export const VerticalWrap = styled.div`
   span {
     ${getTypo({ fontSize: '0.9rem', fontWeight: 700 })}
   }
+`
+
+export const ImgWrap = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+`
+
+export const LikeBtn = styled.div`
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1.5rem;
 `
 
 export const HorizontalWrap = styled.div`

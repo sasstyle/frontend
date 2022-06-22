@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { defaultBaseQuery } from '../../api/query'
-import { TEST_BASE_URL } from '../../api/query/constant'
+import { defaultBaseQuery } from '../../api'
+import { TEST_BASE_URL } from '../../api/constant'
 import { Product } from '../home/Home.interface'
 import { Req_ProductDetail } from './Product.interface'
 

@@ -5,7 +5,7 @@ import AppButton from '../../core/components/AppButton'
 import AppInput from '../../core/components/AppInput'
 import AppSelectBox from '../../core/components/AppSelectBox'
 import { useInput } from '../../core/hooks/useInput'
-import { useRequestSignupMutation } from './Signup.query'
+import { useRequestSignupMutation } from '../../api/auth/auth.query'
 import { useSelect } from '../../core/hooks/useSelect'
 
 export default function SignUp() {
@@ -36,18 +36,20 @@ export default function SignUp() {
     }
   }
   return (
-    <>
+    <UI.Wrap>
       <Player autoplay loop src={animationData} style={{ height: '200px', width: '200px' }} />
-      <AppInput placeHolder="username" value={username} onSetValue={setUserName} />
-      <AppInput placeHolder="password" value={password} onSetValue={setPassword} />
-      <UI.selectWrap>
-        <AppInput placeHolder="name" value={name} onSetValue={setName} />
-        <AppSelectBox optionList={optionList} onSetValue={setGender} />
-      </UI.selectWrap>
-      <AppInput placeHolder="email" value={email} onSetValue={setEmail} />
-      <AppInput placeHolder="phoneNumber" value={phoneNumber} onSetValue={setPhone} />
-      <AppInput placeHolder="address" value={address} onSetValue={setAddress} />
-      <AppButton content="Sign up" radius="2rem" onClick={onSignUp} />
-    </>
+      <UI.FormWrap>
+        <AppInput placeHolder="username" value={username} onSetValue={setUserName} />
+        <AppInput placeHolder="password" value={password} onSetValue={setPassword} />
+        <UI.selectWrap>
+          <AppInput placeHolder="name" value={name} onSetValue={setName} />
+          <AppSelectBox optionList={optionList} onSetValue={setGender} />
+        </UI.selectWrap>
+        <AppInput placeHolder="email" value={email} onSetValue={setEmail} />
+        <AppInput placeHolder="phoneNumber" value={phoneNumber} onSetValue={setPhone} />
+        <AppInput placeHolder="address" value={address} onSetValue={setAddress} />
+        <AppButton content="Sign up" radius="2rem" onClick={onSignUp} />
+      </UI.FormWrap>
+    </UI.Wrap>
   )
 }

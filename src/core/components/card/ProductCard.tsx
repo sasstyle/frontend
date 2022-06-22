@@ -1,3 +1,4 @@
+import { FaRegHeart } from 'react-icons/fa'
 import { Product } from '../../../views/home/Home.interface'
 import * as UI from './ProductCard.styled'
 
@@ -7,10 +8,16 @@ export interface Props {
 }
 
 export function ProductCardVertical(props: Props) {
-  const { imgUrl, price, name, brand, likeCnt, kind, rating } = props.product
+  const { imgUrl, price, name, brand, likeCnt, kind, rating, isLike } = props.product
+
   return (
     <UI.VerticalWrap onClick={props.onClick}>
-      <img src={imgUrl} />
+      <UI.ImgWrap>
+        <UI.LikeBtn>
+          <FaRegHeart size="1rem" />
+        </UI.LikeBtn>
+        <img src={imgUrl} />
+      </UI.ImgWrap>
       <strong>{brand}</strong>
       <p>{name}</p>
       <span>{Number(price).toLocaleString()}원</span>
