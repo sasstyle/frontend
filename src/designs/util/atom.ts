@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { COLOR } from '../assets/token'
 import { TYPO } from './constant'
 import { FuncCss, Typo } from './interface'
 
@@ -12,7 +13,14 @@ export const getTypo: FuncCss<Typo> = (params = TYPO) => {
 
 export const getInnerPadding: FuncCss<string> = (params = '6rem') => {
   const style = css`
-    margin-bottom: ${params};
+    padding-bottom: ${params};
+  `
+  return style
+}
+
+export const getColor: FuncCss<string> = (params = 'GREY_6') => {
+  const style = css`
+    color: ${COLOR[params]};
   `
   return style
 }

@@ -22,3 +22,11 @@ export const getMaxMediaScreen: FuncCss<Max_MediaScreen> = (params = MEDIA_SCREE
   `
   return style
 }
+
+export const getSafeWidth = () => {
+  const style = css`
+    width: 98%;
+    transform: translateX(1%);
+  `
+  return style
+}
