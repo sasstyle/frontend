@@ -28,11 +28,13 @@ export default function User() {
   }
 
   return (
-    <UI.Wrap>
+    <>
       <AppHeader title="마이페이지" icon={HeaderIcon()} />
-      {!isUser && <BeforeUserTitle />}
-      {isUser && <AfterUserTitle user={DummyUser} />}
-      <NavList />
-    </UI.Wrap>
+      <UI.Wrap>
+        {!isUser && <BeforeUserTitle />}
+        {isUser && <AfterUserTitle user={DummyUser} />}
+        <NavList />
+      </UI.Wrap>
+    </>
   )
 }

@@ -8,4 +8,5 @@ export const COLOR: Color = {
   GREY_5: '#595959',
   GREY_6: '#404040',
   BLACK: '#0D0D0D',
+  WHITE: '#ffffff',
 }

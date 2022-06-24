@@ -56,7 +56,7 @@ const UserBasicInfo = styled.div`
   }
   p {
     font-size: 0.8rem;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
     ${getColor('GREY_4')}
   }
   svg {
@@ -69,10 +69,11 @@ const UserBasicInfo = styled.div`
 
 const UserTypeCard = styled.div`
   ${getSafeWidth()}
-  ${getFlex({ js: 'flex-start' })}
   height: 6rem;
+  ${getFlex({ js: 'flex-start' })}
   border-radius: 0.4rem;
   padding: 0 1rem;
+  margin-top: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   div:first-of-type {
     ${getFlex()}

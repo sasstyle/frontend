@@ -13,7 +13,7 @@ export const getTypo: FuncCss<Typo> = (params = TYPO) => {
 
 export const getInnerPadding: FuncCss<string> = (params = '6rem') => {
   const style = css`
-    margin-bottom: ${params};
+    padding-bottom: ${params};
   `
   return style
 }
