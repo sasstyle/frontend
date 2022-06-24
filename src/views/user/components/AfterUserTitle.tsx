@@ -35,7 +35,7 @@ export function AfterUserTitle({ user }: Props) {
             </div>
             <strong>{user.sellerName}</strong>
           </div>
-          <Link to="">
+          <Link to="/seller">
             상품 등록하러 가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
