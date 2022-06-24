@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IoShirtOutline, IoStorefrontOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import { getFlex, getSafeWidth } from '../../../designs/util/display'
 import { getColor } from '../../../designs/util/atom'
+import { Link } from 'react-router-dom'
 
 interface User {
   name: string
@@ -29,9 +30,14 @@ export function AfterUserTitle({ user }: Props) {
       {user.type === 'seller' && (
         <UserTypeCard>
           <div>
-            <IoStorefrontOutline size="1.5rem" stroke="white" />
+            <div>
+              <IoStorefrontOutline size="1.5rem" stroke="white" />
+            </div>
+            <strong>{user.sellerName}</strong>
           </div>
-          <strong>{user.sellerName}</strong>
+          <Link to="">
+            상품 등록하러 가기 <IoChevronForwardOutline size="1.4rem" />
+          </Link>
         </UserTypeCard>
       )}
       {user.type === 'buyer' && (
@@ -69,13 +75,16 @@ const UserBasicInfo = styled.div`
 
 const UserTypeCard = styled.div`
   ${getSafeWidth()}
-  height: 6rem;
-  ${getFlex({ js: 'flex-start' })}
+  height: 8rem;
+  ${getFlex({ dir: 'column', ai: 'flex-start', js: 'space-between' })}
   border-radius: 0.4rem;
-  padding: 0 1rem;
+  padding: 1.5rem 1rem 0 1rem;
   margin-top: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  div:first-of-type {
+  div {
+    ${getFlex()}
+  }
+  div > div {
     ${getFlex()}
     width: 2.6rem;
     height: 2.6rem;
@@ -85,5 +94,17 @@ const UserTypeCard = styled.div`
   }
   strong {
     font-size: 1.4rem;
+  }
+  a {
+    width: 100%;
+    height: 3.4rem;
+    ${getFlex({ js: 'space-between' })}
+    ${getColor('GREY_5')}
+    font-size: 0.9rem;
+    text-decoration: none;
+    svg {
+      transform: translateY(-8%);
+      ${getColor('GREY_2')};
+    }
   }
 `
