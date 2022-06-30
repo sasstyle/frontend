@@ -3,9 +3,10 @@ import { FiHome, FiSearch, FiTag, FiUser, FiHeart } from 'react-icons/fi'
 import { getFlex, getMaxMediaScreen } from '../../designs/util/display'
 import { useNavigate } from 'react-router-dom'
 import { startTransition, useState } from 'react'
+import { getCurrentNav } from '../util'
 
 export default function AppNav() {
-  const [current, setCurrent] = useState('home')
+  const [current, setCurrent] = useState(getCurrentNav())
 
   const getColor = (name: string) => (current === name ? 'black' : 'lightgrey')
 
