@@ -27,7 +27,7 @@ export function AfterUserTitle({ user }: Props) {
         <p>{user.email}</p>
         <IoChevronForwardOutline size="1.4rem" />
       </UserBasicInfo>
-      {user.type === 'seller' && (
+      {user.type === 'ADMIN' && (
         <UserTypeCard>
           <div>
             <div>
@@ -35,17 +35,35 @@ export function AfterUserTitle({ user }: Props) {
             </div>
             <strong>{user.sellerName}</strong>
           </div>
-          <Link to="/seller">
+          <Link to="/user/admin">
             상품 등록하러 가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
       )}
-      {user.type === 'buyer' && (
+      {user.type === 'BRAND' && (
         <UserTypeCard>
           <div>
-            <IoShirtOutline size="1.5rem" stroke="white" />
+            <div>
+              <IoStorefrontOutline size="1.5rem" stroke="white" />
+            </div>
+            <strong>{user.sellerName}</strong>
           </div>
-          <strong>{user.buyerGrade}</strong>
+          <Link to="/">
+            등록된 상품 보러가기 <IoChevronForwardOutline size="1.4rem" />
+          </Link>
+        </UserTypeCard>
+      )}
+      {user.type === 'USER' && (
+        <UserTypeCard>
+          <div>
+            <div>
+              <span style={{ color: 'white', fontSize: '1rem' }}>V</span>
+            </div>
+            <strong>{user.buyerGrade}</strong>
+          </div>
+          <Link to="/">
+            쿠폰 보러가기 <IoChevronForwardOutline size="1.4rem" />
+          </Link>
         </UserTypeCard>
       )}
     </>

@@ -24,3 +24,10 @@ export const getColor: FuncCss<string> = (params = 'GREY_6') => {
   `
   return style
 }
+
+export const getBgColor: FuncCss<string> = (params = 'GREY_6') => {
+  const style = css`
+    background-color: ${COLOR[params]};
+  `
+  return style
+}

@@ -22,7 +22,7 @@ export default function User() {
     email: 'sasstyle@sasstyle.com',
     phoneNumber: '010-1234-5678',
     address: '서울시 어딘가...',
-    type: 'seller',
+    type: 'ADMIN',
     sellerName: 'BrandName',
     buyerGrade: 'VIP',
   }

@@ -18,7 +18,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/user" element={<User />} />
-        <Route path="/seller" element={<SellerAdmin />} />
+        <Route path="/user/admin" element={<SellerAdmin />} />
         <Route path="/product/:id" element={<Product />} />
       </Routes>
       <AppNav />
