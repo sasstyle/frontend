@@ -4,3 +4,8 @@ export const getCurrentNav = () => {
   if (sliceIdx < 0) return location ? location : 'home'
   else return location.slice(0, sliceIdx)
 }
+
+export const checkReg = (value: any, regExpress: RegExp) => {
+  const isValid = regExpress.test(value)
+  return isValid
+}
