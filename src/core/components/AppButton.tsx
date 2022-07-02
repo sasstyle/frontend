@@ -28,7 +28,7 @@ const Button = styled.button<Props>`
   background-color: ${({ background }) => (background ? background : '#010101')};
   border: none;
   &:disabled {
-    ${getBgColor('GREY_2')}
+    ${getBgColor('GREY_1')}
     cursor: not-allowed;
   }
 `

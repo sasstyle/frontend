@@ -8,6 +8,7 @@ import { useInput } from '../../core/hooks/useInput'
 import { useRequestSignupMutation } from '../../api/auth/auth.query'
 import { useSelect } from '../../core/hooks/useSelect'
 import { REG_EMAIL, REG_NAME, REG_PASSWORD, REG_PH, REG_USERNAME } from '../../core/constant/reg'
+import AppLink from '../../core/components/AppLink'
 
 export default function SignUp() {
   const [signUp, { isLoading }] = useRequestSignupMutation()
@@ -86,8 +87,9 @@ export default function SignUp() {
           errorMessage={!isValidPh ? '번호 형식으로 입력해주세요.' : ''}
         />
         <AppInput type="text" label="지역" placeHolder="address" value={address} onSetValue={setAddress} />
-        <AppButton content="Sign up" radius="2rem" onClick={onSignUp} disabled={!isAllValid || address === ''} />
+        <AppButton content="회원가입" radius="2rem" onClick={onSignUp} disabled={!isAllValid || address === ''} />
       </UI.FormWrap>
+      <AppLink href="/login" content="로그인 하러가기" />
     </UI.Wrap>
   )
 }
