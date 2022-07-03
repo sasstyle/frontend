@@ -30,3 +30,13 @@ export const getSafeWidth = () => {
   `
   return style
 }
+
+export const getScreenCenter = () => {
+  const style = css`
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  `
+  return style
+}

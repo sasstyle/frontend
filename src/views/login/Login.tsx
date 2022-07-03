@@ -24,7 +24,6 @@ export default function Login() {
 
     try {
       const result = login(values).unwrap()
-      console.log('login fullied', result)
     } catch (err: any) {
       const { status } = err
     }

@@ -13,7 +13,9 @@ export const signupApi = createApi({
         method: 'POST',
         body: params,
       }),
-      //   transformResponse: () => {},
+      // transformResponse: (response: Res_Signup) => {
+      //   return response
+      // },
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
       async onCacheEntryAdded(
         arg,

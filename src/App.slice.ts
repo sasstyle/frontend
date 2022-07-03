@@ -6,13 +6,15 @@ export const appSlice = createSlice({
   name: 'appSlice',
   initialState: INITIAL_STATE,
   reducers: {
-    setSomething: (state, { payload }: PayloadAction<any>) => {},
+    setIsDimmed: (state, { payload }: PayloadAction<boolean>) => {
+      state.isDimmed = payload
+    },
     cleanupState: () => CLEANUP_STATE,
   },
 })
 
-export const { cleanupState, setSomething } = appSlice.actions
+export const { cleanupState, setIsDimmed } = appSlice.actions
 
-// export const selectSome = ({ appSlice }: T_RootState) => appSlice.something
+export const selectIsDimmed = ({ appSlice }: T_RootState) => appSlice.isDimmed
 
 export default appSlice.reducer

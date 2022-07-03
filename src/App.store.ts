@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 
+// slice
+import appReducer from './App.slice'
+
 // api
 import { signupApi } from './api/auth/auth.query'
 import { homeApi } from './views/home/Home.query'
@@ -10,6 +13,7 @@ const rootReducer = combineReducers({
   [homeApi.reducerPath]: homeApi.reducer,
   [signupApi.reducerPath]: signupApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  appSlice: appReducer,
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

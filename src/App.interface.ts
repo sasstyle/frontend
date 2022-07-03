@@ -1,1 +1,3 @@
-export interface I_Initial_State {}
+export interface I_Initial_State {
+  isDimmed: boolean
+}

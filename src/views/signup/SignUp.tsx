@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
+import { useNavigate } from 'react-router-dom'
 import animationData from '../../designs/assets/lottieSignup.json'
 import * as UI from './Signup.styled'
 import AppButton from '../../core/components/AppButton'
@@ -9,14 +11,22 @@ import { useRequestSignupMutation } from '../../api/auth/auth.query'
 import { useSelect } from '../../core/hooks/useSelect'
 import { REG_EMAIL, REG_NAME, REG_PASSWORD, REG_PH, REG_USERNAME } from '../../core/constant/reg'
 import AppLink from '../../core/components/AppLink'
+import { PROFILE_URL_DEFAULT } from '../../core/constant'
+import { useDispatch } from 'react-redux'
+import { setIsDimmed } from '../../App.slice'
+import AppModal from '../../core/components/modal/AppModal'
 
 export default function SignUp() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [signUp, { isLoading }] = useRequestSignupMutation()
+  const [isModal, setIsModal] = useState(false)
 
   const { value: username, onSetValue: setUserName, isValid: isValidUserName } = useInput('', REG_USERNAME)
   const { value: password, onSetValue: setPassword, isValid: isValidPw } = useInput('', REG_PASSWORD)
   const { value: name, onSetValue: setName, isValid: isValidName } = useInput('', REG_NAME)
-  const { value: gender, onSetValue: setGender, optionList } = useSelect(['WOMAN', 'MAN'])
+  const { value: gender, onSetValue: setGender, optionList: genderList } = useSelect(['WOMAN', 'MAN'])
+  const { value: role, onSetValue: setRole, optionList: roleList } = useSelect(['USER', 'BRAND', 'ADMIN'])
   const { value: email, onSetValue: setEmail, isValid: isValidEmail } = useInput('', REG_EMAIL)
   const { value: phoneNumber, onSetValue: setPhone, isValid: isValidPh } = useInput('', REG_PH)
   const { value: address, onSetValue: setAddress } = useInput('')
@@ -32,16 +42,20 @@ export default function SignUp() {
       email,
       phoneNumber,
       address,
+      role,
+      profileUrl: PROFILE_URL_DEFAULT,
     }
     try {
-      await signUp(values)
+      const result = await signUp(values)
+      dispatch(setIsDimmed(true))
+      setIsModal(true)
     } catch (err: any) {
       const { status } = err
     }
   }
   return (
     <UI.Wrap>
-      <Player autoplay loop src={animationData} style={{ height: '180px', width: '180px' }} />
+      <Player autoplay loop src={animationData} style={{ height: '200px', width: '200px' }} />
       <UI.FormWrap>
         <AppInput
           type="text"
@@ -60,16 +74,17 @@ export default function SignUp() {
           errorMessage={!isValidPw ? '아이디는 영어, 숫자, 특수문자로 8글자 이상, 13글자 이하입니다.' : ''}
         />
         <UI.selectWrap>
+          <AppSelectBox label="회원 타입" optionList={roleList} onSetValue={setRole} />
           <AppInput
             type="text"
-            label="이름"
-            placeHolder="김OO"
+            label={role === 'USER' ? '성함' : '브랜드 이름'}
+            placeHolder=""
             value={name}
             onSetValue={setName}
             errorMessage={!isValidName ? '성함을 입력해주세요.' : ''}
           />
-          <AppSelectBox label="성별" optionList={optionList} onSetValue={setGender} />
         </UI.selectWrap>
+        <AppSelectBox label="성별" optionList={genderList} onSetValue={setGender} />
         <AppInput
           type="text"
           label="이메일"
@@ -90,6 +105,24 @@ export default function SignUp() {
         <AppButton content="회원가입" radius="2rem" onClick={onSignUp} disabled={!isAllValid || address === ''} />
       </UI.FormWrap>
       <AppLink href="/login" content="로그인 하러가기" />
+      {isModal && (
+        <AppModal type="small" icon="success">
+          <UI.ModalContent>
+            <p>
+              안녕하세요 ! <strong>{name}</strong>님
+            </p>
+            <AppButton
+              content="로그인 하러 가기"
+              onClick={() => {
+                dispatch(setIsDimmed(false))
+                navigate('/login')
+              }}
+              radius="1.5rem"
+              background="#9DAABB"
+            />
+          </UI.ModalContent>
+        </AppModal>
+      )}
     </UI.Wrap>
   )
 }
