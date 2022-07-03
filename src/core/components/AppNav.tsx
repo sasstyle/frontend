@@ -70,6 +70,9 @@ const IconWrap = styled.div`
     width: 1.5rem;
     height: 1.5rem;
   }
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const Box = styled.div`

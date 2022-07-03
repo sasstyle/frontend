@@ -15,6 +15,7 @@ export const Wrap = styled.div`
 export const FormWrap = styled.form`
   width: 100%;
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'center' })}
+  gap: 1rem;
 `
 
 export const FileSelectGroup = styled.div`

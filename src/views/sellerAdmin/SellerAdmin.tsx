@@ -5,8 +5,6 @@ import AppInput from '../../core/components/AppInput'
 import { useInput } from '../../core/hooks/useInput'
 import AppHeader from '../../core/components/AppHeader'
 import { uploadFiles } from '../../core/util/uploadFile'
-import AppSelectBox from '../../core/components/AppSelectBox'
-import { useSelect } from '../../core/hooks/useSelect'
 import AppTextArea from '../../core/components/AppTextArea'
 import AppButton from '../../core/components/AppButton'
 
@@ -27,9 +25,9 @@ export default function SellerAdmin() {
     <UI.Wrap>
       <AppHeader title="상품 추가 페이지" />
       <UI.FormWrap>
-        <AppInput type="text" placeHolder="가격" value={price} onSetValue={setPrice} />
-        <AppInput placeHolder="상품 이름" value={name} onSetValue={setName} />
-        <AppInput placeHolder="재고" value={stockQuantity} onSetValue={setStockQuantity} />
+        <AppInput label="가격" type="text" placeHolder="10,000" value={price} onSetValue={setPrice} />
+        <AppInput label="상품 이름" placeHolder="검은 셔츠" value={name} onSetValue={setName} />
+        <AppInput label="재고" placeHolder="100" value={stockQuantity} onSetValue={setStockQuantity} />
       </UI.FormWrap>
       <UI.FileSelectGroup>
         <UI.FileSelectWrap>
