@@ -9,7 +9,9 @@ export const appSlice = createSlice({
     setIsDimmed: (state, { payload }: PayloadAction<boolean>) => {
       state.isDimmed = payload
     },
-    cleanupState: () => CLEANUP_STATE,
+    cleanupState: (state) => {
+      state = CLEANUP_STATE
+    },
   },
 })
 

@@ -7,7 +7,7 @@ import appReducer from './App.slice'
 // api
 import { signupApi } from './api/auth/auth.query'
 import { homeApi } from './views/home/Home.query'
-import { productApi } from './views/product/Porudct.query'
+import { productApi } from './api/product/product.query'
 
 const rootReducer = combineReducers({
   [homeApi.reducerPath]: homeApi.reducer,

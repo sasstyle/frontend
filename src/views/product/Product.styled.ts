@@ -19,10 +19,12 @@ export const ShadowImg = styled.div`
 export const TopImg = styled.img`
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 18rem;
   object-fit: cover;
+  max-width: 530px;
 `
 
 export const TitleBar = styled.div`

@@ -1,11 +1,15 @@
 export interface Product {
-  id: number
-  imgUrl: string
-  price: string
-  brand: string
+  categoryId: number
+  productId: number
+  imageUrl: string
   name: string
-  likeCnt: number
-  rating: number
-  kind: 'top' | 'bottom'
-  isLike: boolean
+  price: number
+}
+
+export type Product_List = Array<Product>
+
+export type Product_Sort = {
+  empty: boolean
+  sorted: boolean
+  unsorted: boolean
 }

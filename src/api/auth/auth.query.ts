@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { defaultBaseQuery } from '..'
 import { Req_Login, Req_Signup, Res_IsUser, Res_Login, Res_Signup } from './auth.interface'
 import { AUTH_BASE_URL } from '../constant'
+import { setToken } from '../../core/util/user'
 
 export const signupApi = createApi({
   reducerPath: 'signupApi',
@@ -17,10 +18,6 @@ export const signupApi = createApi({
       //   return response
       // },
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
-      async onCacheEntryAdded(
-        arg,
-        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
-      ) {},
     }),
 
     requestLogin: build.mutation<Res_Login, Req_Login>({
@@ -30,11 +27,11 @@ export const signupApi = createApi({
         body: params,
       }),
       //   transformResponse: () => {},
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
-      async onCacheEntryAdded(
-        arg,
-        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
-      ) {},
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {
+        const result = await queryFulfilled
+        setToken('access_token', result.data.accessToken)
+        setToken('refresh_token', result.data.refreshToken)
+      },
     }),
 
     requestIsUser: build.query<Res_IsUser, void>({

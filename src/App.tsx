@@ -21,6 +21,7 @@ export default function App() {
   return (
     <Suspense fallback={<div>Loading</div>}>
       <AppInner isDimmed={isDimmed}>
+        {isDimmed && <Dimmed onClick={closeDimmed} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -30,7 +31,6 @@ export default function App() {
           <Route path="/product/:id" element={<Product />} />
         </Routes>
         <AppNav />
-        {isDimmed && <Dimmed onClick={closeDimmed} />}
       </AppInner>
     </Suspense>
   )

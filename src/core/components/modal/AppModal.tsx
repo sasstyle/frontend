@@ -1,5 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player'
-import animationData from '../../../designs/assets/lottieSuccess.json'
+import successAnimation from '../../../designs/assets/lottieSuccess.json'
+import errorAnimation from '../../../designs/assets/lottieError.json'
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 import { getBgColor, getTypo } from '../../../designs/util/atom'
@@ -8,7 +9,7 @@ import { getFlex, getScreenCenter } from '../../../designs/util/display'
 
 interface Props {
   type: 'small'
-  icon?: 'alert' | 'success'
+  icon?: 'error' | 'success'
   children: JSX.Element
 }
 
@@ -17,7 +18,10 @@ export default function AppModal({ type, icon, children }: Props) {
     return (
       <SmallWrap>
         <>
-          {icon === 'success' && <Player autoplay loop src={animationData} style={{ height: '80px', width: '80px' }} />}
+          {icon === 'success' && (
+            <Player autoplay loop src={successAnimation} style={{ height: '80px', width: '80px' }} />
+          )}
+          {icon === 'error' && <Player autoplay loop src={errorAnimation} style={{ height: '80px', width: '80px' }} />}
           {children}
         </>
       </SmallWrap>
@@ -36,6 +40,9 @@ const SmallWrap = styled.div`
   ${getBoxShadow('TYPE_A')}
   gap: 1rem;
   z-index: 999;
+  + div {
+    width: 100%;
+  }
   p {
     ${getTypo({ fontSize: '1rem' })}
     text-align: center;

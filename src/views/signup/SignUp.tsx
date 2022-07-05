@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { useNavigate } from 'react-router-dom'
 import animationData from '../../designs/assets/lottieSignup.json'
@@ -12,15 +12,16 @@ import { useSelect } from '../../core/hooks/useSelect'
 import { REG_EMAIL, REG_NAME, REG_PASSWORD, REG_PH, REG_USERNAME } from '../../core/constant/reg'
 import AppLink from '../../core/components/AppLink'
 import { PROFILE_URL_DEFAULT } from '../../core/constant'
-import { useDispatch } from 'react-redux'
-import { setIsDimmed } from '../../App.slice'
+import { cleanupState, setIsDimmed } from '../../App.slice'
 import AppModal from '../../core/components/modal/AppModal'
+import { useAppDispatch } from '../../core/hooks/redux'
+import { Modal_Type } from './signup.interface'
 
 export default function SignUp() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [signUp, { isLoading }] = useRequestSignupMutation()
-  const [isModal, setIsModal] = useState(false)
+  const [signUp, { isLoading, error }] = useRequestSignupMutation()
+  const [isModal, setIsModal] = useState<Modal_Type>(null)
 
   const { value: username, onSetValue: setUserName, isValid: isValidUserName } = useInput('', REG_USERNAME)
   const { value: password, onSetValue: setPassword, isValid: isValidPw } = useInput('', REG_PASSWORD)
@@ -45,14 +46,24 @@ export default function SignUp() {
       role,
       profileUrl: PROFILE_URL_DEFAULT,
     }
-    try {
-      const result = await signUp(values)
-      dispatch(setIsDimmed(true))
-      setIsModal(true)
-    } catch (err: any) {
-      const { status } = err
-    }
+    signUp(values)
+      .unwrap()
+      .then(() => {
+        dispatch(setIsDimmed(true))
+        setIsModal('success')
+      })
+      .catch(() => {
+        dispatch(setIsDimmed(true))
+        setIsModal('error')
+      })
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanupState())
+    }
+  }, [])
+
   return (
     <UI.Wrap>
       <Player autoplay loop src={animationData} style={{ height: '200px', width: '200px' }} />
@@ -105,7 +116,7 @@ export default function SignUp() {
         <AppButton content="회원가입" radius="2rem" onClick={onSignUp} disabled={!isAllValid || address === ''} />
       </UI.FormWrap>
       <AppLink href="/login" content="로그인 하러가기" />
-      {isModal && (
+      {isModal === 'success' && (
         <AppModal type="small" icon="success">
           <UI.ModalContent>
             <p>
@@ -121,6 +132,22 @@ export default function SignUp() {
               background="#9DAABB"
             />
           </UI.ModalContent>
+        </AppModal>
+      )}
+      {isModal === 'error' && (
+        <AppModal type="small" icon="error">
+          <div>
+            <p>{error?.data.message}</p>
+            <AppButton
+              content="확인"
+              onClick={() => {
+                dispatch(setIsDimmed(false))
+                setIsModal(null)
+              }}
+              radius="1.5rem"
+              background="#9DAABB"
+            />
+          </div>
         </AppModal>
       )}
     </UI.Wrap>

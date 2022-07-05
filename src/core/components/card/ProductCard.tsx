@@ -1,5 +1,5 @@
 import { FaRegHeart } from 'react-icons/fa'
-import { Product } from '../../../views/home/Home.interface'
+import { Product } from '../../types/product'
 import * as UI from './ProductCard.styled'
 
 export interface Props {

@@ -29,4 +29,5 @@ export const Dimmed = styled.div`
   height: 100vh;
   ${getBgColor('GREY_2')}
   opacity: 50%;
+  z-index: 10;
 `

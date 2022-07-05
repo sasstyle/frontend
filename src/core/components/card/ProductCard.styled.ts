@@ -30,6 +30,9 @@ export const VerticalWrap = styled.div`
   span {
     ${getTypo({ fontSize: '0.9rem', fontWeight: 700 })}
   }
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const ImgWrap = styled.div`

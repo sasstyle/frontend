@@ -16,7 +16,7 @@ export const getMaxMediaScreen: FuncCss<Max_MediaScreen> = (params = MEDIA_SCREE
   const style = css`
     @media screen and (min-width: ${BREAK_POINT}) {
       max-width: ${params.maxWidth};
-      min-width: '375px';
+      min-width: 375px;
       ${params.maxHeight !== '' && `max-height: ${params.maxHeight}`}
     }
   `
