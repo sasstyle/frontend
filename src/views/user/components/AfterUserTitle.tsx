@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { IoShirtOutline, IoStorefrontOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import { getFlex, getSafeWidth } from '../../../designs/util/display'
 import { getColor } from '../../../designs/util/atom'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface User {
   name: string
@@ -10,7 +10,7 @@ interface User {
   email: string
   phoneNumber: string
   address: string
-  type: string // 'seller' | 'buyer'
+  type: string
   sellerName?: string
   buyerGrade?: string
 }
@@ -20,9 +20,11 @@ interface Props {
 }
 
 export function AfterUserTitle({ user }: Props) {
+  const navigate = useNavigate()
+
   return (
     <>
-      <UserBasicInfo>
+      <UserBasicInfo onClick={() => navigate('/user/update')}>
         <h1>{user.name}님 안녕하세요 !</h1>
         <p>{user.email}</p>
         <IoChevronForwardOutline size="1.4rem" />
