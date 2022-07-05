@@ -15,9 +15,9 @@ export const productApi = createApi({
   endpoints: (build) => ({
     requestGetAllProduct: build.query<Res_ProductList, void>({
       query: () => ({
-        url: `/`,
+        url: `/products`,
       }),
-      transformResponse: (res: any) => res.data,
+      // transformResponse: (res: any) => res.data,
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
       async onCacheEntryAdded(
         arg,

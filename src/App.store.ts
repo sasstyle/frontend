@@ -6,11 +6,9 @@ import appReducer from './App.slice'
 
 // api
 import { signupApi } from './api/auth/auth.query'
-import { homeApi } from './views/home/Home.query'
 import { productApi } from './api/product/product.query'
 
 const rootReducer = combineReducers({
-  [homeApi.reducerPath]: homeApi.reducer,
   [signupApi.reducerPath]: signupApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
   appSlice: appReducer,
@@ -19,8 +17,7 @@ const rootReducer = combineReducers({
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(signupApi.middleware, homeApi.middleware, productApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(signupApi.middleware, productApi.middleware),
     preloadedState,
   })
 }
