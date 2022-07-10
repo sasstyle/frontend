@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { defaultBaseQuery } from '..'
-import { Req_Login, Req_Signup, Res_IsUser, Res_Login, Res_Signup } from './auth.interface'
+import { Req_IsUser, Req_Login, Req_Signup, Res_IsUser, Res_Login, Res_Signup } from './auth.interface'
 import { AUTH_BASE_URL } from '../constant'
 import { setToken } from '../../core/util/user'
 
@@ -14,9 +14,6 @@ export const signupApi = createApi({
         method: 'POST',
         body: params,
       }),
-      // transformResponse: (response: Res_Signup) => {
-      //   return response
-      // },
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
     }),
 
@@ -34,18 +31,23 @@ export const signupApi = createApi({
       },
     }),
 
-    requestIsUser: build.query<Res_IsUser, void>({
+    checkIsUser: build.query<Res_IsUser, void>({
       query: () => ({
         url: `/users/me`,
       }),
       // transformResponse: (res: any) => res.data,
+    }),
+
+    updateUserInfo: build.mutation<Res_IsUser, Req_IsUser>({
+      query: (params) => ({
+        url: `/users`,
+        method: 'PUT',
+        body: params,
+      }),
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
-      async onCacheEntryAdded(
-        arg,
-        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
-      ) {},
     }),
   }),
 })
 
-export const { useRequestSignupMutation, useRequestLoginMutation, useRequestIsUserQuery } = signupApi
+export const { useRequestSignupMutation, useRequestLoginMutation, useCheckIsUserQuery, useUpdateUserInfoMutation } =
+  signupApi

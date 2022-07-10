@@ -5,14 +5,14 @@ import { getColor } from '../../../designs/util/atom'
 import { Link, useNavigate } from 'react-router-dom'
 
 interface User {
+  profileUrl: string
+  userId: string
   name: string
+  role: string
   gender: string
   email: string
   phoneNumber: string
   address: string
-  type: string
-  sellerName?: string
-  buyerGrade?: string
 }
 
 interface Props {
@@ -29,39 +29,39 @@ export function AfterUserTitle({ user }: Props) {
         <p>{user.email}</p>
         <IoChevronForwardOutline size="1.4rem" />
       </UserBasicInfo>
-      {user.type === 'ADMIN' && (
+      {user.role === 'ADMIN' && (
         <UserTypeCard>
           <div>
             <div>
               <IoStorefrontOutline size="1.5rem" stroke="white" />
             </div>
-            <strong>{user.sellerName}</strong>
+            <strong>{user.name}</strong>
           </div>
           <Link to="/user/admin">
             상품 등록하러 가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
       )}
-      {user.type === 'BRAND' && (
+      {user.role === 'BRAND' && (
         <UserTypeCard>
           <div>
             <div>
               <IoStorefrontOutline size="1.5rem" stroke="white" />
             </div>
-            <strong>{user.sellerName}</strong>
+            <strong>{user.name}</strong>
           </div>
           <Link to="/">
             등록된 상품 보러가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
       )}
-      {user.type === 'USER' && (
+      {user.role === '일반' && (
         <UserTypeCard>
           <div>
             <div>
               <span style={{ color: 'white', fontSize: '1rem' }}>V</span>
             </div>
-            <strong>{user.buyerGrade}</strong>
+            <strong>VIP</strong>
           </div>
           <Link to="/">
             쿠폰 보러가기 <IoChevronForwardOutline size="1.4rem" />

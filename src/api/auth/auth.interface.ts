@@ -23,9 +23,23 @@ export interface Res_Login {
 }
 
 export interface Res_IsUser {
+  profileUrl: string
+  password: string
+  userId: string
   name: string
+  role: string
   gender: string
   email: string
   phoneNumber: string
   address: string
+}
+
+export interface Req_IsUser {
+  username?: string
+  password?: string
+  name?: string
+  gender?: string
+  email?: string
+  phoneNumber?: string
+  address?: string
 }

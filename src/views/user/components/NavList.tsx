@@ -23,10 +23,6 @@ export default function NavList() {
         <span>서비스 이용 약관</span>
       </li>
       <li>
-        <BsHeadset size="1.4rem" />
-        <span>그리고 또 뭐쓸까요</span>
-      </li>
-      <li>
         <BsSliders size="1.4rem" />
         <span>설정</span>
       </li>

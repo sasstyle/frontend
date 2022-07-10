@@ -4,6 +4,7 @@ import BeforeUserTitle from './components/BeforeUserTitle'
 import * as UI from './User.styled'
 import { AfterUserTitle } from './components/AfterUserTitle'
 import AppHeader from '../../core/components/AppHeader'
+import { useCheckIsUserQuery } from '../../api/auth/auth.query'
 
 function HeaderIcon() {
   return (
@@ -15,24 +16,14 @@ function HeaderIcon() {
 }
 
 export default function User() {
-  const isUser = true
-  const DummyUser = {
-    name: '홍길동',
-    gender: 'MAN',
-    email: 'sasstyle@sasstyle.com',
-    phoneNumber: '010-1234-5678',
-    address: '서울시 어딘가...',
-    type: 'ADMIN',
-    sellerName: 'BrandName',
-    buyerGrade: 'VIP',
-  }
+  const { data: userData, isLoading, isError } = useCheckIsUserQuery()
 
   return (
     <>
       <AppHeader title="마이페이지" icon={HeaderIcon()} />
       <UI.Wrap>
-        {!isUser && <BeforeUserTitle />}
-        {isUser && <AfterUserTitle user={DummyUser} />}
+        {!userData && <BeforeUserTitle />}
+        {userData && <AfterUserTitle user={userData} />}
         <NavList />
       </UI.Wrap>
     </>

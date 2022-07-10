@@ -1,4 +1,5 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { getToken } from '../core/util/user'
 
 export const defaultBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
@@ -7,9 +8,9 @@ export const defaultBaseQuery = (baseUrl: string) =>
       'Content-Type': 'application/json',
     },
     prepareHeaders: (headers, { endpoint }) => {
-      // if (endpoint === '/users/me') {
-      //   headers.set('userId', `Bearer ${token}`)
-      // }
+      if (endpoint === 'checkIsUser') {
+        headers.set('Authorization', `Bearer ${getToken('access_token')}`)
+      }
 
       return headers
     },

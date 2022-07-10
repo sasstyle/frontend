@@ -1,7 +1,7 @@
 import { hideScrollBar } from './../../designs/util/helpder'
 import styled from 'styled-components'
 import { getInnerPadding, getTypo } from '../../designs/util/atom'
-import { getFlex } from '../../designs/util/display'
+import { getFlex, setMediaScreen } from '../../designs/util/display'
 
 export const Wrap = styled.div`
   ${getFlex({ dir: 'column', ai: 'flex-start', js: 'flex-start' })}
@@ -14,6 +14,7 @@ export const ShadowImg = styled.div`
   width: 100%;
   height: 18rem;
   background-color: #ffffff;
+  ${setMediaScreen(`display: none;`)}
 `
 
 export const TopImg = styled.img`
