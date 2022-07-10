@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export function ProductCardVertical(props: Props) {
-  const { imgUrl, price, name, brand, likeCnt, kind, rating, isLike } = props.product
+  const { profileUrl, price, name, brandName } = props.product
 
   return (
     <UI.VerticalWrap onClick={props.onClick}>
@@ -16,9 +16,9 @@ export function ProductCardVertical(props: Props) {
         <UI.LikeBtn>
           <FaRegHeart size="1rem" />
         </UI.LikeBtn>
-        <img src={imgUrl} />
+        <img src={profileUrl} />
       </UI.ImgWrap>
-      <strong>{brand}</strong>
+      <strong>{brandName}</strong>
       <p>{name}</p>
       <span>{Number(price).toLocaleString()}원</span>
     </UI.VerticalWrap>

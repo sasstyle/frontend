@@ -1,5 +1,11 @@
 import { Product_List, Product_Sort } from '../../core/types/product'
 
+export interface Req_ProductList {
+  categoryId?: number
+  page: number
+  size?: number
+}
+
 export interface Res_ProductList {
   content: Product_List
   pageable: {

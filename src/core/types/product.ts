@@ -1,9 +1,10 @@
 export interface Product {
   categoryId: number
   productId: number
-  imageUrl: string
+  profileUrl: string
   name: string
   price: number
+  brandName: string
 }
 
 export type Product_List = Array<Product>

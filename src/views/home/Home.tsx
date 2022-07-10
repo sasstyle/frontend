@@ -1,20 +1,19 @@
+import { startTransition, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as UI from './Home.styled'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { ProductCardVertical } from '../../core/components/card/ProductCard'
-
-import { CategoryList } from './Home.constant'
 import AppSearch from '../../core/components/AppSearch'
-import AppCategoryBar from '../../core/components/AppCategoryBar'
-import { startTransition } from 'react'
 import { Product } from '../../core/types/product'
-import { useRequestGetAllProductQuery } from '../../api/product/product.query'
+import { useGetProductQuery } from '../../api/product/product.query'
 import ProductEmpty from '../../core/components/empty/ProductEmpty'
+import Category from './components/Category'
 
 export default function Home() {
-  const { data: productList, isLoading } = useRequestGetAllProductQuery()
+  const [currPage, setCurrPage] = useState(0)
+  const [categoryId, setCategoryId] = useState(183)
 
-  console.log(productList)
+  const { data: productList, isLoading } = useGetProductQuery({ page: currPage, categoryId })
 
   const navigate = useNavigate()
   const goToDetailPage = (id: number) => () => startTransition(() => navigate(`product/${id}`))
@@ -25,13 +24,17 @@ export default function Home() {
         <AppSearch />
         <AiOutlineMenu size="1.5rem" style={{ marginLeft: '1rem' }} />
       </UI.SearchWrap>
-      <AppCategoryBar list={CategoryList} />
+      <Category onSetCategory={(id: number) => setCategoryId(id)} />
       <UI.ProductWrap>
         {productList && productList.content.length < 1 && <ProductEmpty />}
-        {/* {productList &&
-          productList.map((product: Product) => (
-            <ProductCardVertical onClick={goToDetailPage(product.id)} key={product.id} product={product} />
-          ))} */}
+        {productList &&
+          productList.content.map((product: Product) => (
+            <ProductCardVertical
+              onClick={goToDetailPage(product.productId)}
+              key={product.productId}
+              product={product}
+            />
+          ))}
       </UI.ProductWrap>
     </UI.Wrap>
   )

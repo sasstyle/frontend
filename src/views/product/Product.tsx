@@ -1,24 +1,22 @@
 import { useParams } from 'react-router-dom'
 import ReviewCard from './components/ReviewCard'
-import { useRequestProductDetailQuery } from './Porudct.query'
+// import { useRequestProductDetailQuery } from './Porudct.query'
 import { DUMMY_REVIEW_LIST } from './Product.constant'
 import * as UI from './Product.styled'
 
 export default function Product() {
   const params = useParams()
 
-  const { data: product, isLoading } = useRequestProductDetailQuery(Number(params.id))
+  // const { data: product, isLoading } = useRequest/ProductDetailQuery(Number(params.id))
 
   return (
     <UI.Wrap>
-      <UI.TopImg src={product?.imgUrl} />
+      {/* <UI.TopImg src={product?.imgUrl} /> */}
       <UI.ShadowImg />
-      <UI.TitleBar>
-        <strong>{product?.brand}</strong>
-      </UI.TitleBar>
+      <UI.TitleBar>{/* <strong>{product?.brand}</strong> */}</UI.TitleBar>
       <UI.EssentialInfo>
-        <p>{product?.name}</p>
-        <span>{Number(product?.price).toLocaleString()}원</span>
+        {/* <p>{product?.name}</p>
+        <span>{Number(product?.price).toLocaleString()}원</span> */}
       </UI.EssentialInfo>
       <UI.ReviewSection>
         <span>리뷰 20개</span>
