@@ -40,3 +40,12 @@ export const getScreenCenter = () => {
   `
   return style
 }
+
+export const setMediaScreen = (option: string) => {
+  const style = css`
+    @media screen and (min-width: ${BREAK_POINT}) {
+      ${option}
+    }
+  `
+  return style
+}

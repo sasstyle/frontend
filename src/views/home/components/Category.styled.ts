@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { getColor, getTypo } from '../../../designs/util/atom'
-import { getFlex } from '../../../designs/util/display'
+import { getFlex, setMediaScreen } from '../../../designs/util/display'
 
 export const Wrap = styled.div`
   width: 100%;
@@ -36,6 +36,7 @@ export const Cell = styled.li`
   ${getFlex({ js: 'flex-start' })}
   width: calc((100vw - 3.7rem) / 3);
   height: 2rem;
+  ${setMediaScreen('width:9.6rem')}
   ${getTypo({ fontSize: '0.8rem', fontWeight: 600 })}
   ${getColor('GREY_2')}
   &[data-current=true] {
