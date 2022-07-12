@@ -45,9 +45,7 @@ export function AfterUserTitle({ user }: Props) {
       {user.role === 'BRAND' && (
         <UserTypeCard>
           <div>
-            <div>
-              <IoStorefrontOutline size="1.5rem" stroke="white" />
-            </div>
+            <IoStorefrontOutline size="1.5rem" stroke="white" />
             <strong>{user.name}</strong>
           </div>
           <Link to="/">
@@ -58,9 +56,7 @@ export function AfterUserTitle({ user }: Props) {
       {user.role === '일반' && (
         <UserTypeCard>
           <div>
-            <div>
-              <span style={{ color: 'white', fontSize: '1rem' }}>V</span>
-            </div>
+            <img src={user.profileUrl}></img>
             <strong>VIP</strong>
           </div>
           <Link to="/">
@@ -103,6 +99,12 @@ const UserTypeCard = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   div {
     ${getFlex()}
+    img {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 2rem;
+      margin-right: 0.8rem;
+    }
   }
   div > div {
     ${getFlex()}

@@ -34,37 +34,31 @@ export default function UserUpdate() {
   const { value: phoneNumber, onSetValue: setPhone, isValid: isValidPh } = useInput(userData?.phoneNumber, REG_PH)
   const { value: address, onSetValue: setAddress } = useInput(userData?.address)
 
-  const isAllValid = [isValidPw, isValidName, isValidEmail, isValidPh].every((ele) => ele === true)
+  const isAllValid = [isValidName, isValidEmail, isValidPh].every((ele) => ele === true)
   const onUpdateProfile = async () => {
     const values = {
       name: name ? name : userData?.name,
-      password: password ? password : userData?.password,
+      password: password ? password : null,
       gender: gender ? gender : userData?.gender,
       email: email ? email : userData?.email,
       phoneNumber: phoneNumber ? phoneNumber : userData?.phoneNumber,
       address: address ? address : userData?.address,
     }
-    console.log(values)
 
     updateUser(values)
       .unwrap()
       .then((res: any) => {
-        console.log(res)
         window.alert('프로필을 수정했습니다.')
-        // navigate('/user')
-        // dispatch(setIsDimmed(true))
-        // setIsModal('success')
+        navigate('/user')
       })
       .catch((err) => {
         console.log(err)
-        // dispatch(setIsDimmed(true))
-        // setIsModal('error')
       })
   }
 
   return (
     <>
-      <AppHeader title="마이페이지" icon={HeaderIcon()} />
+      <AppHeader isBack title="유저 정보 수정" />
       <UI.Wrap>
         <AppInput
           type="text"
@@ -77,7 +71,7 @@ export default function UserUpdate() {
         <AppInput
           type="password"
           label="비밀번호 변경"
-          placeHolder="영어, 숫자, 특수문자 8 ~ 13 글자"
+          placeHolder="비밀번호가 빈 값이면 이전 비밀번호가 그대로 유지됩니다."
           value={password}
           onSetValue={setPassword}
           errorMessage={!isValidPw ? '아이디는 영어, 숫자, 특수문자로 8글자 이상, 13글자 이하입니다.' : ''}
@@ -106,7 +100,12 @@ export default function UserUpdate() {
           value={address}
           onSetValue={setAddress}
         />
-        <AppButton content="변경 정보 저장하기" onClick={onUpdateProfile} radius="0.3rem" />
+        <AppButton
+          disabled={!isAllValid || address === ''}
+          content="변경 정보 저장하기"
+          onClick={onUpdateProfile}
+          radius="0.3rem"
+        />
       </UI.Wrap>
     </>
   )

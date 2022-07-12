@@ -10,7 +10,6 @@ export const Wrap = styled.div`
 export const HeaderWrap = styled.ul`
   width: 100%;
   ${getFlex({ js: 'space-between' })}
-  overflow-y:scroll;
 `
 
 export const Header = styled.li`

@@ -3,7 +3,7 @@ import { throttle } from 'lodash'
 import { FiSearch, FiX } from 'react-icons/fi'
 import { useInput } from '../hooks/useInput'
 import { getFlex } from '../../designs/util/display'
-import { getBgColor, getTypo } from '../../designs/util/atom'
+import { getBgColor, getColor, getTypo } from '../../designs/util/atom'
 import { useLazyProductAutoCompleteQuery } from '../../api/product/product.query'
 import { startTransition, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -37,7 +37,11 @@ export default function AppSearch() {
           )}
           {result?.data?.map((ele: any) => (
             <Item key={ele.productId} onClick={goToDetailPage(ele.productId)}>
-              {ele.name}
+              <img src={ele.imageUrl} />
+              <div>
+                <span>{ele.name}</span>
+                <span>{ele.brandName}</span>
+              </div>
             </Item>
           ))}
         </AutoCompleteWrap>
@@ -72,14 +76,25 @@ const AutoCompleteWrap = styled.ul`
 `
 
 const Item = styled.li`
-  &:first-child {
-    border: none;
-  }
-  ${getFlex()}
+  border: none;
+  ${getFlex({ js: 'flex-start' })}
   width: 100%;
-  min-height: 2.8rem;
+  min-height: 4rem;
   font-size: 1.1rem;
-  border-top: 1px solid grey;
+  div {
+    ${getFlex({ dir: 'column', ai: 'flex-start' })}
+    span:last-child {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      ${getColor('GREY_4')}
+    }
+  }
+
+  img {
+    width: 3rem;
+    height: 4rem;
+    margin-right: 1rem;
+  }
 `
 
 const InputWrap = styled.div`

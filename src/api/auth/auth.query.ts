@@ -44,7 +44,16 @@ export const signupApi = createApi({
         method: 'PUT',
         body: params,
       }),
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {
+        try {
+          const { data } = await queryFulfilled
+          const patchUserInfo = dispatch(
+            signupApi.util.updateQueryData('checkIsUser', undefined, (draft) => {
+              Object.assign(draft, data)
+            })
+          )
+        } catch {}
+      },
     }),
   }),
 })

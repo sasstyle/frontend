@@ -18,10 +18,10 @@ export const ShadowImg = styled.div`
 `
 
 export const TopImg = styled.img`
-  position: absolute;
+  /* position: absolute; */
+  /* transform: translateX(-50%); */
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
   width: 100%;
   height: 18rem;
   object-fit: cover;
@@ -72,4 +72,14 @@ export const ReviewList = styled.ul`
   overflow-x: scroll;
   scroll-snap-type: x proximity;
   ${hideScrollBar()}
+`
+
+export const ItemImg = styled.img`
+  width: 100%;
+  height: auto;
+`
+
+export const ImageWrap = styled.div`
+  /* ${setMediaScreen(`margin-top: 12rem;`)} */
+  margin: 2rem 0;
 `
