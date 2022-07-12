@@ -27,7 +27,7 @@ export default function SignUp() {
   const { value: password, onSetValue: setPassword, isValid: isValidPw } = useInput('', REG_PASSWORD)
   const { value: name, onSetValue: setName, isValid: isValidName } = useInput('', REG_NAME)
   const { value: gender, onSetValue: setGender, optionList: genderList } = useSelect(['WOMAN', 'MAN'])
-  const { value: role, onSetValue: setRole, optionList: roleList } = useSelect(['USER', 'BRAND', 'ADMIN'])
+  const { value: role, onSetValue: setRole, optionList: roleList } = useSelect(['USER', 'BRAND'])
   const { value: email, onSetValue: setEmail, isValid: isValidEmail } = useInput('', REG_EMAIL)
   const { value: phoneNumber, onSetValue: setPhone, isValid: isValidPh } = useInput('', REG_PH)
   const { value: address, onSetValue: setAddress } = useInput('')
