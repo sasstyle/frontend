@@ -60,6 +60,18 @@ export default function AppNav() {
           <Box />
         </NavWrap>
       )}
+      {current === 'cart' && (
+        <NavWrap>
+          <BuyBtn onClick={() => navigate('/product/buy')}>구매하기</BuyBtn>
+          <Box />
+        </NavWrap>
+      )}
+      {current === 'buy' && (
+        <NavWrap>
+          <BuyBtn>결제하기</BuyBtn>
+          <Box />
+        </NavWrap>
+      )}
       {current === 'auth' && (
         <NavWrap>
           <AppButton onClick={() => navigate('/')} radius="0.5rem" content="로그인 전에 둘러보기" />
@@ -83,6 +95,9 @@ const NavWrap = styled.nav`
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   ${getMaxMediaScreen({ maxWidth: '528px' })}
+  button {
+    cursor: pointer;
+  }
 `
 
 const IconWrap = styled.div`

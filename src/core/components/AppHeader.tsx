@@ -14,14 +14,12 @@ interface Props {
 export default function AppHeader({ title, icon, isBack }: Props) {
   const navigate = useNavigate()
   return (
-    <HeaderWrap>
+    <HeaderWrap data-isBack={isBack}>
       <div>
-        <span>
-          {isBack && (
-            <IoIosArrowBack onClick={() => navigate(-1)} size="1rem" style={{ transform: `translate(-10px,3px)` }} />
-          )}
-          {title}
-        </span>
+        {isBack && (
+          <IoIosArrowBack onClick={() => navigate(-1)} size="1rem" style={{ transform: `translate(-10px,3px)` }} />
+        )}
+        <span>{title}</span>
       </div>
       {icon && icon}
     </HeaderWrap>
@@ -44,5 +42,15 @@ export const HeaderWrap = styled.div`
     width: 1.3rem;
     height: 1.3rem;
     ${getColor('GREY_4')}
+  }
+
+  &[data-isBack='true'] {
+    & > div {
+      span {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
   }
 `

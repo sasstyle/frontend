@@ -5,6 +5,8 @@ export const getCurrentNav = () => {
   else if (location.includes('brand')) return 'brand'
   else if (location.includes('like')) return 'like'
   else if (location.includes('user')) return 'user'
+  else if (location.includes('cart')) return 'cart'
+  else if (location.includes('buy')) return 'buy'
   else if (location.includes('product')) return 'product'
   else if (location.includes('login')) return 'auth'
   else if (location.includes('signup')) return 'auth'

@@ -6,6 +6,7 @@ import { useAppSelector } from './core/hooks/redux'
 
 import AppNav from './core/components/AppNav'
 import { useDispatch } from 'react-redux'
+
 const Home = lazy(() => import('./views/home/Home'))
 const Login = lazy(() => import('./views/login/Login'))
 const SignUp = lazy(() => import('./views/signup/SignUp'))
@@ -13,6 +14,8 @@ const User = lazy(() => import('./views/user/User'))
 const UpdateUser = lazy(() => import('./views/userUpdate/UserUpdate'))
 const Product = lazy(() => import('./views/product/Product'))
 const SellerAdmin = lazy(() => import('./views/sellerAdmin/SellerAdmin'))
+const Cart = lazy(() => import('./views/cart/Cart'))
+const Buy = lazy(() => import('./views/buy/Buy'))
 
 export default function App() {
   const isDimmed = useAppSelector(selectIsDimmed)
@@ -31,6 +34,8 @@ export default function App() {
           <Route path="/user/update" element={<UpdateUser />} />
           <Route path="/user/admin" element={<SellerAdmin />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/product/cart/:id" element={<Cart />} />
+          <Route path="/product/buy" element={<Buy />} />
         </Routes>
         <AppNav />
       </AppInner>
