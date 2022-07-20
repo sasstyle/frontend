@@ -15,7 +15,7 @@ import { deleteToken, isUser } from '../../core/util/user'
 
 export default function Home() {
   const [currPage, setCurrPage] = useState(0)
-  const [categoryId, setCategoryId] = useState(183)
+  const [categoryId, setCategoryId] = useState(1)
   const [isMenu, setIsMenu] = useState(false)
   const [isModal, setIsModal] = useState(false)
 

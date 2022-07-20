@@ -33,6 +33,9 @@ export const FileSelectWrap = styled.div`
 `
 
 export const FileSelectBox = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
   width: 4rem;
   height: 4rem;
   ${getBgColor('GREY_1')}

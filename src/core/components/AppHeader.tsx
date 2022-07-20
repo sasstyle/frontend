@@ -14,7 +14,7 @@ interface Props {
 export default function AppHeader({ title, icon, isBack }: Props) {
   const navigate = useNavigate()
   return (
-    <HeaderWrap data-isBack={isBack}>
+    <HeaderWrap data-isback={isBack}>
       <div>
         {isBack && (
           <IoIosArrowBack onClick={() => navigate(-1)} size="1rem" style={{ transform: `translate(-10px,3px)` }} />
@@ -44,7 +44,7 @@ export const HeaderWrap = styled.div`
     ${getColor('GREY_4')}
   }
 
-  &[data-isBack='true'] {
+  &[data-isback='true'] {
     & > div {
       span {
         position: absolute;

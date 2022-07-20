@@ -5,20 +5,26 @@ import AppInput from '../../core/components/AppInput'
 import { useInput } from '../../core/hooks/useInput'
 import AppHeader from '../../core/components/AppHeader'
 import { uploadFiles } from '../../core/util/uploadFile'
-import AppTextArea from '../../core/components/AppTextArea'
 import AppButton from '../../core/components/AppButton'
 
 export default function SellerAdmin() {
-  const fileInput = useRef<any>(null)
+  const fileInput = useRef<HTMLInputElement>(null)
   const { value: price, onSetValue: setPrice } = useInput('')
   const { value: name, onSetValue: setName } = useInput('')
   const { value: stockQuantity, onSetValue: setStockQuantity } = useInput('')
-  const { value: topDescription, onSetValue: setTopDescription } = useInput('')
-  const { value: bottomDescription, onSetValue: setBottomDescription } = useInput('')
 
-  const test = async () => {
+  const uploadFile = async () => {
     const files = fileInput.current && fileInput.current.files
-    const res = await uploadFiles(files[0])
+    console.log(files)
+
+    // const res = await uploadFiles(files[0])
+
+    // console.log(res)
+  }
+
+  const postProduct = async () => {
+    const imgData = await uploadFile()
+    console.log(imgData)
   }
 
   return (
@@ -36,34 +42,20 @@ export default function SellerAdmin() {
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
-            <input id="imageUrl" type="file" multiple ref={fileInput} />
+            <input onChange={uploadFile} id="imageUrl" type="file" multiple ref={fileInput} />
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
         <UI.FileSelectWrap>
-          <strong>추가 이미지 선택 ( 최대 3개까지 가능합니다 )</strong>
+          <strong>추가 이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
           <UI.FileSelectBox>
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
-            <input id="imageUrl" type="file" multiple ref={fileInput} />
+            <input onChange={uploadFile} id="imageUrl" type="file" multiple ref={fileInput} />
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
       </UI.FileSelectGroup>
-      <UI.TextAreaGroup>
-        <AppTextArea
-          label="메인 소개글을 입력해주세요"
-          placeHolder="dd"
-          value={topDescription}
-          onSetValue={setTopDescription}
-        />
-        <AppTextArea
-          label="서브 소개글을 입력해주세요"
-          placeHolder="dd"
-          value={bottomDescription}
-          onSetValue={setBottomDescription}
-        />
-      </UI.TextAreaGroup>
-      <AppButton content="상품 등록" onClick={() => {}} radius="0.3rem" />
+      <AppButton content="상품 등록" onClick={uploadFile} radius="0.3rem" />
     </UI.Wrap>
   )
 }

@@ -6,9 +6,13 @@ import { startTransition, useEffect, useState } from 'react'
 import { getCurrentNav } from '../util'
 import { getBgColor, getColor } from '../../designs/util/atom'
 import AppButton from './AppButton'
+import ModalSlideUp from './modal/ModalSlideUp'
+import { useModal } from '../hooks/useModal'
+import CartModal from '../../views/product/components/CartModal'
 
 export default function AppNav() {
   const [current, setCurrent] = useState(getCurrentNav())
+  const { isModal, setIsModal } = useModal()
 
   const getColor = (name: string) => (current === name ? 'black' : 'lightgrey')
 
@@ -52,11 +56,12 @@ export default function AppNav() {
       )}
       {current === 'product' && (
         <NavWrap>
+          {isModal && <ModalSlideUp children={<CartModal />} isModal={isModal} trigger={setIsModal} />}
           <Likebox>
             <FiHeart size="2rem" />
             <span>1.2천</span>
           </Likebox>
-          <BuyBtn>구매하기</BuyBtn>
+          <BuyBtn onClick={() => setIsModal(true)}>구매하기</BuyBtn>
           <Box />
         </NavWrap>
       )}

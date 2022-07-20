@@ -8,7 +8,12 @@ export const defaultBaseQuery = (baseUrl: string) =>
       'Content-Type': 'application/json',
     },
     prepareHeaders: (headers, { endpoint }) => {
-      if (endpoint === 'checkIsUser' || endpoint === 'updateUserInfo') {
+      if (
+        endpoint === 'checkIsUser' ||
+        endpoint === 'updateUserInfo' ||
+        endpoint === 'postAddCart' ||
+        endpoint === 'getCartList'
+      ) {
         headers.set('Authorization', `Bearer ${getToken('access_token')}`)
       }
 
