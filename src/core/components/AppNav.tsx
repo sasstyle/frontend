@@ -56,7 +56,9 @@ export default function AppNav() {
       )}
       {current === 'product' && (
         <NavWrap>
-          {isModal && <ModalSlideUp children={<CartModal />} isModal={isModal} trigger={setIsModal} />}
+          {isModal && (
+            <ModalSlideUp children={<CartModal trigger={setIsModal} />} isModal={isModal} trigger={setIsModal} />
+          )}
           <Likebox>
             <FiHeart size="2rem" />
             <span>1.2천</span>

@@ -1,4 +1,3 @@
-import { $CombinedState } from '@reduxjs/toolkit'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { defaultBaseQuery } from '..'
 import { T_RootState } from '../../core/store'
@@ -68,24 +67,6 @@ export const productApi = createApi({
       }),
       transformResponse: (res: any) => res.data,
     }),
-
-    // ! 장바구니 넣기
-    postAddCart: build.mutation<any, I.Req_AddCart>({
-      query: (params) => ({
-        url: `/carts`,
-        method: 'POST',
-        body: params,
-      }),
-      //   transformResponse: () => {},
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
-    }),
-
-    // ! 장바구니 조회
-    getCartList: build.query<I.Res_CartList, void>({
-      query: () => ({
-        url: `/carts`,
-      }),
-    }),
   }),
 })
 
@@ -98,6 +79,4 @@ export const {
   useGetCategoryQuery,
   useGetProductQuery,
   useGetProductDetailQuery,
-  usePostAddCartMutation,
-  useGetCartListQuery,
 } = productApi

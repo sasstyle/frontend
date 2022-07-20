@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Res_Product } from '../../../api/product/product.interface'
-import { selectProduct, usePostAddCartMutation } from '../../../api/product/product.query'
+import { usePostAddCartMutation } from '../../../api/cart/cart.query'
+import { selectProduct } from '../../../api/product/product.query'
 import AppButton from '../../../core/components/AppButton'
 import AppCounter from '../../../core/components/AppCounter'
 import { useAppSelector } from '../../../core/hooks/redux'
@@ -8,7 +9,7 @@ import useCounter from '../../../core/hooks/useCounter'
 import { getBgColor, getColor } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
 
-export default function CartModal() {
+export default function CartModal({ trigger }: { trigger: any }) {
   const productId = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1)
   const productApi = useAppSelector(selectProduct)
   const product: any = productApi[`getProductDetail({"id":${productId}})`]?.data
@@ -25,10 +26,12 @@ export default function CartModal() {
     addCart(values)
       .unwrap()
       .then(() => {
-        console.log('success')
+        window.alert('장바구니에 상품이 추가되었습니다.')
+        trigger(false)
       })
       .catch((err) => {
-        console.log(err)
+        window.alert(err.message)
+        trigger(false)
       })
   }
 
