@@ -21,12 +21,14 @@ export const Hr = styled.div`
 export const BrandTitle = styled.div`
   ${getFlex({ js: 'flex-start' })}
   width: inherit;
-  height: 3rem;
+  height: 2rem;
+  font-size: 1rem;
   img {
     width: 2rem;
     height: 2rem;
     border-radius: 2rem;
     margin-right: 0.6rem;
+    object-fit: cover;
   }
 `
 
@@ -114,5 +116,11 @@ export const TotalPrice = styled.div`
     ${getTypo({ fontSize: '1rem', fontWeight: 500 })}
     width: 100%;
     text-align: right;
+  }
+  & > div {
+    svg,
+    span {
+      ${getBgColor('GREY_1')}
+    }
   }
 `

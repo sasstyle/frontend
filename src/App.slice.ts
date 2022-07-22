@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CLEANUP_STATE, INITIAL_STATE } from './App.constant'
-import { T_RootState } from './core/store'
+import { RootState } from './App.store'
 
 export const appSlice = createSlice({
   name: 'appSlice',
@@ -17,6 +17,6 @@ export const appSlice = createSlice({
 
 export const { cleanupState, setIsDimmed } = appSlice.actions
 
-export const selectIsDimmed = ({ appSlice }: T_RootState) => appSlice.isDimmed
+export const selectIsDimmed = ({ appSlice }: RootState) => appSlice.isDimmed
 
 export default appSlice.reducer

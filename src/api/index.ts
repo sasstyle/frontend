@@ -21,3 +21,17 @@ export const defaultBaseQuery = (baseUrl: string) =>
     },
     credentials: 'omit',
   })
+
+export const tokenBaseQuery = (baseUrl: string) =>
+  fetchBaseQuery({
+    baseUrl,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    prepareHeaders: (headers) => {
+      headers.set('Authorization', `Bearer ${getToken('access_token')}`)
+
+      return headers
+    },
+    credentials: 'omit',
+  })

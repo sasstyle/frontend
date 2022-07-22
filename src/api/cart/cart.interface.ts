@@ -5,14 +5,26 @@ export interface Req_AddCart {
   count: number
 }
 
+export interface CartProductList {
+  cartDetailId: number
+  profileUrl: string
+  name: string
+  price: number
+  count: number
+  brandName: string
+  productId: number
+}
+
 export interface Res_CartList {
   cartId: number
-  products: Array<{
-    cartDetailId: number
-    profileUrl: string
-    name: string
-    price: number
-    count: number
-  }>
+  products: Array<CartProductList>
   totalPrice: number
+}
+
+export interface Req_UpdateCartList {
+  cartDetailId: number
+  body: {
+    productId: number
+    count: number
+  }
 }

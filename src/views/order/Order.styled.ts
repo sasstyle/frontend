@@ -1,4 +1,4 @@
-import { getFlex } from './../../designs/util/display'
+import { getFlex, getMaxMediaScreen } from '../../designs/util/display'
 import styled from 'styled-components'
 import { getBgColor, getColor } from '../../designs/util/atom'
 
@@ -13,7 +13,7 @@ export const Wrap = styled.div`
   }
 `
 
-export const BuyInfo = styled.div`
+export const OrderInfo = styled.div`
   strong {
     font-size: 1rem;
   }
@@ -38,7 +38,7 @@ export const Hr = styled.div`
 export const BrandTitle = styled.div`
   ${getFlex({ js: 'flex-start' })}
   width: inherit;
-  height: 3rem;
+  height: 2rem;
   img {
     width: 2rem;
     height: 2rem;
@@ -56,17 +56,29 @@ export const BrandItem = styled.div`
     height: 3rem;
     border-radius: 1rem;
     margin-right: 1rem;
+    object-fit: cover;
   }
   input {
     margin-right: 0.8rem;
   }
   strong {
     padding-top: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   svg:last-of-type {
     position: absolute;
     right: 0;
+  }
+  & > div {
+    ${getFlex({ dir: 'column', ai: 'flex-start', js: 'flex-start' })}
+    gap:0.5rem;
+    span {
+      font-size: 0.9rem;
+    }
+  }
+  & > strong {
+    width: 100%;
+    text-align: right;
   }
 `
 
@@ -87,7 +99,12 @@ export const UserInfo = styled.div`
 `
 
 export const PayInfo = styled.div`
+  position: fixed;
+  bottom: 8rem;
   margin-top: 2rem;
+  padding: 0 1.7rem;
+  ${getFlex({ dir: 'column' })}
+  ${getMaxMediaScreen()};
   ${getFlex({ js: 'space-between' })}
   strong {
     font-size: 1.1rem;
@@ -96,5 +113,9 @@ export const PayInfo = styled.div`
     font-size: 1rem;
     ${getColor('GREY_4')}
     font-size: 1.5rem;
+  }
+  div:last-child {
+    margin-top: 3rem;
+    ${getFlex({ dir: 'row', js: 'space-between' })}
   }
 `

@@ -14,3 +14,9 @@ export const Wrap = styled.div`
     width: 100%;
   }
 `
+
+export const EmptyWrap = styled.div`
+  ~ nav {
+    display: none;
+  }
+`

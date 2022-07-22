@@ -9,10 +9,16 @@ import AppButton from './AppButton'
 import ModalSlideUp from './modal/ModalSlideUp'
 import { useModal } from '../hooks/useModal'
 import CartModal from '../../views/product/components/CartModal'
+import { selectCartList } from '../../api/cart/cart.query'
+import { useAppSelector } from '../hooks/redux'
+import { usePostOrderMutation } from '../../api/order/order.query'
+import { selectUserInfo } from '../../api/auth/auth.query'
 
 export default function AppNav() {
   const [current, setCurrent] = useState(getCurrentNav())
   const { isModal, setIsModal } = useModal()
+
+  const [orderCartList] = usePostOrderMutation()
 
   const getColor = (name: string) => (current === name ? 'black' : 'lightgrey')
 
@@ -27,6 +33,20 @@ export default function AppNav() {
     setCurrent(getCurrentNav())
   }, [navigate])
 
+  const productList: any = useAppSelector(selectCartList)
+  const userInfo: any = useAppSelector(selectUserInfo)
+
+  const onOrder = () => {
+    const config = {
+      data: productList.products,
+      address: userInfo.address,
+    }
+    orderCartList(config).then(() => {
+      window.alert('상품 주문이 완료되었습니다.')
+      navigate('/')
+    })
+  }
+
   return (
     <>
       {current !== 'product' && (
@@ -35,17 +55,17 @@ export default function AppNav() {
             <FiHome stroke={getColor('home')} />
             <span style={{ color: getColor('home') }}>홈</span>
           </IconWrap>
-          <IconWrap onClick={goTo('/', 'store')}>
-            <FiSearch color={getColor('store')} />
-            <span style={{ color: getColor('store') }}>스토어</span>
-          </IconWrap>
-          <IconWrap onClick={goTo('/', 'brand')}>
+          <IconWrap onClick={goTo('/cart', 'brand')}>
             <FiTag color={getColor('brand')} />
-            <span style={{ color: getColor('brand') }}>브랜드</span>
+            <span style={{ color: getColor('brand') }}>장바구니</span>
           </IconWrap>
           <IconWrap onClick={goTo('/', 'like')}>
             <FiHeart color={getColor('like')} />
             <span style={{ color: getColor('like') }}>찜</span>
+          </IconWrap>
+          <IconWrap onClick={goTo('/order-history', 'store')}>
+            <FiSearch color={getColor('store')} />
+            <span style={{ color: getColor('store') }}>주문내역</span>
           </IconWrap>
           <IconWrap onClick={goTo('/user', 'user')}>
             <FiUser color={getColor('user')} />
@@ -63,19 +83,19 @@ export default function AppNav() {
             <FiHeart size="2rem" />
             <span>1.2천</span>
           </Likebox>
-          <BuyBtn onClick={() => setIsModal(true)}>구매하기</BuyBtn>
+          <OrderBtn onClick={() => setIsModal(true)}>구매하기</OrderBtn>
           <Box />
         </NavWrap>
       )}
       {current === 'cart' && (
         <NavWrap>
-          <BuyBtn onClick={() => navigate('/product/buy')}>구매하기</BuyBtn>
+          <OrderBtn onClick={() => navigate('/order')}>구매하기</OrderBtn>
           <Box />
         </NavWrap>
       )}
-      {current === 'buy' && (
+      {current === 'order' && (
         <NavWrap>
-          <BuyBtn>결제하기</BuyBtn>
+          <OrderBtn onClick={onOrder}>결제하기</OrderBtn>
           <Box />
         </NavWrap>
       )}
@@ -134,7 +154,7 @@ const Box = styled.div`
   border-radius: 2rem;
 `
 
-const BuyBtn = styled.button`
+const OrderBtn = styled.button`
   width: 100%;
   height: 2.5rem;
   border: none;

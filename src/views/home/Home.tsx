@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   const navigate = useNavigate()
-  const goToDetailPage = (id: number) => () => startTransition(() => navigate(`product/${id}`))
+  const goToDetailPage = (id: number) => () => startTransition(() => navigate(`product/detail/${id}`))
 
   return (
     <>

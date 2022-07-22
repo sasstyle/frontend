@@ -3,6 +3,7 @@ import { defaultBaseQuery } from '..'
 import { Req_IsUser, Req_Login, Req_Signup, Res_IsUser, Res_Login, Res_Signup } from './auth.interface'
 import { AUTH_BASE_URL } from '../constant'
 import { setToken } from '../../core/util/user'
+import { RootState } from '../../App.store'
 
 export const signupApi = createApi({
   reducerPath: 'signupApi',
@@ -57,6 +58,8 @@ export const signupApi = createApi({
     }),
   }),
 })
+
+export const selectUserInfo = (state: RootState) => state.signupApi.queries['checkIsUser(undefined)']?.data
 
 export const { useRequestSignupMutation, useRequestLoginMutation, useCheckIsUserQuery, useUpdateUserInfoMutation } =
   signupApi

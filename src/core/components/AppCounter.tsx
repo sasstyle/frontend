@@ -4,14 +4,26 @@ import { getFlex } from '../../designs/util/display'
 export interface AppCounter_Props {
   setCnt: any
   cnt: number
+  onPlus?: any
+  onMinus?: any
 }
 
-export default function AppCounter({ setCnt, cnt }: AppCounter_Props) {
+export default function AppCounter({ setCnt, cnt, onMinus, onPlus }: AppCounter_Props) {
   return (
     <Wrap>
-      <FaMinus onClick={() => setCnt(cnt > 1 ? cnt - 1 : cnt)} />
+      <FaMinus
+        onClick={() => {
+          setCnt(cnt > 1 ? cnt - 1 : cnt)
+          if (onMinus) onMinus()
+        }}
+      />
       <span>{cnt}</span>
-      <FaPlus onClick={() => setCnt(cnt + 1)} />
+      <FaPlus
+        onClick={() => {
+          setCnt(cnt + 1)
+          if (onPlus) onPlus()
+        }}
+      />
     </Wrap>
   )
 }

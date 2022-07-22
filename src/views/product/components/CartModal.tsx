@@ -2,19 +2,26 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { usePostAddCartMutation } from '../../../api/cart/cart.query'
 import { selectProduct } from '../../../api/product/product.query'
+
 import AppButton from '../../../core/components/AppButton'
 import AppCounter from '../../../core/components/AppCounter'
+import SimpleModal from '../../../core/components/modal/SimpleModal'
+
 import { useAppSelector } from '../../../core/hooks/redux'
 import useCounter from '../../../core/hooks/useCounter'
+import { useModal } from '../../../core/hooks/useModal'
 import { getBgColor, getColor } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
 
 export default function CartModal({ trigger }: { trigger: any }) {
+  const navigate = useNavigate()
+
   const productId = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1)
   const productApi = useAppSelector(selectProduct)
   const product: any = productApi[`getProductDetail({"id":${productId}})`]?.data
 
   const { cnt, setCnt } = useCounter(1)
+  const { isModal, setIsModal } = useModal()
 
   const [addCart, { isLoading, error }] = usePostAddCartMutation()
 
@@ -30,29 +37,48 @@ export default function CartModal({ trigger }: { trigger: any }) {
         trigger(false)
       })
       .catch((err) => {
-        window.alert(err.message)
-        trigger(false)
+        if (err.status === 401) setIsModal(true)
       })
   }
 
   return (
-    <Wrap>
-      <ProductWrap>
-        <strong>{product?.name}</strong>
-        <div>
-          <AppCounter cnt={cnt} setCnt={setCnt} />
-          <strong>{product?.price.toLocaleString()}원</strong>
-        </div>
-      </ProductWrap>
-      <PriceWrap>
-        <span>{cnt}개 상품 금액</span>
-        <strong>{(product?.price * cnt).toLocaleString()}원</strong>
-      </PriceWrap>
-      <BtnWrap>
-        <AppButton content="바로구매" onClick={() => {}} />
-        <AppButton content="장바구니" onClick={onAddCart} />
-      </BtnWrap>
-    </Wrap>
+    <>
+      {
+        <SimpleModal
+          isModal={isModal}
+          icon={'error'}
+          content="로그인을 해주세요."
+          btnText="로그인 하러가기"
+          trigger={setIsModal}
+          btnTrigger={() => {
+            navigate('/login')
+            trigger(false)
+          }}
+        />
+      }
+      <Wrap>
+        <ProductWrap>
+          <strong>{product?.name}</strong>
+          <div>
+            <AppCounter cnt={cnt} setCnt={setCnt} />
+            <strong>{product?.price.toLocaleString()}원</strong>
+          </div>
+        </ProductWrap>
+        <PriceWrap>
+          <span>{cnt}개 상품 금액</span>
+          <strong>{(product?.price * cnt).toLocaleString()}원</strong>
+        </PriceWrap>
+        <BtnWrap>
+          {/* <AppButton
+            content="바로구매"
+            onClick={() => {
+              navigate('/cart')
+            }}
+          /> */}
+          <AppButton content="장바구니" onClick={onAddCart} />
+        </BtnWrap>
+      </Wrap>
+    </>
   )
 }
 

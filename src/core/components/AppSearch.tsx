@@ -15,11 +15,12 @@ export default function AppSearch() {
 
   const throttled = useRef(throttle((value) => trigger({ name: value }), 1000))
   useEffect(() => {
+    if (!value) return
     throttled.current(value)
   }, [value])
 
   const navigate = useNavigate()
-  const goToDetailPage = (id: number) => () => startTransition(() => navigate(`product/${id}`))
+  const goToDetailPage = (id: number) => () => startTransition(() => navigate(`product/detail/${id}`))
 
   const onClear = () => onSetValue('')
 

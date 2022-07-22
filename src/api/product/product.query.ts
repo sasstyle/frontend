@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { defaultBaseQuery } from '..'
-import { T_RootState } from '../../core/store'
+import { RootState } from '../../App.store'
 import { Product } from '../../core/types/product'
 import { PRODUCT_BASE_URL } from '../constant'
 import * as I from './product.interface'
@@ -70,7 +70,7 @@ export const productApi = createApi({
   }),
 })
 
-export const selectProduct = (state: T_RootState) => state.productApi.queries
+export const selectProduct = (state: RootState) => state.productApi.queries
 
 export const {
   useGetAllProductQuery,
