@@ -21,3 +21,5 @@ export interface Res_Login {
   accessToken: string
   refreshToken: string
 }
+
+export type Modal_Type = 'success' | 'error' | null

@@ -1,18 +1,27 @@
 import styled from 'styled-components'
-import { getInnerPadding } from '../../designs/util/atom'
 import { getFlex } from '../../designs/util/display'
 
 export const Wrap = styled.div`
   ${getFlex({ dir: 'column', js: 'center', ai: 'center' })}
-  position: relative;
   width: 100%;
-  height: 100vh;
-  ${getInnerPadding()}
+  height: 100%;
+  padding-bottom: 3rem;
+
+  + div {
+    transform: translateY(-30rem);
+  }
+  + nav {
+    display: none;
+  }
+  button {
+    margin-bottom: 1.5rem;
+  }
 `
 
 export const FormWrap = styled.div`
   ${getFlex({ dir: 'column', js: 'center', ai: 'flex-start' })}
-  gap: 0.5rem;
+  width: 100%;
+  gap: 1.5rem;
   margin-top: 1rem;
 `
 
@@ -24,10 +33,11 @@ export const selectWrap = styled.div`
     width: 50%;
     margin-bottom: 0.5rem;
   }
-  ~ button {
-    margin-top: 0.5rem;
-  }
   input {
-    width: 50%;
+    width: 100%;
   }
+`
+
+export const ModalContent = styled.div`
+  width: 100%;
 `
