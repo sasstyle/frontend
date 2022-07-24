@@ -67,6 +67,31 @@ export const productApi = createApi({
       }),
       transformResponse: (res: any) => res.data,
     }),
+
+    postLike: build.mutation<any, I.Req_Post_Wish>({
+      query: (params) => ({
+        url: `/wishs`,
+        method: 'POST',
+        body: params,
+      }),
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
+    }),
+
+    deleteLike: build.mutation<any, I.Req_Post_Wish>({
+      query: (params) => ({
+        url: `/wishs`,
+        method: 'DELETE',
+        body: params,
+      }),
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
+    }),
+
+    getLikeList: build.query<any, void>({
+      query: () => ({
+        url: '/wishs',
+      }),
+      transformResponse: (res: any) => res.content,
+    }),
   }),
 })
 
@@ -79,4 +104,7 @@ export const {
   useGetCategoryQuery,
   useGetProductQuery,
   useGetProductDetailQuery,
+  usePostLikeMutation,
+  useDeleteLikeMutation,
+  useGetLikeListQuery,
 } = productApi

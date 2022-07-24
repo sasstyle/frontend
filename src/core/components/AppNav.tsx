@@ -59,9 +59,9 @@ export default function AppNav() {
             <FiTag color={getColor('brand')} />
             <span style={{ color: getColor('brand') }}>장바구니</span>
           </IconWrap>
-          <IconWrap onClick={goTo('/', 'like')}>
-            <FiHeart color={getColor('like')} />
-            <span style={{ color: getColor('like') }}>찜</span>
+          <IconWrap onClick={goTo('/wish', 'wish')}>
+            <FiHeart color={getColor('wish')} />
+            <span style={{ color: getColor('wish') }}>찜</span>
           </IconWrap>
           <IconWrap onClick={goTo('/order-history', 'store')}>
             <FiSearch color={getColor('store')} />

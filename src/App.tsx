@@ -17,6 +17,7 @@ const SellerAdmin = lazy(() => import('./views/sellerAdmin/SellerAdmin'))
 const Cart = lazy(() => import('./views/cart/Cart'))
 const Order = lazy(() => import('./views/order/Order'))
 const Ordered = lazy(() => import('./views/orderHistory/OrderHistory'))
+const Wish = lazy(() => import('./views/wish/Wish'))
 
 export default function App() {
   const isDimmed = useAppSelector(selectIsDimmed)
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
           <Route path="/order-history" element={<Ordered />} />
+          <Route path="/wish" element={<Wish />} />
         </Routes>
         <AppNav />
       </AppInner>

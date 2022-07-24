@@ -66,3 +66,7 @@ export interface Req_Post_Product {
 export interface Res_Post_Product {
   productId: number
 }
+
+export interface Req_Post_Wish {
+  productId: number
+}

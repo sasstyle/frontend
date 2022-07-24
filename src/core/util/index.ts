@@ -3,7 +3,7 @@ export const getCurrentNav = () => {
 
   if (location.includes('store')) return 'store'
   else if (location.includes('brand')) return 'brand'
-  else if (location.includes('like')) return 'like'
+  else if (location.includes('wish')) return 'wish'
   else if (location.includes('user')) return 'user'
   else if (location.includes('cart')) return 'cart'
   else if (location.includes('order')) return 'order'

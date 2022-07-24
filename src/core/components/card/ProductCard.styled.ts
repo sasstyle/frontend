@@ -45,6 +45,9 @@ export const LikeBtn = styled.div`
   position: absolute;
   right: 0.5rem;
   bottom: 1.5rem;
+  svg {
+    z-index: 10;
+  }
 `
 
 export const HorizontalWrap = styled.div`

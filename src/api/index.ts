@@ -9,10 +9,14 @@ export const defaultBaseQuery = (baseUrl: string) =>
     },
     prepareHeaders: (headers, { endpoint }) => {
       if (
+        endpoint == 'getProduct' ||
         endpoint === 'checkIsUser' ||
         endpoint === 'updateUserInfo' ||
         endpoint === 'postAddCart' ||
-        endpoint === 'getCartList'
+        endpoint === 'getCartList' ||
+        endpoint === 'postLike' ||
+        endpoint === 'deleteLike' ||
+        endpoint === 'getLikeList'
       ) {
         headers.set('Authorization', `Bearer ${getToken('access_token')}`)
       }

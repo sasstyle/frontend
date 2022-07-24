@@ -5,6 +5,7 @@ export interface Product {
   name: string
   price: number
   brandName: string
+  wish: false
 }
 
 export type Product_List = Array<Product>

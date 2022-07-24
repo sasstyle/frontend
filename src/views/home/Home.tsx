@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useState } from 'react'
+import { startTransition, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as UI from './Home.styled'
 import { AiOutlineMenu } from 'react-icons/ai'
