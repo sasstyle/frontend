@@ -50,6 +50,7 @@ export const signupApi = createApi({
           const { data } = await queryFulfilled
           const patchUserInfo = dispatch(
             signupApi.util.updateQueryData('checkIsUser', undefined, (draft) => {
+              console.log(draft)
               Object.assign(draft, data)
             })
           )

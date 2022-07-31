@@ -1,9 +1,14 @@
+import { startTransition } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useGetOrderCartQuery } from '../../api/order/order.query'
 import AppHeader from '../../core/components/AppHeader'
 import * as UI from './OrderHistory.styled'
 
 export default function OrderHistory() {
   const { data, isLoading, isError } = useGetOrderCartQuery()
+
+  const navigate = useNavigate()
+  const goToDetailPage = () => startTransition(() => navigate(`/review/create`))
 
   return (
     <>
@@ -24,6 +29,7 @@ export default function OrderHistory() {
                 </div>
               </UI.Product>
             ))}
+            <button onClick={goToDetailPage}>리뷰 작성</button>
           </UI.HistoryWrap>
         ))}
         {/* <strong>{data?.data.orderDate}</strong> */}

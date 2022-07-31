@@ -44,7 +44,7 @@ export const ImgWrap = styled.div`
 export const LikeBtn = styled.div`
   position: absolute;
   right: 0.5rem;
-  bottom: 1.5rem;
+  top: 1rem;
   svg {
     z-index: 10;
   }

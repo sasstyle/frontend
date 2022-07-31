@@ -12,7 +12,7 @@ export const cartApi = createApi({
     // ! 장바구니 넣기
     postAddCart: build.mutation<any, I.Req_AddCart>({
       query: (params) => ({
-        url: `/carts`,
+        url: `/carts/detail`,
         method: 'POST',
         body: params,
       }),

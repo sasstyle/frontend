@@ -53,9 +53,9 @@ export const ReviewSection = styled.section`
   ${getFlex({ dir: 'column', js: 'center', ai: 'flex-start' })}
   width: inherit;
   margin-top: 1.5rem;
-  span {
-    font-size: 0.8rem;
-    color: blue;
+  strong {
+    font-size: 1.1rem;
+    color: black;
   }
   p {
     font-size: 0.9rem;

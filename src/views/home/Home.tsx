@@ -85,6 +85,7 @@ export default function Home() {
                 onClick={goToDetailPage(product.productId)}
                 key={product.productId}
                 product={product}
+                categoryId={categoryId}
               />
             ))}
         </UI.ProductWrap>

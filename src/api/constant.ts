@@ -2,8 +2,9 @@
 export const TEST_BASE_URL = 'http://54.180.24.169:4000/'
 
 // REAL SERVER
-const BASE_URL = 'http://175.205.6.23:8000'
+const BASE_URL = 'http://34.125.15.160:8000'
 export const AUTH_BASE_URL = `${BASE_URL}/user-service`
 export const PRODUCT_BASE_URL = `${BASE_URL}/product-service`
 export const CART_BASE_URL = `${BASE_URL}/cart-service`
 export const ORDER_BASE_URL = `${BASE_URL}/order-service`
+export const REVIEW_BASE_URL = `${BASE_URL}/review-service`

@@ -3,10 +3,12 @@ import * as UI from './ProductCard.styled'
 import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5'
 import { useDeleteLikeMutation, usePostLikeMutation } from '../../../api/product/product.query'
 import { getToken } from '../../util/user'
+import { useState } from 'react'
 
 export interface Props {
   product: Product
   onClick: () => void
+  categoryId: number
 }
 
 export function ProductCardVertical(props: Props) {
@@ -15,34 +17,37 @@ export function ProductCardVertical(props: Props) {
   const [postLike] = usePostLikeMutation()
   const [deleteLike] = useDeleteLikeMutation()
 
+  const [isLike, setIsLike] = useState<boolean>(wish)
+
   const onPostLike = (e: any) => {
+    e.stopPropagation()
     postLike({ productId })
       .unwrap()
-      .then(() => {})
+      .then(() => {
+        setIsLike(true)
+      })
       .catch(() => {})
   }
 
   const onDeleteLike = (e: any) => {
+    e.stopPropagation()
     deleteLike({ productId })
       .unwrap()
-      .then(() => {})
+      .then(() => {
+        setIsLike(false)
+      })
       .catch(() => {})
   }
 
   return (
-    <UI.VerticalWrap
-      onClick={(e) => {
-        e.stopPropagation()
-        props.onClick
-      }}
-    >
+    <UI.VerticalWrap onClick={props.onClick}>
       <UI.ImgWrap>
         {getToken('access_token') && (
           <UI.LikeBtn>
-            {wish ? (
-              <IoHeartSharp size="1.2rem" fill={'red'} onClick={onDeleteLike} />
+            {isLike ? (
+              <IoHeartSharp size="1.5rem" fill={'red'} onClick={onDeleteLike} />
             ) : (
-              <IoHeartOutline size="1.2rem" stroke={'black'} onClick={onPostLike} />
+              <IoHeartOutline size="1.5rem" stroke={'black'} onClick={onPostLike} />
             )}
           </UI.LikeBtn>
         )}

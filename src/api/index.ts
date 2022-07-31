@@ -16,7 +16,9 @@ export const defaultBaseQuery = (baseUrl: string) =>
         endpoint === 'getCartList' ||
         endpoint === 'postLike' ||
         endpoint === 'deleteLike' ||
-        endpoint === 'getLikeList'
+        endpoint === 'getLikeList' ||
+        endpoint === 'postOrder' ||
+        endpoint === 'deleteReview'
       ) {
         headers.set('Authorization', `Bearer ${getToken('access_token')}`)
       }

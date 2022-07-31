@@ -74,7 +74,17 @@ export const productApi = createApi({
         method: 'POST',
         body: params,
       }),
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {
+        try {
+          const { data: updatedPost } = await queryFulfilled
+
+          const patch = dispatch(
+            productApi.util.updateQueryData('getProduct', { page: 0, categoryId: 1 }, (draft) => {
+              Object.assign(draft, updatedPost)
+            })
+          )
+        } catch {}
+      },
     }),
 
     deleteLike: build.mutation<any, I.Req_Post_Wish>({

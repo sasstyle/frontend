@@ -18,6 +18,8 @@ const Cart = lazy(() => import('./views/cart/Cart'))
 const Order = lazy(() => import('./views/order/Order'))
 const Ordered = lazy(() => import('./views/orderHistory/OrderHistory'))
 const Wish = lazy(() => import('./views/wish/Wish'))
+const Review = lazy(() => import('./views/review/Review'))
+const CreateReview = lazy(() => import('./views/review/CreateReview'))
 
 export default function App() {
   const isDimmed = useAppSelector(selectIsDimmed)
@@ -41,6 +43,8 @@ export default function App() {
           <Route path="/order" element={<Order />} />
           <Route path="/order-history" element={<Ordered />} />
           <Route path="/wish" element={<Wish />} />
+          <Route path="/product/review/:id" element={<Review />} />
+          <Route path="/review/create" element={<CreateReview />} />
         </Routes>
         <AppNav />
       </AppInner>

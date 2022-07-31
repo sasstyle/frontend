@@ -17,6 +17,7 @@ export const Wrap = styled.div`
 `
 
 export const HistoryWrap = styled.div`
+  position: relative;
   ${getFlex({ dir: 'column', ai: 'flex-start' })}
 
   padding-bottom:1rem;
@@ -25,6 +26,14 @@ export const HistoryWrap = styled.div`
     display: block;
     margin-bottom: 1rem;
     font-size: 1.2rem;
+  }
+  button {
+    position: absolute;
+    right: 1rem;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+    border: none;
   }
 `
 
