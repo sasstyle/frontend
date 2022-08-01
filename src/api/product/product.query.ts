@@ -27,6 +27,7 @@ export const productApi = createApi({
         arg,
         { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
       ) {},
+      keepUnusedDataFor: 0,
     }),
 
     // ! 상품 검색해서 불러오기
@@ -78,11 +79,11 @@ export const productApi = createApi({
         try {
           const { data: updatedPost } = await queryFulfilled
 
-          const patch = dispatch(
-            productApi.util.updateQueryData('getProduct', { page: 0, categoryId: 1 }, (draft) => {
-              Object.assign(draft, updatedPost)
-            })
-          )
+          // const patch = dispatch(
+          //   productApi.util.updateQueryData('getProduct', { page: 0, categoryId: 1 }, (draft) => {
+          //     draft.push(updatedPost)
+          //   })
+          // )
         } catch {}
       },
     }),
@@ -106,6 +107,7 @@ export const productApi = createApi({
 })
 
 export const selectProduct = (state: RootState) => state.productApi.queries
+export const selectCategory = (state: RootState) => state.productApi.queries
 
 export const {
   useGetAllProductQuery,
@@ -117,4 +119,5 @@ export const {
   usePostLikeMutation,
   useDeleteLikeMutation,
   useGetLikeListQuery,
+  usePostProductMutation,
 } = productApi

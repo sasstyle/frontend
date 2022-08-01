@@ -1,5 +1,4 @@
-import ReactS3Client from 'react-aws-s3-typescript'
-import { getS3Config } from '../constant/s3Config'
+import AWS from 'aws-sdk'
 
 export const guid = () => {
   function _s4() {
@@ -8,24 +7,30 @@ export const guid = () => {
   return _s4() + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + '-' + _s4() + _s4() + _s4()
 }
 
-export const uploadFiles = async (file: any) => {
-  const config = await getS3Config()
-  const s3 = new ReactS3Client(config)
-
-  try {
-    const res = await s3.uploadFile(file, guid())
-    return res
-
-    /*
-     * {
-     *   Response: {
-     *     bucket: "bucket-name",
-     *     key: "directory-name/filename-to-be-uploaded",
-     *     location: "https:/your-aws-s3-bucket-url/directory-name/filename-to-be-uploaded"
-     *   }
-     * }
-     */
-  } catch (exception) {
-    console.log(exception)
+export const uploadFiles = async (fileList: any) => {
+  const region = 'ap-northeast-2'
+  const bucket = 'gram-img/upload-img'
+  const locationList: Array<string> = []
+  AWS.config.update({
+    region: region,
+    accessKeyId: import.meta.env.VITE_ACCESS_KEY_ID,
+    secretAccessKey: import.meta.env.VITE_SECRET_ACCESS_KEY,
+  })
+  for (let i = 0; i < fileList.length; i++) {
+    const upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: bucket,
+        Key: `${guid()}.jpeg`,
+        Body: fileList[i],
+      },
+    })
+    const promise = await upload.promise()
+    try {
+      console.log('success', i)
+    } catch (err) {
+      console.log('err', i)
+    }
+    locationList.push(promise.Location)
   }
+  return locationList
 }

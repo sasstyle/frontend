@@ -58,5 +58,8 @@ export const WriteWrap = styled.div`
     height: 10rem;
     padding: 0.5rem;
   }
+  svg {
+    cursor: pointer;
+  }
   margin-bottom: 1rem;
 `

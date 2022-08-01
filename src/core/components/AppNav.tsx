@@ -79,10 +79,10 @@ export default function AppNav() {
           {isModal && (
             <ModalSlideUp children={<CartModal trigger={setIsModal} />} isModal={isModal} trigger={setIsModal} />
           )}
-          <Likebox>
+          {/* <Likebox>
             <FiHeart size="2rem" />
             <span>1.2천</span>
-          </Likebox>
+          </Likebox> */}
           <OrderBtn onClick={() => setIsModal(true)}>구매하기</OrderBtn>
           <Box />
         </NavWrap>

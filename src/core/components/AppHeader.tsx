@@ -42,6 +42,7 @@ export const HeaderWrap = styled.div`
     width: 1.3rem;
     height: 1.3rem;
     ${getColor('GREY_4')}
+    cursor: pointer;
   }
 
   &[data-isback='true'] {

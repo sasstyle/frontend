@@ -54,13 +54,11 @@ export interface Req_Product {
 
 export interface Req_Post_Product {
   categoryId: number
-  imageUrl: string
   name: string
   price: number
   stockQuantity: number
-  topDescription: string
-  bottomDescription: string
-  detailImages: Array<string>
+  profileUrl: string
+  images: Array<string>
 }
 
 export interface Res_Post_Product {

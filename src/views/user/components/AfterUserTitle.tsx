@@ -29,7 +29,7 @@ export function AfterUserTitle({ user }: Props) {
         <p>{user.email}</p>
         <IoChevronForwardOutline size="1.4rem" />
       </UserBasicInfo>
-      {user.role === 'ADMIN' && (
+      {user.role === '브랜드' && (
         <UserTypeCard>
           <div>
             <div>
@@ -42,7 +42,7 @@ export function AfterUserTitle({ user }: Props) {
           </Link>
         </UserTypeCard>
       )}
-      {user.role === 'BRAND' && (
+      {/* {user.role === 'BRAND' && (
         <UserTypeCard>
           <div>
             <IoStorefrontOutline size="1.5rem" stroke="white" />
@@ -52,7 +52,7 @@ export function AfterUserTitle({ user }: Props) {
             등록된 상품 보러가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
-      )}
+      )} */}
       {user.role === '일반' && (
         <UserTypeCard>
           <div>

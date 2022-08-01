@@ -49,11 +49,12 @@ export const FileSelectBox = styled.div`
   }
   input {
     position: absolute;
-    width: 0;
-    height: 0;
+    width: 3rem;
+    height: 3rem;
     padding: 0;
     overflow: hidden;
     border: 0;
+    /* visibility: hidden */
   }
 `
 

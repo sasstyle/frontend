@@ -1,30 +1,56 @@
-import { useRef } from 'react'
 import * as UI from './SellerAdmin.styled'
 import { GoPlus } from 'react-icons/go'
 import AppInput from '../../core/components/AppInput'
 import { useInput } from '../../core/hooks/useInput'
 import AppHeader from '../../core/components/AppHeader'
-import { uploadFiles } from '../../core/util/uploadFile'
 import AppButton from '../../core/components/AppButton'
+import { useState } from 'react'
+import { useGetCategoryQuery, usePostProductMutation } from '../../api/product/product.query'
+import { uploadFiles } from '../../core/util/uploadFile'
+import { useNavigate } from 'react-router-dom'
 
 export default function SellerAdmin() {
-  const fileInput = useRef<HTMLInputElement>(null)
+  const navigate = useNavigate()
   const { value: price, onSetValue: setPrice } = useInput('')
   const { value: name, onSetValue: setName } = useInput('')
   const { value: stockQuantity, onSetValue: setStockQuantity } = useInput('')
 
-  const uploadFile = async () => {
-    const files = fileInput.current && fileInput.current.files
-    console.log(files)
+  const { data: categoryData } = useGetCategoryQuery()
 
-    // const res = await uploadFiles(files[0])
+  const [postProduct] = usePostProductMutation()
 
-    // console.log(res)
+  const [mainImg, setMainImg] = useState()
+  const [subImg, setSubImg] = useState()
+  const [category, setCategory] = useState(1)
+
+  const mainImgHandler = (e: any) => {
+    const files = e.target.files
+    setMainImg(files)
   }
 
-  const postProduct = async () => {
-    const imgData = await uploadFile()
-    console.log(imgData)
+  const subImgHandler = (e: any) => {
+    const files = e.target.files
+    setSubImg(files)
+  }
+
+  const onUploadProduct = async () => {
+    const mainImgLocation: any = await uploadFiles(mainImg)
+    const images = await uploadFiles(subImg)
+    const params = {
+      categoryId: category,
+      name,
+      price: Number(price),
+      stockQuantity,
+      profileUrl: String(mainImgLocation[0]),
+      images,
+    }
+    postProduct(params)
+      .unwrap()
+      .then((res) => {
+        window.alert('상품이 등록되었습니다.')
+        navigate('/user')
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -42,20 +68,28 @@ export default function SellerAdmin() {
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
-            <input onChange={uploadFile} id="imageUrl" type="file" multiple ref={fileInput} />
+            <input type="file" onChange={mainImgHandler} />
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
         <UI.FileSelectWrap>
-          <strong>추가 이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
+          <strong>이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
           <UI.FileSelectBox>
+            <input type="file" onChange={subImgHandler} multiple />
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
-            <input onChange={uploadFile} id="imageUrl" type="file" multiple ref={fileInput} />
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
       </UI.FileSelectGroup>
-      <AppButton content="상품 등록" onClick={uploadFile} radius="0.3rem" />
+      <select onChange={(e: any) => setCategory(e.target.value)}>
+        {categoryData &&
+          categoryData.map((d: any) => (
+            <option key={d.categoryId} onChange={() => setCategory(d.categoryId)} value={d.categoryId}>
+              {d.name}
+            </option>
+          ))}
+      </select>
+      <AppButton content="상품 등록" onClick={onUploadProduct} radius="0.3rem" />
     </UI.Wrap>
   )
 }

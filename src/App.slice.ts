@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CLEANUP_STATE, INITIAL_STATE } from './App.constant'
+import { ReviewInfo } from './App.interface'
 import { RootState } from './App.store'
 
 export const appSlice = createSlice({
@@ -9,13 +10,16 @@ export const appSlice = createSlice({
     setIsDimmed: (state, { payload }: PayloadAction<boolean>) => {
       state.isDimmed = payload
     },
+    setReviewInfo: (state, { payload }: PayloadAction<ReviewInfo>) => {
+      state.reviewInfo = payload
+    },
     cleanupState: (state) => {
       state = CLEANUP_STATE
     },
   },
 })
 
-export const { cleanupState, setIsDimmed } = appSlice.actions
+export const { cleanupState, setIsDimmed, setReviewInfo } = appSlice.actions
 
 export const selectIsDimmed = ({ appSlice }: RootState) => appSlice.isDimmed
 
