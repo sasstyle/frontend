@@ -1,11 +1,42 @@
 import { useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import { GoPlus } from 'react-icons/go'
+import { usePostReviewMutation } from '../../api/review/review.query'
 import AppButton from '../../core/components/AppButton'
 import AppHeader from '../../core/components/AppHeader'
+import { uploadFiles } from '../../core/util/uploadFile'
+import { FileSelectBox, FileSelectWrap } from '../sellerAdmin/SellerAdmin.styled'
 import * as UI from './Review.styled'
 
 export default function CreateReview() {
   const [rating, setRating] = useState(0)
+  const [img, setImg] = useState()
+
+  const imgHandler = (e: any) => {
+    const files = e.target.files
+    setImg(files)
+  }
+
+  const [postReview] = usePostReviewMutation()
+
+  const onPostReview = async () => {
+    const images: any = await uploadFiles(img)
+    const params = {
+      productId: 5,
+      content: 'content',
+      images,
+      rate: rating,
+    }
+    postReview(params)
+      .unwrap()
+      .then((res) => {
+        console.log(res)
+        // window.alert('상품이 등록되었습니다.')
+        // navigate('/user')
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <>
       <AppHeader title="리뷰 쓰기" isBack />
@@ -44,8 +75,16 @@ export default function CreateReview() {
             )}
           </div>
         </UI.WriteWrap>
-        {/* <AppButton content="사진 첨부하기" radius="0.5rem" onClick={() => {}} /> */}
-        <AppButton content="리뷰 등록하기" radius="0.5rem" onClick={() => {}} />
+        <FileSelectWrap>
+          <strong>이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
+          <FileSelectBox>
+            <input type="file" onChange={imgHandler} multiple />
+            <label htmlFor="imageUrl">
+              <GoPlus />
+            </label>
+          </FileSelectBox>
+        </FileSelectWrap>
+        <AppButton content="리뷰 등록하기" radius="0.5rem" onClick={onPostReview} />
       </UI.Wrap>
     </>
   )

@@ -8,7 +8,7 @@ export const reviewApi = createApi({
   baseQuery: tokenBaseQuery(REVIEW_BASE_URL),
   endpoints: (build) => ({
     // ! 리뷰 추가하기
-    postOrder: build.mutation<any, I.Req_PostReview>({
+    postReview: build.mutation<any, I.Req_PostReview>({
       query: (params) => ({
         url: `/reviews`,
         method: 'POST',
@@ -37,4 +37,4 @@ export const reviewApi = createApi({
   }),
 })
 
-export const { useGetReviewQuery } = reviewApi
+export const { useGetReviewQuery, usePostReviewMutation } = reviewApi

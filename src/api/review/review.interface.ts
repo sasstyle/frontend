@@ -42,7 +42,7 @@ export interface Res_PostReview {}
 export interface Req_PostReview {
   productId: number
   content: string
-  images: string
+  images: Array<string>
   rate: number
 }
 
