@@ -9,14 +9,12 @@ import * as UI from './OrderHistory.styled'
 export default function OrderHistory() {
   const { data, isLoading, isError } = useGetOrderCartQuery()
 
-  console.log(data)
-
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
   const goToDetailPage = (product: any) => () => {
     const itemInfo = {
-      productId: 1,
+      productId: product.productId,
       img: product.profileUrl,
       name: product.productName,
     }

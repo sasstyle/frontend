@@ -7,6 +7,7 @@ export const reviewApi = apiSlice.injectEndpoints({
       query: ({ productId }) => ({
         url: `/review-service/reviews?productId=${productId}`,
       }),
+      providesTags: ['review'],
     }),
 
     postReview: build.mutation<any, I.Req_PostReview>({
@@ -15,6 +16,7 @@ export const reviewApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: params,
       }),
+      invalidatesTags: ['review'],
     }),
 
     deleteReview: build.mutation<any, I.Req_DeleteReview>({
@@ -22,6 +24,7 @@ export const reviewApi = apiSlice.injectEndpoints({
         url: `/review-service/reviews?reviewId=${reviewId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['review'],
     }),
   }),
 })

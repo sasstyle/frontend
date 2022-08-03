@@ -66,11 +66,11 @@ export const ReviewList = styled.ul`
   display: grid;
   width: 100%;
   margin-top: 0.8rem;
-  grid-template-columns: 14rem;
   grid-template-rows: 1fr;
   grid-auto-flow: column;
   overflow-x: scroll;
   scroll-snap-type: x proximity;
+  gap: 1rem;
   ${hideScrollBar()}
 `
 

@@ -22,5 +22,6 @@ export const appSlice = createSlice({
 export const { cleanupState, setIsDimmed, setReviewInfo } = appSlice.actions
 
 export const selectIsDimmed = ({ appSlice }: RootState) => appSlice.isDimmed
+export const selectReviewInfo = ({ appSlice }: RootState) => appSlice.reviewInfo
 
 export default appSlice.reducer

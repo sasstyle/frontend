@@ -30,7 +30,7 @@ export const signupApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `/user-service/users/me`,
       }),
-      providesTags: ['user'],
+      keepUnusedDataFor: 0,
     }),
 
     updateUserInfo: build.mutation<Res_IsUser, Req_IsUser>({
@@ -39,7 +39,6 @@ export const signupApi = apiSlice.injectEndpoints({
         method: 'PUT',
         body: params,
       }),
-      invalidatesTags: ['user'],
     }),
   }),
 })

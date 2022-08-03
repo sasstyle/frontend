@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { GoPlus } from 'react-icons/go'
+import { useNavigate } from 'react-router-dom'
 import { usePostReviewMutation } from '../../api/review/review.query'
+import { selectReviewInfo } from '../../App.slice'
 import AppButton from '../../core/components/AppButton'
 import AppHeader from '../../core/components/AppHeader'
+import { useAppSelector } from '../../core/hooks/redux'
 import { uploadFiles } from '../../core/util/uploadFile'
 import { FileSelectBox, FileSelectWrap } from '../sellerAdmin/SellerAdmin.styled'
 import * as UI from './Review.styled'
@@ -11,6 +14,11 @@ import * as UI from './Review.styled'
 export default function CreateReview() {
   const [rating, setRating] = useState(0)
   const [img, setImg] = useState()
+  const textRef = useRef<any>(null)
+
+  const navigate = useNavigate()
+
+  const reviewInfo = useAppSelector(selectReviewInfo)
 
   const imgHandler = (e: any) => {
     const files = e.target.files
@@ -20,19 +28,18 @@ export default function CreateReview() {
   const [postReview] = usePostReviewMutation()
 
   const onPostReview = async () => {
-    const images: any = await uploadFiles(img)
     const params = {
-      productId: 5,
-      content: 'content',
-      images,
+      productId: reviewInfo.productId,
+      content: textRef.current.value,
+      images: img ? await uploadFiles(img) : null,
       rate: rating,
     }
+
     postReview(params)
       .unwrap()
       .then((res) => {
-        console.log(res)
-        // window.alert('상품이 등록되었습니다.')
-        // navigate('/user')
+        window.alert('리뷰가 등록되었습니다.')
+        navigate('/')
       })
       .catch((err) => console.log(err))
   }
@@ -43,7 +50,7 @@ export default function CreateReview() {
       <UI.Wrap>
         <UI.WriteWrap>
           <strong>리뷰를 작성해주세요.</strong>
-          <textarea placeholder="텍스트 리뷰"></textarea>
+          <textarea ref={textRef} placeholder="텍스트 리뷰"></textarea>
         </UI.WriteWrap>
         <UI.WriteWrap>
           <strong>별점</strong>
