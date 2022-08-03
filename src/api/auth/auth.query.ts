@@ -1,30 +1,24 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { defaultBaseQuery } from '..'
 import { Req_IsUser, Req_Login, Req_Signup, Res_IsUser, Res_Login, Res_Signup } from './auth.interface'
-import { AUTH_BASE_URL } from '../constant'
 import { setToken } from '../../core/util/user'
 import { RootState } from '../../App.store'
+import { apiSlice } from '../../App.apiSlice'
 
-export const signupApi = createApi({
-  reducerPath: 'signupApi',
-  baseQuery: defaultBaseQuery(AUTH_BASE_URL),
+export const signupApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     requestSignup: build.mutation<Res_Signup, Req_Signup>({
       query: (params) => ({
-        url: `/users`,
+        url: `/user-service/users`,
         method: 'POST',
         body: params,
       }),
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
     }),
 
     requestLogin: build.mutation<Res_Login, Req_Login>({
       query: (params) => ({
-        url: `/users/login`,
+        url: `/user-service/users/login`,
         method: 'POST',
         body: params,
       }),
-      //   transformResponse: () => {},
       async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {
         const result = await queryFulfilled
         setToken('access_token', result.data.accessToken)
@@ -34,33 +28,23 @@ export const signupApi = createApi({
 
     checkIsUser: build.query<Res_IsUser, void>({
       query: () => ({
-        url: `/users/me`,
+        url: `/user-service/users/me`,
       }),
-      // transformResponse: (res: any) => res.data,
+      providesTags: ['user'],
     }),
 
     updateUserInfo: build.mutation<Res_IsUser, Req_IsUser>({
       query: (params) => ({
-        url: `/users`,
+        url: `/user-service/users`,
         method: 'PUT',
         body: params,
       }),
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {
-        try {
-          const { data } = await queryFulfilled
-          const patchUserInfo = dispatch(
-            signupApi.util.updateQueryData('checkIsUser', undefined, (draft) => {
-              console.log(draft)
-              Object.assign(draft, data)
-            })
-          )
-        } catch {}
-      },
+      invalidatesTags: ['user'],
     }),
   }),
 })
 
-export const selectUserInfo = (state: RootState) => state.signupApi.queries['checkIsUser(undefined)']?.data
+export const selectUserInfo = (state: RootState) => state.api.queries['checkIsUser(undefined)']?.data
 
 export const { useRequestSignupMutation, useRequestLoginMutation, useCheckIsUserQuery, useUpdateUserInfoMutation } =
   signupApi

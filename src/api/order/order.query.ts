@@ -1,29 +1,22 @@
-import { tokenBaseQuery } from './../index'
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { ORDER_BASE_URL } from '../constant'
 import * as I from './order.interface'
+import { apiSlice } from '../../App.apiSlice'
 
-export const orderApi = createApi({
-  reducerPath: 'orderApi',
-  baseQuery: tokenBaseQuery(ORDER_BASE_URL),
+export const orderApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    // ! 상품 주문하기
+    getOrderCart: build.query<I.Res_Order, void>({
+      query: () => ({
+        url: `/order-service/orders`,
+      }),
+      providesTags: ['order'],
+    }),
+
     postOrder: build.mutation<any, I.Req_PostOrder>({
       query: (params) => ({
-        url: `/orders`,
+        url: `/order-service/orders`,
         method: 'POST',
         body: params,
       }),
-      //   transformResponse: () => {},
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }) {},
-    }),
-
-    // ! 주문한 상품 조회하기
-    getOrderCart: build.query<I.Res_Order, void>({
-      query: () => ({
-        url: `/orders`,
-      }),
-      keepUnusedDataFor: 0,
+      invalidatesTags: ['order'],
     }),
   }),
 })
