@@ -18,7 +18,7 @@ export default function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isModal, setIsModal] = useState(false)
-  const [login, { isLoading, error }] = useRequestLoginMutation()
+  const [login, { isLoading, error, isSuccess }] = useRequestLoginMutation()
 
   const { value: username, onSetValue: setUserName, isValid: isValidUserName } = useInput('', REG_USERNAME)
   const { value: password, onSetValue: setPassword, isValid: isValidPw } = useInput('', REG_PASSWORD)
@@ -70,7 +70,7 @@ export default function Login() {
       {isModal && isDimmed && (
         <AppModal type="small" icon="error">
           <div>
-            <p>{error?.data.message}</p>
+            <p>{'잘못된 계정입니다.'}</p>
             <AppButton
               content="확인"
               onClick={() => {

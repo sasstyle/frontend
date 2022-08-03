@@ -137,7 +137,7 @@ export default function SignUp() {
       {isModal === 'error' && (
         <AppModal type="small" icon="error">
           <div>
-            <p>{error?.data.message}</p>
+            <p>{'다시 입력해주세요.'}</p>
             <AppButton
               content="확인"
               onClick={() => {

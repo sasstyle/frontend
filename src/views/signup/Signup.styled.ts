@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import { getFlex } from '../../designs/util/display'
+import { hideScrollBar } from '../../designs/util/helpder'
 
 export const Wrap = styled.div`
   ${getFlex({ dir: 'column', js: 'center', ai: 'center' })}
   width: 100%;
-  height: 100%;
-  padding-bottom: 3rem;
+  height: 100vh;
+  padding: 1rem 0 8rem 0;
+  overflow-y: scroll;
+  ${hideScrollBar()}
 
   + div {
     transform: translateY(-30rem);

@@ -30,7 +30,6 @@ export const signupApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `/user-service/users/me`,
       }),
-      keepUnusedDataFor: 0,
     }),
 
     updateUserInfo: build.mutation<Res_IsUser, Req_IsUser>({

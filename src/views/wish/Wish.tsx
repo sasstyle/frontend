@@ -26,6 +26,7 @@ export default function Wish() {
                 onClick={goToDetailPage(product.productId)}
                 key={product.productId}
                 product={product}
+                categoryId={product.categoryId}
               />
             ))}
         </UI.ProductWrap>

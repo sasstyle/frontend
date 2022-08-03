@@ -7,6 +7,7 @@ export const setToken = (tokenKey: string, tokenValue: string) => localStorage.s
 export const deleteToken = () => {
   localStorage.removeItem('access_token')
   localStorage.removeItem('refresh_token')
+  location.reload()
 }
 
 export const isUser = () => {

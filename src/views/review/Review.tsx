@@ -13,7 +13,7 @@ export default function Review() {
       <AppHeader isBack title={'상품 리뷰'} />
       <UI.Wrap>
         <strong>리뷰 {reviewList?.totalElements}개</strong>
-        {reviewList?.content.map((review) => (
+        {reviewList?.content.map((review: any) => (
           <UI.ReviewWrap>
             <UI.Profile>
               <strong>작성자 닉네임</strong>
