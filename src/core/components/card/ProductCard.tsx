@@ -1,24 +1,59 @@
-import { FaRegHeart } from 'react-icons/fa'
-import { Product } from '../../../views/home/Home.interface'
+import { Product } from '../../types/product'
 import * as UI from './ProductCard.styled'
+import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5'
+import { useDeleteLikeMutation, usePostLikeMutation } from '../../../api/product/product.query'
+import { getToken } from '../../util/user'
+import { useState } from 'react'
 
 export interface Props {
   product: Product
   onClick: () => void
+  categoryId: number
 }
 
 export function ProductCardVertical(props: Props) {
-  const { imgUrl, price, name, brand, likeCnt, kind, rating, isLike } = props.product
+  const { profileUrl, price, name, brandName, wish, productId } = props.product
+
+  const [postLike] = usePostLikeMutation()
+  const [deleteLike] = useDeleteLikeMutation()
+
+  const [isLike, setIsLike] = useState<boolean>(wish)
+
+  const onPostLike = (e: any) => {
+    e.stopPropagation()
+    postLike({ productId })
+      .unwrap()
+      .then(() => {
+        setIsLike(true)
+      })
+      .catch(() => {})
+  }
+
+  const onDeleteLike = (e: any) => {
+    e.stopPropagation()
+    deleteLike({ productId })
+      .unwrap()
+      .then(() => {
+        setIsLike(false)
+      })
+      .catch(() => {})
+  }
 
   return (
     <UI.VerticalWrap onClick={props.onClick}>
       <UI.ImgWrap>
-        <UI.LikeBtn>
-          <FaRegHeart size="1rem" />
-        </UI.LikeBtn>
-        <img src={imgUrl} />
+        {getToken('access_token') && (
+          <UI.LikeBtn>
+            {isLike ? (
+              <IoHeartSharp size="1.5rem" fill={'red'} onClick={onDeleteLike} />
+            ) : (
+              <IoHeartOutline size="1.5rem" stroke={'black'} onClick={onPostLike} />
+            )}
+          </UI.LikeBtn>
+        )}
+        <img src={profileUrl} />
       </UI.ImgWrap>
-      <strong>{brand}</strong>
+      <strong>{brandName}</strong>
       <p>{name}</p>
       <span>{Number(price).toLocaleString()}원</span>
     </UI.VerticalWrap>

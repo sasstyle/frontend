@@ -1,14 +1,12 @@
+import Rate from '../../../core/components/Rate'
 import * as UI from './ReviewCard.styled'
 
 interface Review {
   img: null | string
-  option: string
-  form: string
   userId: string
-  title: string
   content: string
-  likeCnt: number
   date: string
+  rate: number
 }
 
 interface Props {
@@ -16,12 +14,16 @@ interface Props {
 }
 
 export default function ReviewCard({ item }: Props) {
-  const { img, option, form, userId, title, content, likeCnt, date } = item
+  const { img, userId, content, date, rate } = item
   return (
     <UI.Wrap>
-      {img && <img src="" />}
+      <div>{img && <img src={img} />}</div>
       <div>
-        <strong>{title}</strong>
+        <UI.WriterInfo>
+          <strong>writer</strong>
+          <Rate rate={rate} />
+        </UI.WriterInfo>
+
         <p>{content}</p>
       </div>
     </UI.Wrap>

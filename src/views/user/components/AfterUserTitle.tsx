@@ -2,17 +2,17 @@ import styled from 'styled-components'
 import { IoShirtOutline, IoStorefrontOutline, IoChevronForwardOutline } from 'react-icons/io5'
 import { getFlex, getSafeWidth } from '../../../designs/util/display'
 import { getColor } from '../../../designs/util/atom'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface User {
+  profileUrl: string
+  userId: string
   name: string
+  role: string
   gender: string
   email: string
   phoneNumber: string
   address: string
-  type: string // 'seller' | 'buyer'
-  sellerName?: string
-  buyerGrade?: string
 }
 
 interface Props {
@@ -20,32 +20,48 @@ interface Props {
 }
 
 export function AfterUserTitle({ user }: Props) {
+  const navigate = useNavigate()
+
   return (
     <>
-      <UserBasicInfo>
+      <UserBasicInfo onClick={() => navigate('/user/update')}>
         <h1>{user.name}님 안녕하세요 !</h1>
         <p>{user.email}</p>
         <IoChevronForwardOutline size="1.4rem" />
       </UserBasicInfo>
-      {user.type === 'seller' && (
+      {user.role === '브랜드' && (
         <UserTypeCard>
           <div>
             <div>
               <IoStorefrontOutline size="1.5rem" stroke="white" />
             </div>
-            <strong>{user.sellerName}</strong>
+            <strong>{user.name}</strong>
           </div>
-          <Link to="/seller">
+          <Link to="/user/admin">
             상품 등록하러 가기 <IoChevronForwardOutline size="1.4rem" />
           </Link>
         </UserTypeCard>
       )}
-      {user.type === 'buyer' && (
+      {/* {user.role === 'BRAND' && (
         <UserTypeCard>
           <div>
-            <IoShirtOutline size="1.5rem" stroke="white" />
+            <IoStorefrontOutline size="1.5rem" stroke="white" />
+            <strong>{user.name}</strong>
           </div>
-          <strong>{user.buyerGrade}</strong>
+          <Link to="/">
+            등록된 상품 보러가기 <IoChevronForwardOutline size="1.4rem" />
+          </Link>
+        </UserTypeCard>
+      )} */}
+      {user.role === '일반' && (
+        <UserTypeCard>
+          <div>
+            <img src={user.profileUrl}></img>
+            <strong>VIP</strong>
+          </div>
+          <Link to="/">
+            쿠폰 보러가기 <IoChevronForwardOutline size="1.4rem" />
+          </Link>
         </UserTypeCard>
       )}
     </>
@@ -83,6 +99,12 @@ const UserTypeCard = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   div {
     ${getFlex()}
+    img {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 2rem;
+      margin-right: 0.8rem;
+    }
   }
   div > div {
     ${getFlex()}

@@ -1,23 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import type { PreloadedState } from '@reduxjs/toolkit'
+
+// slice
+import appReducer from './App.slice'
 
 // api
-import { signupApi } from './api/auth/auth.query'
-import { homeApi } from './views/home/Home.query'
-import { productApi } from './views/product/Porudct.query'
+import { apiSlice } from './App.apiSlice'
 
 const rootReducer = combineReducers({
-  [homeApi.reducerPath]: homeApi.reducer,
-  [signupApi.reducerPath]: signupApi.reducer,
-  [productApi.reducerPath]: productApi.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
+  appSlice: appReducer,
 })
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(signupApi.middleware, homeApi.middleware, productApi.middleware),
-    preloadedState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
   })
 }
 

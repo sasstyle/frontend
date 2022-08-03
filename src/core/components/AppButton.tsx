@@ -1,4 +1,6 @@
+import { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
+import { getBgColor } from '../../designs/util/atom'
 
 interface Props {
   content: string
@@ -9,8 +11,12 @@ interface Props {
   radius?: string
 }
 
-export default function AppButton(props: Props) {
-  return <Button {...props}>{props.content}</Button>
+export default function AppButton(props: Props & ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <Button disabled={props.disabled} {...props}>
+      {props.content}
+    </Button>
+  )
 }
 
 const Button = styled.button<Props>`
@@ -21,4 +27,11 @@ const Button = styled.button<Props>`
   color: ${({ color }) => (color ? color : '#ffffff')};
   background-color: ${({ background }) => (background ? background : '#010101')};
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    ${getBgColor('GREY_1')}
+    cursor: not-allowed;
+  }
 `

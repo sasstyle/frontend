@@ -1,5 +1,2 @@
-// TEST SERVER
-export const TEST_BASE_URL = 'http://54.180.24.169:4000/'
-
-// REAL SERVER
-export const AUTH_BASE_URL = 'http://203.252.240.42:8000/user-service'
+export const BASE_URL = import.meta.env.VITE_BASE_URL
+export const REVIEW_BASE_URL = `${BASE_URL}/review-service`
