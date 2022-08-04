@@ -20,7 +20,7 @@ export const productApi = apiSlice.injectEndpoints({
 
     // ! 카테고리에 따라 상품 불러오기
     getProduct: build.query<I.Res_ProductList, I.Req_ProductList>({
-      query: ({ page = 0, size = 20, categoryId }) => ({
+      query: ({ page = 0, size = 30, categoryId }) => ({
         url: `/product-service/categories/${categoryId}?page=${page}&size=${size}`,
       }),
       providesTags: ['product'],
