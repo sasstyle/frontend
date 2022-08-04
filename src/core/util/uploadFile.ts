@@ -13,8 +13,8 @@ export const uploadFiles = async (fileList: any) => {
   const locationList: Array<string> = []
   AWS.config.update({
     region: region,
-    accessKeyId: import.meta.env.VITE_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.VITE_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
   })
   for (let i = 0; i < fileList.length; i++) {
     const upload = new AWS.S3.ManagedUpload({
