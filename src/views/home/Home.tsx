@@ -1,11 +1,11 @@
-import { startTransition, useState } from 'react'
+import { startTransition, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as UI from './Home.styled'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { ProductCardVertical } from '../../core/components/card/ProductCard'
 import AppSearch from '../../core/components/AppSearch'
 import { Product } from '../../core/types/product'
-import { useGetProductQuery } from '../../api/product/product.query'
+import { useGetProductQuery, useLazyGetProductQuery } from '../../api/product/product.query'
 import ProductEmpty from '../../core/components/empty/ProductEmpty'
 import Category from './components/Category'
 import AppButton from '../../core/components/AppButton'
@@ -18,8 +18,28 @@ export default function Home() {
   const [categoryId, setCategoryId] = useState(1)
   const [isMenu, setIsMenu] = useState(false)
   const [isModal, setIsModal] = useState(false)
+  const [isItem, setIsItem] = useState(true)
 
-  const { data: productList, isLoading } = useGetProductQuery({ page: currPage, categoryId })
+  const { data: initialProduct, isLoading } = useGetProductQuery({ page: 0, categoryId })
+  const [trigger, result, lastPromiseInfo] = useLazyGetProductQuery()
+
+  const [productList, setProductList] = useState<any>([])
+
+  useEffect(() => {
+    if (productList.length > 10) return
+    !isLoading && initialProduct && setProductList(initialProduct.content)
+  }, [isLoading, productList, initialProduct])
+
+  window.onscroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && isItem && productList) {
+      trigger({ page: currPage + 1, categoryId }).then((res: any) => {
+        setProductList(productList.concat(res.data.content))
+        setCurrPage(currPage + 1)
+        if (res.data.content.length < 10) setIsItem(false)
+      })
+    }
+  }
+
   const resetState = () => {
     setIsModal(false)
     setIsMenu(false)
@@ -60,6 +80,7 @@ export default function Home() {
                 onClick={() => {
                   setIsModal(true)
                   setIsMenu(false)
+                  setIsItem(true)
                 }}
                 radius="1rem"
               />
@@ -76,11 +97,16 @@ export default function Home() {
             style={{ marginLeft: '1rem', cursor: 'pointer' }}
           />
         </UI.SearchWrap>
-        <Category onSetCategory={(id: number) => setCategoryId(id)} />
+        <Category
+          onSetCategory={(id: number) => {
+            setCategoryId(id)
+            setCurrPage(0)
+          }}
+        />
         <UI.ProductWrap>
-          {productList && productList.content.length < 1 && <ProductEmpty />}
+          {productList && productList.length < 1 && <ProductEmpty />}
           {productList &&
-            productList.content.map((product: Product) => (
+            productList.map((product: Product) => (
               <ProductCardVertical
                 onClick={goToDetailPage(product.productId)}
                 key={product.productId}
