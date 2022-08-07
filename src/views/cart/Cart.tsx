@@ -15,7 +15,7 @@ export default function Cart() {
     <>
       <AppHeader title="장바구니" isBack />
       {isLoading && <Loading />}
-      {!isLoading && data && data?.products.length > 0 && (
+      {!isError && !isLoading && data && data?.products.length > 0 && (
         <UI.Wrap empty={isLoading}>
           {data?.products.map((product: CartProductList) => (
             <ProductCard
@@ -32,7 +32,7 @@ export default function Cart() {
           ))}
         </UI.Wrap>
       )}
-      {!isLoading && data && data?.products.length === 0 && (
+      {!isError && !isLoading && data && data?.products.length === 0 && (
         <UI.EmptyWrap>
           <ProductEmpty />
         </UI.EmptyWrap>
