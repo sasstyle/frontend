@@ -9,6 +9,7 @@ export const Wrap = styled.li`
   border: 0.5px solid lightgray;
   border-radius: 0.5rem;
 
+  overflow-y: scroll;
   strong {
     font-size: 0.8rem;
   }
@@ -19,7 +20,7 @@ export const Wrap = styled.li`
   img {
     width: 3rem;
     height: 3rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 `
 
@@ -28,7 +29,7 @@ export const WriterInfo = styled.div`
   strong {
     font-size: 0.8rem;
     margin-right: 0.5rem;
-    width: 2.8rem;
+    width: 3rem;
   }
 
   svg {

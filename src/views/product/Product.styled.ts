@@ -47,6 +47,9 @@ export const EssentialInfo = styled.div`
     ${getTypo({ fontSize: '1rem', fontWeight: 700 })}
     letter-spacing: 0.01rem;
   }
+  p {
+    line-height: 1.4rem;
+  }
 `
 
 export const ReviewSection = styled.section`
