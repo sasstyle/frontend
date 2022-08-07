@@ -12,6 +12,7 @@ import AppButton from '../../core/components/AppButton'
 import AppModal from '../../core/components/modal/AppModal'
 import { Dimmed } from '../../App.styled'
 import { deleteToken, isUser } from '../../core/util/user'
+import ProductLoading from '../../core/components/ProductLoading'
 
 export default function Home() {
   const [currPage, setCurrPage] = useState(0)
@@ -20,7 +21,7 @@ export default function Home() {
   const [isModal, setIsModal] = useState(false)
   const [isItem, setIsItem] = useState(true)
 
-  const { data: initialProduct, isLoading } = useGetProductQuery({ page: 0, categoryId })
+  const { data: initialProduct, isLoading, refetch } = useGetProductQuery({ page: 0, categoryId })
   const [trigger, result, lastPromiseInfo] = useLazyGetProductQuery()
 
   const [productList, setProductList] = useState<any>([])
@@ -29,6 +30,10 @@ export default function Home() {
     if (productList.length > 10) return
     !isLoading && initialProduct && setProductList(initialProduct.content)
   }, [isLoading, productList, initialProduct])
+
+  useEffect(() => {
+    refetch()
+  }, [categoryId, refetch])
 
   window.onscroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight && isItem && productList) {
@@ -101,10 +106,13 @@ export default function Home() {
           onSetCategory={(id: number) => {
             setCategoryId(id)
             setCurrPage(0)
+            setProductList([])
+            setIsItem(true)
           }}
         />
         <UI.ProductWrap>
-          {productList && productList.length < 1 && <ProductEmpty />}
+          {isLoading && <ProductLoading />}
+          {!isLoading && productList.length < 1 && <ProductEmpty />}
           {productList &&
             productList.map((product: Product) => (
               <ProductCardVertical

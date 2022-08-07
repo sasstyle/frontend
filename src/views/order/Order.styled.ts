@@ -16,6 +16,7 @@ export const Wrap = styled.div`
 export const OrderInfo = styled.div`
   strong {
     font-size: 1rem;
+    width: 20rem;
   }
   ul {
     margin-top: 1rem;

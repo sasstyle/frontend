@@ -1,7 +1,11 @@
 import { CartProductList } from '../../api/cart/cart.interface'
 import { useGetCartListQuery, useUpdateCartListMutation } from '../../api/cart/cart.query'
 import AppHeader from '../../core/components/AppHeader'
+import ProductEmpty from '../../core/components/empty/ProductEmpty'
+import NoLogin from '../../core/components/NoLogin'
+import { getToken } from '../../core/util/user'
 import * as UI from './Cart.styled'
+import Loading from './ProductCard/Loading'
 import ProductCard from './ProductCard/ProductCard'
 
 export default function Cart() {
@@ -10,8 +14,9 @@ export default function Cart() {
   return (
     <>
       <AppHeader title="장바구니" isBack />
-      {data && data?.products.length > 0 ? (
-        <UI.Wrap>
+      {isLoading && <Loading />}
+      {!isLoading && data && data?.products.length > 0 && (
+        <UI.Wrap empty={isLoading}>
           {data?.products.map((product: CartProductList) => (
             <ProductCard
               key={product.cartDetailId}
@@ -26,9 +31,13 @@ export default function Cart() {
             />
           ))}
         </UI.Wrap>
-      ) : (
-        <UI.EmptyWrap>장바구니가 비어있습니다.</UI.EmptyWrap>
       )}
+      {!isLoading && data && data?.products.length === 0 && (
+        <UI.EmptyWrap>
+          <ProductEmpty />
+        </UI.EmptyWrap>
+      )}
+      {isError && <NoLogin />}
     </>
   )
 }

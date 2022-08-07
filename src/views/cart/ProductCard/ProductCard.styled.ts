@@ -1,6 +1,7 @@
 import { getFlex } from '../../../designs/util/display'
 import styled from 'styled-components'
 import { getBgColor, getColor, getTypo } from '../../../designs/util/atom'
+import { hideScrollBar } from '../../../designs/util/helpder'
 
 export const ProductWrap = styled.div`
   ${getFlex({ dir: 'column' })}
@@ -48,6 +49,7 @@ export const BrandItem = styled.div`
   strong {
     padding-top: 0.5rem;
     font-size: 1rem;
+    padding-right: 1rem;
   }
   svg:last-of-type {
     position: absolute;
@@ -122,5 +124,49 @@ export const TotalPrice = styled.div`
     span {
       ${getBgColor('GREY_1')}
     }
+  }
+`
+
+export const LoadingWrapOuter = styled.div`
+  ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
+  gap: 1rem;
+  & > div {
+    width: 100% !important;
+    height: 1.2rem;
+  }
+  margin-bottom: 3rem;
+`
+
+export const LoadingWrap = styled.div`
+  ${getFlex({ js: 'flex-start', ai: 'flex-start' })}
+`
+
+export const LoadingImg = styled.div`
+  width: 5rem !important;
+  height: 4rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
+  ${getBgColor('GREY_1')}
+`
+
+export const LoadingLine = styled.div`
+  height: 1rem;
+  margin-top: 0.7rem;
+  ${getBgColor('GREY_1')}
+`
+
+export const LoadingListWrap = styled.div`
+  ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 4rem 0 7rem 0;
+  gap: 2rem;
+  ${hideScrollBar()}
+  div {
+    width: 100%;
+  }
+  ~ nav {
+    display: none;
   }
 `

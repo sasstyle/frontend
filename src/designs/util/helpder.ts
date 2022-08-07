@@ -10,3 +10,11 @@ export const hideScrollBar = () => {
   `
   return style
 }
+
+export const sliceLetter = (content: any, limit: number) => {
+  if (!content) return
+  if (content.length > limit) {
+    return `${content.slice(0, limit)}...`
+  }
+  return content
+}

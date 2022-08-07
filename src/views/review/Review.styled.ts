@@ -13,6 +13,9 @@ export const Wrap = styled.div`
   + nav {
     display: none;
   }
+  button {
+    margin-top: 1rem;
+  }
 `
 
 export const ReviewWrap = styled.div`
@@ -21,6 +24,7 @@ export const ReviewWrap = styled.div`
   p {
     font-size: 1rem;
     margin-bottom: 0.8rem;
+    line-height: 1.5rem;
   }
   strong {
     font-size: 1rem;

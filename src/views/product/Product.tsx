@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductDetailQuery } from '../../api/product/product.query'
 import { useGetReviewQuery } from '../../api/review/review.query'
 import AppHeader from '../../core/components/AppHeader'
+import { sliceLetter } from '../../designs/util/helpder'
 import ReviewCard from './components/ReviewCard'
 import * as UI from './Product.styled'
 
@@ -14,7 +15,7 @@ export default function Product() {
 
   return (
     <>
-      <AppHeader isBack title={product?.name || ''} />
+      <AppHeader isBack title={sliceLetter(product?.name, 15) || ''} />
       <UI.Wrap>
         <UI.TopImg src={product?.profileUrl} />
         {/* <UI.ShadowImg /> */}
@@ -35,7 +36,7 @@ export default function Product() {
         </UI.ReviewSection>
         <UI.ImageWrap>
           {product?.images.map((image: any) => (
-            <UI.ItemImg key={image} src={image} />
+            <UI.ItemImg key={image} src={image} alt={'상품 이미지'} />
           ))}
         </UI.ImageWrap>
       </UI.Wrap>

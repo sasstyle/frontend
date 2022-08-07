@@ -10,6 +10,9 @@ export const Wrap = styled.div`
   height: 100vh;
   overflow-y: scroll;
   ${hideScrollBar()}
+  button {
+    margin-top: 2rem;
+  }
 `
 
 export const FormWrap = styled.form`
@@ -33,28 +36,31 @@ export const FileSelectWrap = styled.div`
 `
 
 export const FileSelectBox = styled.div`
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
+  ${getFlex()}
   width: 4rem;
   height: 4rem;
-  ${getBgColor('GREY_1')}
+  font-size: 18px;
+  padding: 0 10px;
   border-radius: 1.1rem;
-  ${getFlex()}
+  ${getBgColor('GREY_1')}
+
   label {
-    ${getTypo({ fontSize: '2rem', fontWeight: 500 })}
+    display: inline-block;
+    ${getFlex()}
+    width: 4rem;
+    height: 4rem;
     ${getColor('WHITE')}
-    text-align: center;
-    line-height: 1.5rem;
+    ${getTypo({ fontSize: '2rem', fontWeight: 500 })}
+    cursor: pointer;
   }
   input {
     position: absolute;
-    width: 3rem;
-    height: 3rem;
+    width: 0;
+    height: 0;
     padding: 0;
     overflow: hidden;
     border: 0;
-    /* visibility: hidden */
   }
 `
 
@@ -62,4 +68,17 @@ export const TextAreaGroup = styled.div`
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
   gap: 1.5rem;
   margin: 1.5rem 0;
+`
+
+export const Select = styled.select`
+  width: 50%;
+  height: 2.5rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #f4f4f4;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  &:focus {
+    outline: none;
+  }
 `

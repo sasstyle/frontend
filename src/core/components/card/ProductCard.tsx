@@ -4,6 +4,7 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5'
 import { useDeleteLikeMutation, usePostLikeMutation } from '../../../api/product/product.query'
 import { getToken } from '../../util/user'
 import { useState } from 'react'
+import { sliceLetter } from '../../../designs/util/helpder'
 
 export interface Props {
   product: Product
@@ -51,10 +52,10 @@ export function ProductCardVertical(props: Props) {
             )}
           </UI.LikeBtn>
         )}
-        <img src={profileUrl} />
+        <img src={profileUrl} alt={name} />
       </UI.ImgWrap>
       <strong>{brandName}</strong>
-      <p>{name}</p>
+      <p>{sliceLetter(name, 15)}</p>
       <span>{Number(price).toLocaleString()}원</span>
     </UI.VerticalWrap>
   )

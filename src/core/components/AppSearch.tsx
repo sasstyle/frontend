@@ -7,6 +7,7 @@ import { getBgColor, getColor, getTypo } from '../../designs/util/atom'
 import { useLazyProductAutoCompleteQuery } from '../../api/product/product.query'
 import { startTransition, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { sliceLetter } from '../../designs/util/helpder'
 
 export default function AppSearch() {
   const [value, onSetValue] = useState('')
@@ -38,9 +39,9 @@ export default function AppSearch() {
           )}
           {result?.data?.map((ele: any) => (
             <Item key={ele.productId} onClick={goToDetailPage(ele.productId)}>
-              <img src={ele.imageUrl} />
+              <img src={ele.imageUrl} alt={ele.name} />
               <div>
-                <span>{ele.name}</span>
+                <span>{sliceLetter(ele.name, 25)}</span>
                 <span>{ele.brandName}</span>
               </div>
             </Item>
@@ -95,6 +96,12 @@ const Item = styled.li`
     width: 3rem;
     height: 4rem;
     margin-right: 1rem;
+  }
+
+  margin-bottom: 2rem;
+  line-height: 1.5rem;
+  &:last-child {
+    margin-bottom: 0;
   }
 `
 

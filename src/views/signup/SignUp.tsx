@@ -62,7 +62,7 @@ export default function SignUp() {
     return () => {
       dispatch(cleanupState())
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <UI.Wrap>
