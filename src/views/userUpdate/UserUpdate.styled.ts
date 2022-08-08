@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { getTypo } from '../../designs/util/atom'
 import { getFlex } from '../../designs/util/display'
 
 export const Wrap = styled.div`
@@ -10,5 +11,9 @@ export const Wrap = styled.div`
   overflow-y: scroll;
   button:last-of-type {
     margin-top: 0.5rem;
+  }
+  p {
+    padding-left: 0.5rem;
+    ${getTypo({ fontSize: '0.65rem', fontWeight: 500 })}
   }
 `

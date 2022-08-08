@@ -10,6 +10,10 @@ import AppButton from '../../core/components/AppButton'
 import { useCheckIsUserQuery, useUpdateUserInfoMutation } from '../../api/auth/auth.query'
 import { useAppDispatch } from '../../core/hooks/redux'
 import { useNavigate } from 'react-router-dom'
+import { FileSelectBox } from '../sellerAdmin/SellerAdmin.styled'
+import { GoPlus } from 'react-icons/go'
+import { useState } from 'react'
+import { uploadFiles } from '../../core/util/uploadFile'
 
 function HeaderIcon() {
   return (
@@ -24,6 +28,13 @@ export default function UserUpdate() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
+  const [profileImg, setProfileImg] = useState()
+
+  const profileImgHandler = (e: any) => {
+    const file = e.target.files
+    setProfileImg(file)
+  }
+
   const { data: userData, isLoading, isError } = useCheckIsUserQuery()
   const [updateUser] = useUpdateUserInfoMutation()
 
@@ -36,6 +47,7 @@ export default function UserUpdate() {
 
   const isAllValid = [isValidName, isValidEmail, isValidPh].every((ele) => ele === true)
   const onUpdateProfile = async () => {
+    const img = await uploadFiles(profileImg)
     const values = {
       name: name ? name : userData?.name,
       password: password ? password : null,
@@ -43,6 +55,7 @@ export default function UserUpdate() {
       email: email ? email : userData?.email,
       phoneNumber: phoneNumber ? phoneNumber : userData?.phoneNumber,
       address: address ? address : userData?.address,
+      profileUrl: img[0],
     }
 
     updateUser(values)
@@ -100,6 +113,13 @@ export default function UserUpdate() {
           value={address}
           onSetValue={setAddress}
         />
+        <p>피팅때 사용할 정면 이미지</p>
+        <FileSelectBox>
+          <input type="file" id="imageUrl" onChange={profileImgHandler} />
+          <label htmlFor="imageUrl">
+            <GoPlus />
+          </label>
+        </FileSelectBox>
         <AppButton
           disabled={!isAllValid || address === ''}
           content="변경 정보 저장하기"

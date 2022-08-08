@@ -86,3 +86,9 @@ export const ImageWrap = styled.div`
   /* ${setMediaScreen(`margin-top: 12rem;`)} */
   margin: 2rem 0;
 `
+
+export const FittingHelper = styled.p`
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  line-height: 1.2rem;
+`
