@@ -55,7 +55,7 @@ export default function UserUpdate() {
       email: email ? email : userData?.email,
       phoneNumber: phoneNumber ? phoneNumber : userData?.phoneNumber,
       address: address ? address : userData?.address,
-      profileUrl: img[0],
+      profileUrl: img ? img[0] : null,
     }
 
     updateUser(values)

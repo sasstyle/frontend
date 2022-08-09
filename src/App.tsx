@@ -1,11 +1,11 @@
-import { lazy, Suspense } from 'react'
+import { Suspense, lazy } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+
 import { selectIsDimmed, setIsDimmed } from './App.slice'
 import { AppInner, Dimmed } from './App.styled'
-import { useAppSelector } from './core/hooks/redux'
-
 import AppNav from './core/components/AppNav'
-import { useDispatch } from 'react-redux'
+import { useAppSelector } from './core/hooks/redux'
 
 const Home = lazy(() => import('./views/home/Home'))
 const Login = lazy(() => import('./views/login/Login'))
@@ -21,6 +21,7 @@ const Ordered = lazy(() => import('./views/orderHistory/OrderHistory'))
 const Wish = lazy(() => import('./views/wish/Wish'))
 const Review = lazy(() => import('./views/review/Review'))
 const CreateReview = lazy(() => import('./views/review/CreateReview'))
+const Fitting = lazy(() => import('./views/fitting/Fitting'))
 
 export default function App() {
   const isDimmed = useAppSelector(selectIsDimmed)
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/user/admin" element={<SellerAdmin />} />
           <Route path="/user/ordered" element={<Ordered />} />
           <Route path="/product/detail/:id" element={<Product />} />
+          <Route path="/product/fitting/:id" element={<Fitting />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
           <Route path="/order-history" element={<Ordered />} />

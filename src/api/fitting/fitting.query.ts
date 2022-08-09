@@ -1,23 +1,43 @@
-import { createApi } from '@reduxjs/toolkit/dist/query/react'
-import { fittingBaseQuery } from '..'
+import { apiSlice } from '../../App.apiSlice'
 import * as I from './fitting.interface'
 
-export const fittingApi = createApi({
-  reducerPath: 'fittingApi',
-  baseQuery: fittingBaseQuery(),
-  tagTypes: ['fitting'],
+export const fittingApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    // getOrderCart: build.query<any, any>({
-    //   query: () => ({
-    //     url: `:9000/fitting-service/orders`,
-    //   }),
-    //   providesTags: ['fitting'],
-    // }),
+    // 사용 안할 api
+    getAllFitting: build.query<any, void>({
+      query: () => ({
+        url: `/fitting-service/fittings/`,
+      }),
+      providesTags: ['fitting'],
+    }),
+
+    getProductFitting: build.query<Array<I.Res_FittingDetail>, { productId: number }>({
+      query: ({ productId }) => ({
+        url: `/fitting-service/fittings/filter/${productId}/`,
+      }),
+      providesTags: ['fitting'],
+    }),
+
+    getFittingDetail: build.query<I.Res_FittingDetail, I.Req_FittingDetail>({
+      query: ({ id }) => ({
+        url: `/fitting-service/fittings/${id}/`,
+      }),
+      providesTags: ['fitting'],
+    }),
 
     postFitting: build.mutation<I.Res_PostFitting, I.Req_PostFitting>({
       query: (params) => ({
-        url: `:9000/fitting-service/fittings`,
+        url: `/fitting-service/fittings/`,
         method: 'POST',
+        body: params,
+      }),
+      invalidatesTags: ['fitting'],
+    }),
+
+    deleteFitting: build.mutation<any, I.Req_PostFitting>({
+      query: (params) => ({
+        url: `/fittings`,
+        method: 'DELETE',
         body: params,
       }),
       invalidatesTags: ['fitting'],
@@ -25,4 +45,5 @@ export const fittingApi = createApi({
   }),
 })
 
-export const { usePostFittingMutation } = fittingApi
+export const { useGetAllFittingQuery, usePostFittingMutation, useGetProductFittingQuery, useGetFittingDetailQuery } =
+  fittingApi

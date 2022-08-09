@@ -41,13 +41,15 @@ export default function CreateReview() {
       setWarning('리뷰를 입력해주세요')
       return
     }
-    if (img.length > 5) {
-      dispatch(setIsDimmed(true))
-      setWarning('이미지는 5개까지 가능합니다.')
-      setImg([])
-      return
+    if (img) {
+      if (img.length > 5) {
+        dispatch(setIsDimmed(true))
+        setWarning('이미지는 5개까지 가능합니다.')
+        setImg([])
+        return
+      }
     }
-    const params = {
+    const params: any = {
       productId: reviewInfo.productId,
       content,
       images: img ? await uploadFiles(img) : null,

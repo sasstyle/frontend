@@ -8,6 +8,7 @@ export const guid = () => {
 }
 
 export const uploadFiles = async (fileList: any) => {
+  if (!fileList) return
   const region = 'ap-northeast-2'
   const bucket = 'gram-img/upload-img'
   const locationList: Array<string> = []

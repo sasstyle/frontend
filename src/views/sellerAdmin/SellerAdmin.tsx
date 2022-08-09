@@ -36,7 +36,7 @@ export default function SellerAdmin() {
   const onUploadProduct = async () => {
     const mainImgLocation: any = await uploadFiles(mainImg)
     const images = await uploadFiles(subImg)
-    const params = {
+    const params: any = {
       categoryId: category,
       name,
       price: Number(price),

@@ -1,26 +1,62 @@
+import axios from 'axios'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { usePostFittingMutation } from '../../api/fitting/fitting.query'
+
+import { useCheckIsUserQuery } from '../../api/auth/auth.query'
+import { Res_PostFitting } from '../../api/fitting/fitting.interface'
+import { useGetAllFittingQuery, usePostFittingMutation } from '../../api/fitting/fitting.query'
 import { useGetProductDetailQuery } from '../../api/product/product.query'
 import { useGetReviewQuery } from '../../api/review/review.query'
 import AppButton from '../../core/components/AppButton'
 import AppHeader from '../../core/components/AppHeader'
+import SimpleModal from '../../core/components/modal/SimpleModal'
+import { useModal } from '../../core/hooks/useModal'
 import { sliceLetter } from '../../designs/util/helpder'
-import ReviewCard from './components/ReviewCard'
 import * as UI from './Product.styled'
+import ReviewCard from './components/ReviewCard'
 
 export default function Product() {
+  const { isModal, setIsModal } = useModal()
+  const [modalProps, setModalProps] = useState({ content: '', btn: '', trigger: () => {} })
+
   const params = useParams()
   const navigate = useNavigate()
 
   const { data: product, isLoading } = useGetProductDetailQuery({ id: Number(params.id) })
   const { data: reviewList } = useGetReviewQuery({ productId: Number(params.id) })
+  const { data: userData } = useCheckIsUserQuery()
+  const { data } = useGetAllFittingQuery()
 
-  const [postFitting, result] = usePostFittingMutation()
+  const [postFitting, { isLoading: fittingLoading, isSuccess, isError }] = usePostFittingMutation()
 
-  const onPostFitting = () => {}
+  const onPostFitting = () => {
+    const fittingParams: any = {
+      desc: '',
+      productId: Number(params.id),
+      clothUrl: product?.images[0],
+      profileUrl: userData?.profileUrl,
+    }
+    if (!fittingParams.profileUrl) {
+      setModalProps({ content: '로그인을 해주세요', btn: '로그인 하러가기', trigger: () => navigate('/login') })
+      setIsModal(true)
+      return
+    }
+    postFitting(fittingParams)
+      .unwrap()
+      .then((res) => console.log(res))
+      .catch((er) => console.log(er))
+  }
 
   return (
     <>
+      <SimpleModal
+        isModal={isModal}
+        icon={'error'}
+        content={modalProps.content}
+        btnText={modalProps.btn}
+        trigger={setIsModal}
+        btnTrigger={modalProps.trigger}
+      />
       <AppHeader isBack title={sliceLetter(product?.name, 15) || ''} />
       <UI.Wrap>
         <UI.TopImg src={product?.profileUrl} />
@@ -33,8 +69,16 @@ export default function Product() {
           <span>{Number(product?.price).toLocaleString()}원</span>
         </UI.EssentialInfo>
         <AppButton
-          content="👕 피팅해보기"
+          content="👕 피팅해보기 👕"
           onClick={onPostFitting}
+          background="white"
+          color="black"
+          radius="0.5rem"
+          style={{ marginTop: '1.2rem', border: '1px solid black' }}
+        />
+        <AppButton
+          content="🙌 다른 사람 피팅 사진 둘러보기 🙌"
+          onClick={() => navigate(`/product/fitting/${params.id}`)}
           background="white"
           color="black"
           radius="0.5rem"

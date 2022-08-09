@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
 import { getToken } from '../core/util/user'
-import { BASE_URL, FITTING_BASE_URL } from './constant'
+import { BASE_URL } from './constant'
 
 export const defaultBaseQuery = () =>
   fetchBaseQuery({
@@ -10,21 +11,6 @@ export const defaultBaseQuery = () =>
     },
     prepareHeaders: (headers, { endpoint }) => {
       if (endpoint === 'requestSignup' || endpoint === 'requestLogin') return headers
-      headers.set('Authorization', `Bearer ${getToken('access_token')}`)
-
-      return headers
-    },
-    credentials: 'omit',
-  })
-
-export const fittingBaseQuery = () =>
-  fetchBaseQuery({
-    baseUrl: FITTING_BASE_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    prepareHeaders: (headers, { endpoint }) => {
-      // if (false) return headers
       headers.set('Authorization', `Bearer ${getToken('access_token')}`)
 
       return headers
