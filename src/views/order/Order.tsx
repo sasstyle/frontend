@@ -23,7 +23,7 @@ export default function Order() {
                 </UI.BrandTitle>
                 <UI.Hr />
                 <UI.BrandItem>
-                  <img src={product.profileUrl} />
+                  <img src={product.profileUrl} alt={product.name} />
                   <div>
                     <strong>{product.name}</strong>
                     <span>{product.count}개</span>

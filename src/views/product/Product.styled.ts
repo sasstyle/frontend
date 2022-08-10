@@ -1,5 +1,6 @@
-import { hideScrollBar } from './../../designs/util/helpder'
 import styled from 'styled-components'
+
+import { hideScrollBar } from './../../designs/util/helpder'
 import { getInnerPadding, getTypo } from '../../designs/util/atom'
 import { getFlex, setMediaScreen } from '../../designs/util/display'
 
@@ -47,6 +48,9 @@ export const EssentialInfo = styled.div`
     ${getTypo({ fontSize: '1rem', fontWeight: 700 })}
     letter-spacing: 0.01rem;
   }
+  p {
+    line-height: 1.4rem;
+  }
 `
 
 export const ReviewSection = styled.section`
@@ -82,4 +86,17 @@ export const ItemImg = styled.img`
 export const ImageWrap = styled.div`
   /* ${setMediaScreen(`margin-top: 12rem;`)} */
   margin: 2rem 0;
+`
+
+export const FittingHelper = styled.p`
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  line-height: 1.2rem;
+`
+
+export const FittingLoading = styled.div`
+  ${getFlex({ dir: 'column' })}
+  width: 100%;
+  height: 25rem;
+  transform: translateY(-2rem);
 `

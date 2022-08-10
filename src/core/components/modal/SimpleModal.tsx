@@ -1,12 +1,14 @@
-import { Player } from '@lottiefiles/react-lottie-player'
-import successAnimation from '../../../designs/assets/lottieSuccess.json'
-import errorAnimation from '../../../designs/assets/lottieError.json'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
+
+import { Player } from '@lottiefiles/react-lottie-player'
+
+import errorAnimation from '../../../designs/assets/lottieError.json'
+import successAnimation from '../../../designs/assets/lottieSuccess.json'
 import { getBoxShadow } from '../../../designs/util/boxShadow'
 import { getFlex, getMaxMediaScreen } from '../../../designs/util/display'
-import * as I from './interface'
 import AppButton from '../AppButton'
+import * as I from './interface'
 
 export default function SimpleModal(props: I.SimpleModal) {
   const container = document.getElementById('root') || document.body
@@ -14,12 +16,21 @@ export default function SimpleModal(props: I.SimpleModal) {
   return createPortal(<Contents {...props} />, container)
 }
 
-const Contents = ({ isModal, icon, content, btnText, trigger, btnTrigger }: I.SimpleModal) => {
+const Contents = ({
+  isModal,
+  icon,
+  content,
+  btnText,
+  trigger,
+  btnTrigger,
+  height = '13rem',
+  isBtn = true,
+}: I.SimpleModal) => {
   return (
     <>
       {isModal && (
         <>
-          <Wrap>
+          <Wrap height={height}>
             <>
               {icon === 'success' && (
                 <Player autoplay loop src={successAnimation} style={{ height: '70px', width: '70px' }} />
@@ -29,7 +40,7 @@ const Contents = ({ isModal, icon, content, btnText, trigger, btnTrigger }: I.Si
               )}
             </>
             <p>{content}</p>
-            <AppButton onClick={btnTrigger} content={btnText} radius="1rem" />
+            {isBtn && <AppButton onClick={btnTrigger} content={btnText} radius="1rem" />}
           </Wrap>
           <Cover onClick={() => trigger(false)} />
         </>
@@ -38,7 +49,7 @@ const Contents = ({ isModal, icon, content, btnText, trigger, btnTrigger }: I.Si
   )
 }
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ height: string }>`
   ${getFlex({ dir: 'column', js: 'flex-start' })}
   gap: 1.1rem;
   position: fixed;
@@ -47,7 +58,7 @@ const Wrap = styled.div`
   transform: translate(50%, 50%);
   width: 80vw;
   max-width: 400px;
-  height: 13rem;
+  ${({ height }) => `height: ${height};`}
   background-color: white;
   z-index: 10;
   border-radius: 1.5rem;

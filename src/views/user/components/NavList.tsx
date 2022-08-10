@@ -1,14 +1,16 @@
 import styled from 'styled-components'
-import { BsHeadset, BsJournalText, BsMegaphone, BsPersonLinesFill, BsSliders } from 'react-icons/bs'
+import { BsFillPersonFill, BsJournalText, BsMegaphone, BsPersonLinesFill, BsSliders } from 'react-icons/bs'
 import { getColor } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
+import { useNavigate } from 'react-router-dom'
 
 export default function NavList() {
+  const navigate = useNavigate()
   return (
     <ListWrap>
-      <li>
-        <BsHeadset size="1.4rem" />
-        <span>고객센터</span>
+      <li onClick={() => navigate('/user/profile')}>
+        <BsFillPersonFill size="1.4rem" />
+        <span>내 프로필 보기</span>
       </li>
       <li>
         <BsMegaphone size="1.4rem" />
@@ -42,5 +44,6 @@ const ListWrap = styled.ul`
     ${getFlex({ js: 'flex-start' })}
     font-size: 1rem;
     height: 4rem;
+    cursor: pointer;
   }
 `

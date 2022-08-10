@@ -36,7 +36,7 @@ export default function SellerAdmin() {
   const onUploadProduct = async () => {
     const mainImgLocation: any = await uploadFiles(mainImg)
     const images = await uploadFiles(subImg)
-    const params = {
+    const params: any = {
       categoryId: category,
       name,
       price: Number(price),
@@ -55,7 +55,15 @@ export default function SellerAdmin() {
 
   return (
     <UI.Wrap>
-      <AppHeader title="상품 추가 페이지" />
+      <AppHeader title="상품 추가 페이지" isBack />
+      <UI.Select onChange={(e: any) => setCategory(e.target.value)}>
+        {categoryData &&
+          categoryData.map((d: any) => (
+            <option key={d.categoryId} onChange={() => setCategory(d.categoryId)} value={d.categoryId}>
+              {d.name}
+            </option>
+          ))}
+      </UI.Select>
       <UI.FormWrap>
         <AppInput label="가격" type="text" placeHolder="10,000" value={price} onSetValue={setPrice} />
         <AppInput label="상품 이름" placeHolder="검은 셔츠" value={name} onSetValue={setName} />
@@ -65,31 +73,28 @@ export default function SellerAdmin() {
         <UI.FileSelectWrap>
           <strong>기본 이미지 선택 ( 1개 )</strong>
           <UI.FileSelectBox>
+            <input type="file" id="imageUrl" onChange={mainImgHandler} />
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
-            <input type="file" onChange={mainImgHandler} />
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
         <UI.FileSelectWrap>
           <strong>이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
           <UI.FileSelectBox>
-            <input type="file" onChange={subImgHandler} multiple />
+            <input id="imageUrl" type="file" onChange={subImgHandler} multiple />
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
           </UI.FileSelectBox>
         </UI.FileSelectWrap>
       </UI.FileSelectGroup>
-      <select onChange={(e: any) => setCategory(e.target.value)}>
-        {categoryData &&
-          categoryData.map((d: any) => (
-            <option key={d.categoryId} onChange={() => setCategory(d.categoryId)} value={d.categoryId}>
-              {d.name}
-            </option>
-          ))}
-      </select>
-      <AppButton content="상품 등록" onClick={onUploadProduct} radius="0.3rem" />
+      <AppButton
+        content="상품 등록"
+        onClick={onUploadProduct}
+        radius="0.3rem"
+        disabled={!price || !name || !stockQuantity}
+      />
     </UI.Wrap>
   )
 }

@@ -13,6 +13,7 @@ export const HeaderWrap = styled.ul`
 `
 
 export const Header = styled.li`
+  cursor: pointer;
   height: 2.8rem;
   ${getFlex()}
   ${getTypo({ fontSize: '0.9rem', fontWeight: 600 })}
@@ -32,6 +33,7 @@ export const CellWrap = styled.ul`
 `
 
 export const Cell = styled.li`
+  cursor: pointer;
   ${getFlex({ js: 'flex-start' })}
   width: calc((100vw - 3.7rem) / 3);
   height: 2rem;

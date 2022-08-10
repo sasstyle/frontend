@@ -1,14 +1,12 @@
-import { Player } from '@lottiefiles/react-lottie-player'
 import styled from 'styled-components'
-import animationData from '../../../designs/assets/lottieEmptyProduct.json'
 import { getColor, getTypo } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
 
 export default function ProductEmpty() {
   return (
     <Wrap>
-      <Player loop autoplay src={animationData} style={{ height: '300px', width: '300px' }} />
-      <p>해당 조건에 상품이 없습니다</p>
+      <img src="https://gram-img.s3.ap-northeast-2.amazonaws.com/empty.jpg" alt="empty" />
+      <p>상품이 없습니다</p>
     </Wrap>
   )
 }
@@ -19,8 +17,7 @@ const Wrap = styled.div`
   height: 100%;
   transform: translateY(-10%);
   p {
-    ${getTypo({ fontSize: '1.3rem' })}
+    ${getTypo({ fontSize: '1rem' })}
     ${getColor('BLACK')}
-    margin-top: 1rem;
   }
 `

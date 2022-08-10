@@ -1,5 +1,5 @@
-import * as I from './order.interface'
 import { apiSlice } from '../../App.apiSlice'
+import * as I from './order.interface'
 
 export const orderApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({

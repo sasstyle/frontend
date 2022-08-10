@@ -1,2 +1,1 @@
-export const BASE_URL = import.meta.env.VITE_BASE_URL
-export const REVIEW_BASE_URL = `${BASE_URL}/review-service`
+export const BASE_URL = process.env.REACT_APP_BASE_URL

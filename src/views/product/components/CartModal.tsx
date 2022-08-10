@@ -12,6 +12,7 @@ import useCounter from '../../../core/hooks/useCounter'
 import { useModal } from '../../../core/hooks/useModal'
 import { getBgColor, getColor } from '../../../designs/util/atom'
 import { getFlex } from '../../../designs/util/display'
+import { sliceLetter } from '../../../designs/util/helpder'
 
 export default function CartModal({ trigger }: { trigger: any }) {
   const navigate = useNavigate()
@@ -58,7 +59,7 @@ export default function CartModal({ trigger }: { trigger: any }) {
       }
       <Wrap>
         <ProductWrap>
-          <strong>{product?.name}</strong>
+          <strong>{sliceLetter(product?.name, 25)}</strong>
           <div>
             <AppCounter cnt={cnt} setCnt={setCnt} />
             <strong>{product?.price.toLocaleString()}원</strong>

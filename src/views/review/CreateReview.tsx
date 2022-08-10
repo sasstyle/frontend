@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { GoPlus } from 'react-icons/go'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { usePostReviewMutation } from '../../api/review/review.query'
-import { selectReviewInfo } from '../../App.slice'
+import { cleanupState, selectIsDimmed, selectReviewInfo, setIsDimmed } from '../../App.slice'
 import AppButton from '../../core/components/AppButton'
 import AppHeader from '../../core/components/AppHeader'
+import AppModal from '../../core/components/modal/AppModal'
 import { useAppSelector } from '../../core/hooks/redux'
 import { uploadFiles } from '../../core/util/uploadFile'
 import { FileSelectBox, FileSelectWrap } from '../sellerAdmin/SellerAdmin.styled'
@@ -13,8 +15,13 @@ import * as UI from './Review.styled'
 
 export default function CreateReview() {
   const [rating, setRating] = useState(0)
-  const [img, setImg] = useState()
+  const [img, setImg] = useState<any>()
+  const isDimmed = useAppSelector(selectIsDimmed)
+  const [warning, setWarning] = useState('')
+
   const textRef = useRef<any>(null)
+
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
@@ -28,9 +35,23 @@ export default function CreateReview() {
   const [postReview] = usePostReviewMutation()
 
   const onPostReview = async () => {
-    const params = {
+    const content = textRef.current.value
+    if (content.length < 1) {
+      dispatch(setIsDimmed(true))
+      setWarning('리뷰를 입력해주세요')
+      return
+    }
+    if (img) {
+      if (img.length > 5) {
+        dispatch(setIsDimmed(true))
+        setWarning('이미지는 5개까지 가능합니다.')
+        setImg([])
+        return
+      }
+    }
+    const params: any = {
       productId: reviewInfo.productId,
-      content: textRef.current.value,
+      content,
       images: img ? await uploadFiles(img) : null,
       rate: rating,
     }
@@ -43,6 +64,12 @@ export default function CreateReview() {
       })
       .catch((err) => console.log(err))
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(cleanupState())
+    }
+  }, [dispatch])
 
   return (
     <>
@@ -85,14 +112,27 @@ export default function CreateReview() {
         <FileSelectWrap>
           <strong>이미지 선택 ( 최대 5개까지 가능합니다 )</strong>
           <FileSelectBox>
-            <input type="file" onChange={imgHandler} multiple />
+            <input type="file" id="imageUrl" onChange={imgHandler} multiple />
             <label htmlFor="imageUrl">
               <GoPlus />
             </label>
           </FileSelectBox>
         </FileSelectWrap>
-        <AppButton content="리뷰 등록하기" radius="0.5rem" onClick={onPostReview} />
+        <AppButton content="리뷰 등록하기" radius="0.5rem" onClick={onPostReview} disabled={rating === 0} />
       </UI.Wrap>
+      {isDimmed && (
+        <AppModal type="small" icon="error">
+          <>
+            <p>{warning}</p>
+            <AppButton
+              content="확인"
+              onClick={() => dispatch(setIsDimmed(false))}
+              radius="1.5rem"
+              background="#9DAABB"
+            />
+          </>
+        </AppModal>
+      )}
     </>
   )
 }

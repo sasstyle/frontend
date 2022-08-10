@@ -43,6 +43,7 @@ export const Product = styled.div`
     width: 5rem;
     height: 5rem;
     object-fit: contain;
+    margin-right: 1rem;
   }
   font-size: 1rem;
   p {
@@ -53,5 +54,8 @@ export const Product = styled.div`
   }
   span {
     ${getColor('GREY_4')}
+  }
+  button {
+    cursor: pointer;
   }
 `

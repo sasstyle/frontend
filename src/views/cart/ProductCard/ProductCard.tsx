@@ -65,7 +65,7 @@ export default function ProductCard({
           <label htmlFor={'item1'}>
             <IoCheckmarkSharp size={'1rem'} />
           </label> */}
-          <img src={imgUrl} />
+          <img src={imgUrl} alt={productName} />
           <strong>{productName}</strong>
           <IoClose size={'1.2rem'} fill={'#949494'} onClick={onDeleteCart} />
         </UI.BrandItem>

@@ -2,7 +2,7 @@ import { getFlex } from './../../designs/util/display'
 import styled from 'styled-components'
 import { hideScrollBar } from '../../designs/util/helpder'
 
-export const Wrap = styled.div`
+export const Wrap = styled.div<{ empty: boolean }>`
   ${getFlex({ dir: 'column', js: 'flex-start', ai: 'flex-start' })}
   width: 100%;
   height: 100vh;
@@ -13,6 +13,7 @@ export const Wrap = styled.div`
   div {
     width: 100%;
   }
+  ${({ empty }) => empty && `~nav{display:none;}`}
 `
 
 export const EmptyWrap = styled.div`
