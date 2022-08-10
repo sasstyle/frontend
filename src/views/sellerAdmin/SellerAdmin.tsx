@@ -93,7 +93,7 @@ export default function SellerAdmin() {
         content="상품 등록"
         onClick={onUploadProduct}
         radius="0.3rem"
-        disabled={!price || !name || !stockQuantity || !subImg || !mainImg}
+        disabled={!price || !name || !stockQuantity}
       />
     </UI.Wrap>
   )
