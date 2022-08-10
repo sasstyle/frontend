@@ -62,7 +62,10 @@ export default function Product() {
           isModal={isModal}
           content={fittingLoading ? <FittingLoading /> : <FittingModal image={fittingImg} />}
           btnText={'닫기'}
-          trigger={setIsModal}
+          trigger={() => {
+            setIsModal(false)
+            setTriggerFitting(false)
+          }}
           btnTrigger={() => setIsModal(false)}
           height={'25rem'}
           isBtn={fittingLoading ? false : true}
@@ -71,7 +74,7 @@ export default function Product() {
         <SimpleModal
           isModal={isModal}
           icon={'error'}
-          content={triggerFitting}
+          content={modalProps.content}
           btnText={modalProps.btn}
           trigger={setIsModal}
           btnTrigger={modalProps.trigger}
