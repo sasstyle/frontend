@@ -55,7 +55,7 @@ export default function SellerAdmin() {
 
   return (
     <UI.Wrap>
-      <AppHeader title="상품 추가 페이지" />
+      <AppHeader title="상품 추가 페이지" isBack />
       <UI.Select onChange={(e: any) => setCategory(e.target.value)}>
         {categoryData &&
           categoryData.map((d: any) => (

@@ -37,7 +37,7 @@ export default function Product() {
     const fittingParams: any = {
       desc: 'test',
       productId: Number(params.id),
-      clothUrl: product?.images[0],
+      clothUrl: product?.profileUrl,
       profileUrl: userData?.profileUrl,
     }
     if (!fittingParams.profileUrl) {

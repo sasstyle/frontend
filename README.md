@@ -9,11 +9,7 @@
     쇼핑몰 기반의 패션 의류 가상 피팅 서비스
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Learned</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Trouble Shooting</a>
+    <a href="http://sasstyle.s3-website.ap-northeast-2.amazonaws.com/">View Demo</a>
   </p>
 </div>
 
@@ -25,9 +21,6 @@
 sasstyle은 가상 피팅 서비스를 쇼핑몰 내에 구현한 프로젝트입니다.
 쇼핑몰의 기본적인 장바구니, 구매, 리뷰 등의 기능을 구현해놓았고, 추가로 피팅 서비스를 각 상품 페이지 안에 구현했습니다.
 <br />
-<br />
-
-### ❗️ 신경쓴 것들 (가제,,,)
 
 - 페이지의 UI별로 로딩 스켈레톤을 작성하여 로딩 화면의 어색함을 최소화
 - data fetching library를 사용하여 중복 네트워크 요청을 최소화
@@ -80,7 +73,11 @@ sasstyle은 가상 피팅 서비스를 쇼핑몰 내에 구현한 프로젝트�
 
 ### 3. 피팅서비스
 
-작성중..
+본인의 정면 사진에 옷을 입혀볼 수 있습니다.
+<br />
+<img width="32%" alt="스크린샷 2022-08-10 오후 3 21 59" src="https://user-images.githubusercontent.com/104143009/183830193-6144e4f7-778c-4d1e-bb71-ae9b3b48b0fe.png">
+<img width="32%" alt="스크린샷 2022-08-10 오후 3 22 07" src="https://user-images.githubusercontent.com/104143009/183830200-4cf7ff28-a976-491f-b61e-bba970fac124.png">
+<img width="32%" alt="스크린샷 2022-08-10 오후 3 25 47" src="https://user-images.githubusercontent.com/104143009/183830410-cf5a5174-441c-4109-a23a-cd54f1e9edbe.png">
 <br />
 <br />
 
