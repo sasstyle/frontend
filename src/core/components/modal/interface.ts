@@ -6,4 +6,5 @@ export interface SimpleModal {
   btnText: string
   btnTrigger: any
   height?: string
+  isBtn?: boolean
 }

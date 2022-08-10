@@ -1,9 +1,9 @@
-import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { Player } from '@lottiefiles/react-lottie-player'
+
 import { useCheckIsUserQuery } from '../../api/auth/auth.query'
-import { Res_PostFitting } from '../../api/fitting/fitting.interface'
 import { useGetAllFittingQuery, usePostFittingMutation } from '../../api/fitting/fitting.query'
 import { useGetProductDetailQuery } from '../../api/product/product.query'
 import { useGetReviewQuery } from '../../api/review/review.query'
@@ -11,11 +11,15 @@ import AppButton from '../../core/components/AppButton'
 import AppHeader from '../../core/components/AppHeader'
 import SimpleModal from '../../core/components/modal/SimpleModal'
 import { useModal } from '../../core/hooks/useModal'
+import animationData from '../../designs/assets/lottineLoading.json'
 import { sliceLetter } from '../../designs/util/helpder'
+import { ModalImg } from '../fitting/Fitting.styled'
 import * as UI from './Product.styled'
 import ReviewCard from './components/ReviewCard'
 
 export default function Product() {
+  const [triggerFitting, setTriggerFitting] = useState(false)
+  const [fittingImg, setFittingImg] = useState('')
   const { isModal, setIsModal } = useModal()
   const [modalProps, setModalProps] = useState({ content: '', btn: '', trigger: () => {} })
 
@@ -31,7 +35,7 @@ export default function Product() {
 
   const onPostFitting = () => {
     const fittingParams: any = {
-      desc: '',
+      desc: 'test',
       productId: Number(params.id),
       clothUrl: product?.images[0],
       profileUrl: userData?.profileUrl,
@@ -41,22 +45,38 @@ export default function Product() {
       setIsModal(true)
       return
     }
+    setTriggerFitting(true)
+    setIsModal(true)
     postFitting(fittingParams)
       .unwrap()
-      .then((res) => console.log(res))
+      .then((res) => {
+        setFittingImg(res.image)
+      })
       .catch((er) => console.log(er))
   }
 
   return (
     <>
-      <SimpleModal
-        isModal={isModal}
-        icon={'error'}
-        content={modalProps.content}
-        btnText={modalProps.btn}
-        trigger={setIsModal}
-        btnTrigger={modalProps.trigger}
-      />
+      {triggerFitting ? (
+        <SimpleModal
+          isModal={isModal}
+          content={fittingLoading ? <FittingLoading /> : <FittingModal image={fittingImg} />}
+          btnText={'닫기'}
+          trigger={setIsModal}
+          btnTrigger={() => setIsModal(false)}
+          height={'25rem'}
+          isBtn={fittingLoading ? false : true}
+        />
+      ) : (
+        <SimpleModal
+          isModal={isModal}
+          icon={'error'}
+          content={triggerFitting}
+          btnText={modalProps.btn}
+          trigger={setIsModal}
+          btnTrigger={modalProps.trigger}
+        />
+      )}
       <AppHeader isBack title={sliceLetter(product?.name, 15) || ''} />
       <UI.Wrap>
         <UI.TopImg src={product?.profileUrl} />
@@ -103,5 +123,18 @@ export default function Product() {
         </UI.ImageWrap>
       </UI.Wrap>
     </>
+  )
+}
+
+export function FittingModal({ image }: { image: string }) {
+  return <ModalImg src={image} alt="fitting img" />
+}
+
+export function FittingLoading() {
+  return (
+    <UI.FittingLoading>
+      <Player autoplay loop src={animationData} style={{ height: '300px', width: '300px' }}></Player>
+      <p>피팅 중 입니다</p>
+    </UI.FittingLoading>
   )
 }

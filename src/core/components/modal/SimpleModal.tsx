@@ -16,7 +16,16 @@ export default function SimpleModal(props: I.SimpleModal) {
   return createPortal(<Contents {...props} />, container)
 }
 
-const Contents = ({ isModal, icon, content, btnText, trigger, btnTrigger, height = '13rem' }: I.SimpleModal) => {
+const Contents = ({
+  isModal,
+  icon,
+  content,
+  btnText,
+  trigger,
+  btnTrigger,
+  height = '13rem',
+  isBtn = true,
+}: I.SimpleModal) => {
   return (
     <>
       {isModal && (
@@ -31,7 +40,7 @@ const Contents = ({ isModal, icon, content, btnText, trigger, btnTrigger, height
               )}
             </>
             <p>{content}</p>
-            <AppButton onClick={btnTrigger} content={btnText} radius="1rem" />
+            {isBtn && <AppButton onClick={btnTrigger} content={btnText} radius="1rem" />}
           </Wrap>
           <Cover onClick={() => trigger(false)} />
         </>

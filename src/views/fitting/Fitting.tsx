@@ -20,15 +20,17 @@ export default function Fitting() {
       <UI.Wrap>
         <UI.ImgList>
           {data?.map((item) => (
-            <img
-              key={item.id}
-              src={'https://gram-img.s3.ap-northeast-2.amazonaws.com/upload-img/default_user.jpeg'}
-              alt="fitting img"
-              onClick={() => {
-                setCurrId(item.id)
-                setIsModal(true)
-              }}
-            />
+            <div>
+              <img
+                key={item.id}
+                src={item.image}
+                alt="fitting img"
+                onClick={() => {
+                  setCurrId(item.id)
+                  setIsModal(true)
+                }}
+              />
+            </div>
           ))}
         </UI.ImgList>
       </UI.Wrap>
@@ -46,10 +48,5 @@ export default function Fitting() {
 
 export function FittingModal({ fittingId }: { fittingId: number }) {
   const { data, isLoading } = useGetFittingDetailQuery({ id: fittingId })
-  return (
-    <UI.ModalImg
-      src={'https://gram-img.s3.ap-northeast-2.amazonaws.com/upload-img/default_user.jpeg'}
-      alt="fitting img"
-    />
-  )
+  return <UI.ModalImg src={data?.image} alt="fitting img" />
 }

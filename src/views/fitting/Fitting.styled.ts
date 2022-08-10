@@ -18,14 +18,19 @@ export const ImgList = styled.div`
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
+
   img {
     width: 100%;
     height: auto;
     cursor: pointer;
+    object-fit: cover;
   }
 `
 
 export const ModalImg = styled.img`
   width: 16rem;
   height: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  object-fit: cover;
 `

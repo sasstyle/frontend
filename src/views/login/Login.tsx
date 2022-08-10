@@ -1,17 +1,19 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { Player } from '@lottiefiles/react-lottie-player'
+
+import { cleanupState, selectIsDimmed, setIsDimmed } from '../../App.slice'
+import { useRequestLoginMutation } from '../../api/auth/auth.query'
 import AppButton from '../../core/components/AppButton'
 import AppInput from '../../core/components/AppInput'
+import AppLink from '../../core/components/AppLink'
+import AppModal from '../../core/components/modal/AppModal'
+import { REG_PASSWORD, REG_USERNAME } from '../../core/constant/reg'
+import { useAppDispatch, useAppSelector } from '../../core/hooks/redux'
 import { useInput } from '../../core/hooks/useInput'
-import { useRequestLoginMutation } from '../../api/auth/auth.query'
 import animationData from '../../designs/assets/lottieLogin.json'
 import * as UI from './Login.styled'
-import { REG_PASSWORD, REG_USERNAME } from '../../core/constant/reg'
-import AppLink from '../../core/components/AppLink'
-import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { cleanupState, selectIsDimmed, setIsDimmed } from '../../App.slice'
-import { useAppDispatch, useAppSelector } from '../../core/hooks/redux'
-import AppModal from '../../core/components/modal/AppModal'
 
 export default function Login() {
   const isDimmed = useAppSelector(selectIsDimmed)

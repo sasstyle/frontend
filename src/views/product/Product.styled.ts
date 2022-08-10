@@ -1,5 +1,6 @@
-import { hideScrollBar } from './../../designs/util/helpder'
 import styled from 'styled-components'
+
+import { hideScrollBar } from './../../designs/util/helpder'
 import { getInnerPadding, getTypo } from '../../designs/util/atom'
 import { getFlex, setMediaScreen } from '../../designs/util/display'
 
@@ -91,4 +92,11 @@ export const FittingHelper = styled.p`
   margin-top: 0.8rem;
   font-size: 0.7rem;
   line-height: 1.2rem;
+`
+
+export const FittingLoading = styled.div`
+  ${getFlex({ dir: 'column' })}
+  width: 100%;
+  height: 25rem;
+  transform: translateY(-2rem);
 `
