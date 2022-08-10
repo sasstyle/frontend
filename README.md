@@ -9,7 +9,7 @@
     쇼핑몰 기반의 패션 의류 가상 피팅 서비스
     <br />
     <br />
-    <a href="http://sasstyle.s3-website.ap-northeast-2.amazonaws.com/">View Demo</a>
+    <a href="http://sasstyle.shop/">View Demo</a>
   </p>
 </div>
 
