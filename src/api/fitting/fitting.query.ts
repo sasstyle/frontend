@@ -34,16 +34,20 @@ export const fittingApi = apiSlice.injectEndpoints({
       invalidatesTags: ['fitting'],
     }),
 
-    deleteFitting: build.mutation<any, I.Req_PostFitting>({
-      query: (params) => ({
-        url: `/fittings`,
+    deleteFitting: build.mutation<any, I.Req_FittingDetail>({
+      query: ({ id }) => ({
+        url: `/fitting-service/fittings/${id}/`,
         method: 'DELETE',
-        body: params,
       }),
       invalidatesTags: ['fitting'],
     }),
   }),
 })
 
-export const { useGetAllFittingQuery, usePostFittingMutation, useGetProductFittingQuery, useGetFittingDetailQuery } =
-  fittingApi
+export const {
+  useGetAllFittingQuery,
+  usePostFittingMutation,
+  useGetProductFittingQuery,
+  useGetFittingDetailQuery,
+  useDeleteFittingMutation,
+} = fittingApi
