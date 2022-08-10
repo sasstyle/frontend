@@ -43,12 +43,16 @@ sasstyle은 가상 피팅 서비스를 쇼핑몰 내에 구현한 프로젝트�
 
 ## 📑 구성 페이지
 
-### 1. 기본적인 쇼핑몰 기능 ( 검색, 조회, 구매, 리뷰 등 )
+### 1. 기본적인 쇼핑몰 기능
 
+검색, 조회 등이 있습니다.
+<br />
 <img width="32%" alt="스크린샷 2022-08-08 오후 11 29 12" src="https://user-images.githubusercontent.com/104143009/183442065-063316dc-a4b2-4b86-85fd-79a3c0424daa.png">
 <img width="32%" alt="스크린샷 2022-08-08 오후 11 42 58" src="https://user-images.githubusercontent.com/104143009/183444989-43819b9b-0573-4e01-82ae-1aea931e5c29.png">
 <img width="32%" alt="스크린샷 2022-08-08 오후 11 46 22" src="https://user-images.githubusercontent.com/104143009/183445893-3f14b98b-9dee-4792-8455-4ab50b1e8485.png">
 <br />
+<br />
+장바구니, 구매, 리뷰등이 있습니다.
 <br />
 <img width="32%" alt="스크린샷 2022-08-08 오후 11 45 33" src="https://user-images.githubusercontent.com/104143009/183449227-dbe847ab-8f55-4182-b184-38ba6f2f55db.png">
 <img width="32%" alt="스크린샷 2022-08-08 오후 11 45 43" src="https://user-images.githubusercontent.com/104143009/183449241-77d631e6-6512-4b4f-86bb-cfcc332c9058.png">
